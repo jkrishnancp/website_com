@@ -16,8 +16,7 @@
       background-color: #141414;
       color: #fff;
       margin: 0;
-      /* Added padding to body for consistent left alignment and spacing */
-      padding: 0 20px; /* 0 top/bottom, 20px left/right */
+      padding: 0; /* Removed body padding to allow child elements to control their own alignment */
       overflow-x: hidden;
       -webkit-user-select: none; /* Safari */
       -moz-user-select: none;    /* Firefox */
@@ -27,8 +26,7 @@
     /* Header styling for the top navigation bar */
     .header {
       background-color: #141414;
-      /* Padding adjusted to align with body padding, but keep vertical padding */
-      padding: 15px 0; /* Horizontal padding handled by body */
+      padding: 15px 20px; /* Fixed padding for header */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -36,9 +34,8 @@
       top: 0;
       z-index: 100;
       border-radius: 0 0 8px 8px;
-      /* Ensure header content is within max-width and left-aligned */
-      max-width: 1200px; /* Match content max-width */
-      margin: 0 auto; /* Keep header centered within body padding for large screens */
+      max-width: 1200px; /* Limit header width */
+      margin: 0 auto; /* Center header on large screens */
     }
     .header .name {
       font-size: 1.8rem;
@@ -105,7 +102,7 @@
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/san-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg'); /* Placeholder for San Francisco image */
+      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -123,14 +120,10 @@
     }
     /* Main content area */
     .content {
-      /* Removed margin: 0 auto; to allow left alignment */
-      padding: 20px 0; /* Keep vertical padding, horizontal handled by body */
+      padding: 20px; /* Consistent padding for content sections */
       min-height: calc(100vh - 60px);
       max-width: 1200px; /* Limit content width on very large screens */
-      margin: 0 auto; /* Re-added margin auto to center the content *within the body's padding* */
-      /* This ensures it's left-aligned relative to the screen edge (due to body padding)
-         but still has a max-width and is centered within that available space.
-         This is a common and usually desired behavior on large screens. */
+      margin: 0 auto; /* Center content within the available space */
     }
     /* Section headers */
     .section-header {
@@ -432,23 +425,23 @@
       },
       manager: {
         title: 'Manager, Security Operations',
-        description: 'As Manager at METMOX, Jay evaluated security processes and crafted a comprehensive framework, boosting hybrid environment protection by 50%. His vendor collaborations became a model for efficiency.'
+        description: '<b>METMOX</b><br>Manager, Security Operations<br>May 2013 - April 2023 (10 years)<br>San Francisco Bay Area<br>Evaluated current security processes, tools, and practices as a member of the information security team reporting directly to the CISO. Charged with evaluating the effectiveness of current solutions and identifying gaps in security protection. Developed a comprehensive <b>security architecture framework</b> to evaluate and manage security architecture strategy for both traditional on-premises and cloud environments. Worked with vendors and cross-organizationally to identify, evaluate, and test (pilot) solutions. Technologies evaluated included <b>data loss prevention (DLP), endpoint detection and response (EDR), traditional endpoint security, email security solutions (on-prem and Office 365), network security tools and capabilities, identity and access management tools and capabilities, application security practices, and cloud security tools</b>.<br><br><b>Main Responsibilities:</b><br><ul><li>Lead the response to Cyber Security threats and incidents for the collection, analysis, and preservation of digital evidence.</li><li>Oversee day-to-day operations of multiple teams of security analysts and investigators</li><li>Manage critical security infrastructure including <b>IPS, SIEM</b>, etc.</li><li>Conduct root causes analysis to identify gaps and recommendations ultimately remediating risks to the firm.</li><li>Provide complete Solution by gathering customer requirement with assistance of various market unit representatives</li><li>Ability to articulate the product value proposition</li><li>Plan, research, and design robust security architectures.</li><li>Research security standards and security systems</li><li>Prepare cost estimates and identify integration issues</li><li>Provide technical supervision for (and guidance too) a security team</li><li>Define, implement and maintain corporate security policies and procedures</li></ul>'
       },
       teamLead: {
         title: 'Team Lead - Incident Management',
-        description: 'Jay’s tenure as Team Lead at Verizon Business saw him inject security into application stacks, crafting a roadmap that improved ISO 27001 compliance by 35%.'
+        description: '<b>Verizon Business</b><br>Team Lead - Incident Management<br>April 2012 - May 2013 (1 year 2 months)<br>Mumbai Area, India<br>As a member of the enterprise architecture team, charged with broad responsibilities to inject security practices into the overall application stack. Reviewed overall environment and developed an <b>incremental roadmap for addressing critical gaps</b> and charting a progressive course to more effective enterprise security over time. Included collaborating with the team driving a <b>DevOps initiative</b>, as well as initiating changes to implement and leverage <b>sec ops automation</b>.<br><br><b>Main Responsibilities:</b><br><ul><li>Analysis of an organization\'s overall security risks and requirements, rating the importance of a company\'s products and offerings, and the related design, configuration, implementation and support of the information infrastructure to protect the business from potential security breaches.</li><li>Create reports for assigned areas of responsibility; Manage Security Programs; Offer new ideas and suggestions for improvement.</li><li>Involved in rigorous reporting and metric presentation to management with regard to information security and compliance issues.</li><li>Lead and mentor a team of 6 people and took ownership of their deliverables</li><li>Maintaining Assets report of Critical Systems in the organization, Preparing Analysis and trending report for the organization on weekly, monthly basis Monitors security audit and intrusion detection system logs for system and network anomalies.</li><li>Investigates and/or escalates security violations, attempts to gain unauthorized access, virus infections that may affect the network or other event affecting security. Document and reports event(s); Assists in providing engineering analysis, design and support for firewalls, routers, networks and operating systems</li><li>Assists in performing product evaluations and recommends products/ services for network security. Validates and tests basic security architecture and design solutions to produce detailed engineering specifications with recommended vendor technologies.</li></ul>'
       },
       seniorAnalyst: {
         title: 'Senior Security Analyst',
-        description: 'At Super Computers Trading Est., Jay designed SIEM solutions, enhancing threat detection by 30%, and his vulnerability assessments cut risks by 40%.'
+        description: '<b>Super Computers Trading Est, Abu Dhabi, UAE.</b><br>Senior Security Analyst<br>September 2011 - April 2012 (8 months)<br><ul><li>Hold multifaceted responsibilities like <b>Implementation, design architecture, upgrades, and health checks and advanced troubleshooting</b>.</li><li>Address and administer peer-level client relationships.</li><li>Facilitate participation in business development and technical pre-sales activities, whenever required.</li><li>Being primary contacts for operations and SOC Operations.</li><li>Designing, implementation, integration, and administration of <b>SIEM technologies</b></li><li>Conduct knowledge transfer and security awareness sessions for resources.</li><li><b>Vulnerability Assessment and Penetration Testing</b>.</li></ul>'
       },
       assistantManager: {
         title: 'Assistant Manager - Information Security',
-        description: 'Jay coordinated security measures at Geojit Financial Services, achieving 98% regulatory compliance and reducing network intrusions by 50%.'
+        description: '<b>Geojit Financial Services</b><br>Assistant Manager - Information Security<br>February 2007 - September 2011 (4 years 8 months)<br>Cochin - India<br><ul><li>Coordinating the implementation of data processing with personnel and outside vendors and conduct tests to ensure the processing activities and security measures.</li><li>Modifying the security files for incorporating new software and correcting the errors.</li><li>Evaluating the security features of various information systems and products.</li><li>Responsible for handling the disaster scenarios and Implement redundancy, protection mechanisms for critical recourses.</li><li>Applying skills and knowledge to initiate good security practice and planning.</li><li>Ensures that right training is provided to all the levels of the staff.</li><li>Taking responsibility for providing all the arrangements for physical and logical security policies.</li><li>Installation of internal and external <b>firewalls & IPS</b> to ensure that the device is configured optimally</li><li>Evaluating and investigating regarding various threats</li><li>Configure network <b>switches/routers/Juniper SSG devices</b> as per the configuration baselines</li><li><b>Vendor Management, Incident Management, and Change management</b>.</li><li>To monitor mail logs and critical services for warning/errors, Co-ordinate with anti-spam provider for blacklisting/whitelisting</li><li>Help Desk in Charge, handling client queries, assigning persons to rectify the same.</li></ul>'
       },
       systemAdmin: {
         title: 'System Administrator',
-        description: 'As System Administrator at Safe Software, Jay ensured 100% uptime for banking servers, his backup processes reducing data loss by 90%.'
+        description: '<b>Safe Software & Integrated Solutions (P) Ltd.</b><br>System Administrator<br>March 2005 - February 2007 (2 years)<br>Palakkad - India<br><ul><li>Installation of Workstations/servers at the client end.</li><li>Installation of Networking Devices and Software’s for Co-Operate Banks</li><li>Preparing Documentation for every instruments and location</li><li>Maintaining <b>100% Uptime on Banking Hours</b></li><li><b>Backing up and Restoration of SQL databases</b></li><li>Installing backup devices on Servers</li></ul>'
       },
       mba: {
         title: 'Master of Business Administration (MBA)',
