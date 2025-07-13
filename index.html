@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
+    [x-cloak] { display: none !important; }
     body {
       font-family: 'Netflix Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #141414;
@@ -85,20 +86,15 @@
     }
     .offcanvas {
       position: fixed;
-      top: 0;
-      right: -100%;
-      width: 300px;
+      top-0 right-0;
+      width: 80; /* w-80 = 320px */
       height: 100%;
       background-color: #1f1f1f;
       padding: 20px;
       box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      transition: right 0.3s ease-in-out;
+      z-index: 50;
       overflow-y: auto;
       color: #ccc;
-    }
-    .offcanvas.active {
-      right: 0;
     }
     .offcanvas-close {
       position: absolute;
@@ -293,7 +289,17 @@
       </div>
 
       <!-- Offcanvas Panel -->
-      <div x-show="isOpen" class="offcanvas" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="translate-x-full" x-transition:leave="transition ease-in-out duration-300" x-transition:leave-end="translate-x-full">
+      <div 
+        x-show="isOpen" 
+        x-cloak
+        x-transition:enter="transition ease-in-out duration-300 transform"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in-out duration-300 transform"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+        class="offcanvas fixed top-0 right-0 w-80 h-full bg-gray-900 z-50 overflow-y-auto p-4"
+      >
         <span class="offcanvas-close" @click="isOpen = false">×</span>
         <h3 x-text="{
           'seniorDirector': 'Senior Director - Security Operations',
