@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jayakrishnan C P | Cybersecurity Leader Resume</title>
+  <title>Jayakrishnan CP | Cybersecurity Leader Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
@@ -11,91 +12,91 @@
     [x-cloak] { display: none !important; }
     /* Custom font for a Netflix-like feel */
     body {
-      font-family: 'Inter', sans-serif; /* Changed to Inter for better consistency */
-      background-color: #141414; /* Dark background */
-      color: #fff; /* White text */
+      font-family: 'Poppins', sans-serif;
+      background-color: #141414;
+      color: #fff;
       margin: 0;
       padding: 0;
-      overflow-x: hidden; /* Prevent horizontal scroll */
+      overflow-x: hidden;
     }
     /* Header styling for the top navigation bar */
     .header {
-      background-color: #141414; /* Changed to match body background */
+      background-color: #141414;
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between; /* Space out name and navigation */
+      justify-content: space-between;
       align-items: center;
-      position: sticky; /* Make header sticky */
+      position: sticky;
       top: 0;
-      z-index: 100; /* Ensure header is on top */
-      border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+      z-index: 100;
+      border-radius: 0 0 8px 8px;
     }
     .header .name {
       font-size: 1.8rem;
-      font-weight: bold; /* Already bold, but explicitly set */
-      color: #E50914; /* Changed to red */
+      font-weight: bold;
+      color: #E50914;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
     .header nav a {
-      color: #fff; /* Changed to white */
+      color: #fff;
       text-decoration: none;
       margin-left: 25px;
       font-size: 1.1rem;
-      font-weight: bold; /* Changed to bold */
+      font-weight: bold;
       transition: color 0.3s ease;
     }
     .header nav a:hover {
-      color: #f0f0f0; /* Slightly lighter on hover */
+      color: #f0f0f0;
       text-decoration: underline;
     }
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
-      background-size: cover; /* Cover the entire area */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Do not repeat the image */
-      background-color: #141414; /* Fallback background color */
-      padding: 60px 20px; /* Adjusted padding after removing profile picture */
-      text-align: left; /* Changed to left alignment */
+      background-image: url('https://placehold.co/1200x600/000000/FFFFFF/png?text=San+Francisco+Skyline'); /* Placeholder for San Francisco image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #141414;
+      padding: 60px 20px;
+      text-align: left;
       position: relative;
       /* Add an overlay to make text more readable */
-      box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Dark overlay */
-      display: flex; /* Use flexbox for content alignment */
-      flex-direction: column; /* Stack items vertically */
-      justify-content: center; /* Center content vertically */
-      min-height: 400px; /* Minimum height for the hero section */
-      width: 100%; /* Ensure full width */
+      box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 400px;
+      width: 100%;
     }
     /* Main content area */
     .content {
       padding: 20px;
-      min-height: calc(100vh - 60px); /* Ensure content takes up most of the viewport */
+      min-height: calc(100vh - 60px);
     }
     /* Section headers */
     .section-header {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #E50914; /* Red color for section headers */
+      color: #E50914;
       margin-bottom: 10px;
     }
-    /* Carousel for experience, skills, projects, and education */
+    /* Carousel for experience, projects, and education */
     .carousel-container {
         position: relative;
         width: 100%;
-        overflow: hidden; /* Hide scrollbar but allow scrolling */
+        overflow: hidden;
     }
     .carousel {
       display: flex;
-      overflow-x: scroll; /* Enable horizontal scrolling */
-      gap: 20px; /* Space between cards */
+      overflow-x: scroll;
+      gap: 20px;
       padding: 10px 0;
-      scroll-behavior: smooth; /* Smooth scrolling */
-      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-      scrollbar-width: none; /* Hide scrollbar for Firefox */
-      -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .carousel::-webkit-scrollbar { /* Hide scrollbar for Chrome, Safari, and Opera */
+    .carousel::-webkit-scrollbar {
         display: none;
     }
     .carousel-arrow {
@@ -127,28 +128,28 @@
         right: 10px;
     }
 
-    /* Individual card styling */
-    .card, .skill-card {
+    /* Individual card styling for experience, projects, education, licenses */
+    .card {
       min-width: 200px;
       height: 300px; /* Enforce consistent height for images */
-      background-color: #1f1f1f; /* Darker background for cards */
-      border-radius: 8px; /* Rounded corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+      background-color: #1f1f1f;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s; /* Smooth transform on hover */
+      transition: transform 0.3s;
       cursor: pointer;
     }
-    .card:hover, .skill-card:hover {
-      transform: scale(1.05); /* Visual feedback on hover */
+    .card:hover {
+      transform: scale(1.05);
     }
-    .card img, .skill-card img {
+    .card img {
       width: 100%;
       height: 100%; /* Ensure images fill the card height */
       object-fit: cover;
-      opacity: 0.7; /* Slightly transparent image */
+      opacity: 0.7;
     }
-    .card-number, .skill-number {
+    .card-number {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -157,7 +158,7 @@
       font-weight: bold;
       z-index: 1;
     }
-    .card-title, .skill-title {
+    .card-title {
       position: absolute;
       bottom: 20px;
       left: 20px;
@@ -166,6 +167,43 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       z-index: 1;
     }
+
+    /* New styling for skill category buttons */
+    .skill-category-button {
+      @apply px-6 py-3 rounded-full border-2 border-gray-500 text-lg font-bold transition-colors duration-300 cursor-pointer;
+    }
+    .skill-category-button.active {
+      @apply bg-red-600 border-red-600 text-white;
+    }
+
+    /* Styling for individual skill boxes in the grid */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid columns */
+      gap: 15px; /* Space between skill boxes */
+      padding: 10px 0;
+    }
+    .skill-grid-item {
+      background-color: #1f1f1f;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem; /* Slightly smaller font for more text in box */
+      min-height: 80px; /* Fixed height for consistent rows */
+      transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+      cursor: pointer;
+    }
+    .skill-grid-item:hover {
+      transform: translateY(-3px);
+      background-color: #2a2a2a;
+    }
+
     /* Offcanvas (now modal) styling */
     .offcanvas-backdrop {
       position: fixed;
@@ -173,37 +211,42 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
-      z-index: 40; /* Below the modal, above content */
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 40;
     }
     .offcanvas {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); /* Center the modal */
-      width: 90%; /* Responsive width */
-      max-width: 600px; /* Max width for larger screens */
-      height: auto; /* Height adjusts to content */
-      max-height: 90vh; /* Max height to prevent overflow on small screens */
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      max-height: 90vh;
       background-color: #1f1f1f;
       padding: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Stronger shadow for modal */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
       z-index: 50;
       overflow-y: auto;
       color: #ccc;
-      border-radius: 8px; /* Rounded corners on all sides */
+      border-radius: 8px;
     }
     .offcanvas-close {
       position: absolute;
       top: 10px;
-      right: 15px; /* Adjusted right position for padding */
-      font-size: 1.8rem; /* Slightly larger for easier clicking */
+      right: 15px;
+      font-size: 1.8rem;
       color: #E50914;
       cursor: pointer;
       font-weight: bold;
     }
     .offcanvas-content {
-      margin-top: 20px; /* Adjusted margin for close button */
+      margin-top: 20px;
+      /* Disable text selection */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
     .lang-form select, .lang-form button {
       margin: 5px;
@@ -228,14 +271,201 @@
     /* Responsive adjustments */
     @media (min-width: 768px) {
       .offcanvas {
-        width: 600px; /* Fixed width on larger screens */
+        width: 600px;
       }
     }
   </style>
 </head>
 <body>
-  <div x-data="{ isOpen: false, selectedItem: '', selectedLang: 'en' }">
-    <!-- Red Header with Name and Navigation -->
+  <div x-data="{ 
+    isOpen: false, 
+    selectedItem: '', 
+    selectedLang: 'en',
+    activeSkillCategory: 'industryKnowledge', /* New state for active skill category */
+    skills: { /* Grouped skills for easy management */
+      industryKnowledge: [
+        { id: 'cybersecurity', title: 'Cybersecurity' },
+        { id: 'informationSecurity', title: 'Information Security' },
+        { id: 'securityOperations', title: 'Security Operations' },
+        { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment' },
+        { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management' },
+        { id: 'incidentResponse', title: 'Incident Response' },
+        { id: 'securityArchitectureDesign', title: 'Security Architecture Design' },
+        { id: 'itSecurityOperations', title: 'IT Security Operations' },
+        { id: 'itSecurityPoliciesProcedures', title: 'IT Security Policies & Procedures' },
+        { id: 'networkSecurity', title: 'Network Security' },
+        { id: 'managedSecurityServices', title: 'Managed Security Services' },
+        { id: 'riskManagement', title: 'Risk Management' },
+        { id: 'internalAudits', title: 'Internal Audits' },
+        { id: 'informationSecurityManagement', title: 'Information Security Management' },
+        { id: 'securityStandards', title: 'Security Standards' },
+        { id: 'productSecurity', title: 'Product Security' },
+        { id: 'corporateSecurity', title: 'Corporate Security' },
+        { id: 'thirdPartyVendorManagement', title: 'Third Party Vendor Management' },
+        { id: 'leadership', title: 'Leadership' },
+        { id: 'executiveLeadership', title: 'Executive Leadership' },
+        { id: 'peopleManagement', title: 'People Management' },
+        { id: 'interpersonalCommunication', title: 'Interpersonal Communication' },
+        { id: 'crossFunctionalTeamLeadership', title: 'Cross-functional Team Leadership' },
+        { id: 'teamBuilding', title: 'Team Building' },
+        { id: 'relationshipBuilding', title: 'Relationship Building' },
+        { id: 'accountability', title: 'Accountability' },
+        { id: 'publicSpeaking', title: 'Public Speaking' },
+        { id: 'compassion', title: 'Compassion' }
+      ],
+      toolsTechnologies: [
+        { id: 'siemSkill', title: 'SIEM' }, /* Changed from siem to siemSkill to avoid conflict */
+        { id: 'casb', title: 'CASB' },
+        { id: 'amazonWebServicesAws', title: 'Amazon Web Services (AWS)' },
+        { id: 'awsSecurity', title: 'AWS Security' },
+        { id: 'splunk', title: 'Splunk' },
+        { id: 'redHatLinux', title: 'Red Hat Linux' },
+        { id: 'windows', title: 'Windows' },
+        { id: 'restApis', title: 'REST APIs' },
+        { id: 'php', title: 'PHP' },
+        { id: 'artificialIntelligenceAi', title: 'Artificial Intelligence (AI)' },
+        { id: 'generativeAi', title: 'Generative AI' }
+      ]
+    },
+    details: { /* All details for experience, education, skills, licenses */
+      seniorDirector: {
+        en: 'Jay has excelled as Senior Director at UltraViolet Cyber, leading transformative projects like Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection, reducing unauthorized access by 60%. His strategic vision has set new benchmarks in cybersecurity leadership.',
+        es: 'Jay ha destacado como Director Senior en UltraViolet Cyber, liderando proyectos transformadores como arquitecturas Zero Trust (ZIA, ZPA) y detección de amenazas con IA, reduciendo accesos no autorizados en un 60%.',
+        hi: 'जय ने अल्ट्रावायलेट साइबर में वरिष्ठ निदेशक के रूप में उत्कृष्ट प्रदर्शन किया, जिसमें जीरो ट्रस्ट आर्किटेक्चर (जेडआईए, जेडपीए) और एआई-संचालित खतरे का पता लगाने जैसे परिवर्तनकारी परियोजनाओं का नेतृत्व किया, जिससे अनधिकृत पहुंच 60% कम हुई।'
+      },
+      manager: {
+        en: 'As Manager at METMOX, Jay evaluated security processes and crafted a comprehensive framework, boosting hybrid environment protection by 50%. His vendor collaborations became a model for efficiency.',
+        es: 'Como Gerente en METMOX, Jay evaluó procesos de seguridad y creó un marco integral, mejorando la protección de entornos híbridos en un 50%.',
+        hi: 'मेटमॉक्स में प्रबंधक के रूप में, जय ने सुरक्षा प्रक्रियाओं का मूल्यांकन किया और एक व्यापक ढांचा बनाया, जिससे हाइब्रिड वातावरण की सुरक्षा 50% बढ़ी।'
+      },
+      teamLead: {
+        en: 'Jay’s tenure as Team Lead at Verizon Business saw him inject security into application stacks, crafting a roadmap that improved ISO 27001 compliance by 35%.',
+        es: 'Durante su mandato como Líder de Equipo en Verizon Business, Jay integró seguridad en las pilas de aplicaciones, elaborando un plan que mejoró el cumplimiento de ISO 27001 en un 35%.',
+        hi: 'वेरिज़न बिजनेस में टीम लीड के रूप में जय के कार्यकाल ने उन्हें एप्लिकेशन स्टैक में सुरक्षा को शामिल करने का मौका दिया, जिससे आईएसओ 27001 अनुपालन 35% बेहतर हुआ।'
+      },
+      seniorAnalyst: {
+        en: 'At Super Computers Trading Est., Jay designed SIEM solutions, enhancing threat detection by 30%, and his vulnerability assessments cut risks by 40%.',
+        es: 'En Super Computers Trading Est., Jay diseñó soluciones SIEM, mejorando la detección de amenazas en un 30%, y sus evaluaciones de vulnerabilidades redujeron riesgos en un 40%.',
+        hi: 'सुपर कंप्यूटर्स ट्रेडिंग एस्ट में, जय ने SIEM समाधान डिज़ाइन किए, जिससे खतरे का पता लगाने में 30% की वृद्धि हुई, और उनकी कमजोरियों की जांच से जोखिम 40% कम हुआ।'
+      },
+      assistantManager: {
+        en: 'Jay coordinated security measures at Geojit Financial Services, achieving 98% regulatory compliance and reducing network intrusions by 50%.',
+        es: 'Jay coordinó medidas de seguridad en Geojit Financial Services, logrando un 98% de cumplimiento regulatorio y reduciendo intrusiones en la red en un 50%.',
+        hi: 'जय ने गेओजिट फाइनेंशियल सर्विसेज में सुरक्षा उपायों का समन्वय किया, जिससे 98% नियामक अनुपालन और नेटवर्क घुसपैठ में 50% की कमी हुई।'
+      },
+      systemAdmin: {
+        en: 'As System Administrator at Safe Software, Jay ensured 100% uptime for banking servers, his backup processes reducing data loss by 90%.',
+        es: 'Como Administrador de Sistemas en Safe Software, Jay aseguró un 100% de tiempo de actividad para servidores bancarios, reduciendo la pérdida de datos en un 90% con sus procesos de respaldo.',
+        hi: 'सेफ सॉफ्टवेयर में सिस्टम प्रशासक के रूप में, जय ने बैंकिंग सर्वर के लिए 100% अपटाइम सुनिश्चित किया, जिससे उनके बैकअप प्रक्रियाओं ने डेटा हानि को 90% कम किया।'
+      },
+      mba: {
+        en: 'Jay earned his MBA from NIM, specializing in IT and HR, laying a strong foundation for his strategic leadership in cybersecurity.',
+        es: 'Jay obtuvo su MBA en NIM, especializándose en TI y RRHH, sentando una sólida base para su liderazgo estratégico en ciberseguridad.',
+        hi: 'जय ने NIM से MBA प्राप्त किया, जो IT और HR में विशेषज्ञता के साथ उनके साइबर सुरक्षा में रणनीतिक नेतृत्व के लिए एक मजबूत आधार रखता है।'
+      },
+      gdba: {
+        en: 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills and shaping his holistic approach to security.',
+        es: 'Su GDBA de NIM dotó a Jay de perspicacia empresarial, complementando sus habilidades técnicas y moldeando su enfoque holístico de la seguridad.',
+        hi: 'उनका NIM से GDBA जय को व्यावसायिक समझ से लैस किया, जो उनकी तकनीकी कौशल के पूरक है और सुरक्षा के प्रति उनके समग्र दृष्टिकोण को आकार देता है।'
+      },
+      diploma: {
+        en: 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his career, giving him hands-on expertise that evolved into advanced security solutions.',
+        es: 'El Diploma en Hardware de Computadoras de Jay de la Universidad Técnica de Kerala dio inicio a su carrera, brindándole experiencia práctica que evolucionó en soluciones de seguridad avanzadas.',
+        hi: 'जय का केरल तकनीकी विश्वविद्यालय से कम्प्यूटर हार्डवेयर में डिप्लोमा उनकी तकनीकी करियर की शुरुआत थी, जिससे उन्हें व्यावहारिक विशेषज्ञता मिली जो उन्नत सुरक्षा समाधानों में विकसित हुई।'
+      },
+      threatIntel: {
+        en: 'Jay engineered an AI-powered Threat Intel Engine using Python and n8n, parsing CVEs and IOCs with CVSS scoring, cutting analysis time by 50% and boosting accuracy by 30%.',
+        es: 'Jay diseñó un motor de inteligencia de amenazas impulsado por IA usando Python y n8n, reduciendo el tiempo de análisis en un 50%.',
+        hi: 'जय ने पायथन और n8n का उपयोग करके एक AI-संचालित खतरे की खुफिया इंजन का निर्माण किया, जिससे विश्लेषण समय 50% कम हुआ।'
+      },
+      securityAutomation: {
+        en: 'Jay built n8n workflows for security automation, syndicating blogs and analyzing phishing alerts, automating 70% of tasks and reducing incidents by 25%.',
+        es: 'Jay construyó flujos de trabajo n8n para automatización de seguridad, automatizando el 70% de las tareas y reduciendo incidentes en un 25%.',
+        hi: 'जय ने सुरक्षा स्वचालन के लिए n8n कार्यप्रवाह बनाए, जिससे 70% कार्य स्वचालित हुए और घटनाओं में 25% की कमी आई।'
+      },
+      cloudDashboard: {
+        en: 'Jay integrated Tenable, CrowdStrike, and Sentinel into a cloud dashboard with AWS and Tableau, enhancing decision-making by 35% and cutting vulnerabilities by 20%.',
+        es: 'Jay integró Tenable, CrowdStrike y Sentinel en un panel en la nube con AWS y Tableau, mejorando la toma de decisiones en un 35% y reduciendo vulnerabilidades en un 20%.',
+        hi: 'जय ने टेनेबल, क्राउडस्ट्राइक और सेंटिनल को AWS और टैब्लू के साथ एक क्लाउड डैशबोर्ड में एकीकृत किया, जिससे निर्णय लेने में 35% की वृद्धि हुई और कमजोरियां 20% कम हुईं।'
+      },
+      // New Skills Details (updated to match the new structure)
+      cybersecurity: { en: 'Expertise in protecting computer systems and networks from digital attacks, including data breaches, cyber threats, and unauthorized access.', es: 'Experiencia en la protección de sistemas informáticos y redes contra ataques digitales, incluyendo filtraciones de datos, ciberamenazas y acceso no autorizado.', hi: 'कंप्यूटर सिस्टम और नेटवर्क को डिजिटल हमलों, डेटा उल्लंघनों, साइबर खतरों और अनधिकृत पहुंच से बचाने में विशेषज्ञता।' },
+      informationSecurity: { en: 'Proficiency in establishing and maintaining the confidentiality, integrity, and availability of information assets within an organization.', es: 'Dominio en el establecimiento y mantenimiento de la confidencialidad, integridad y disponibilidad de los activos de información dentro de una organización.', hi: 'किसी संगठन के भीतर सूचना संपत्तियों की गोपनीयता, अखंडता और उपलब्धता को स्थापित करने और बनाए रखने में दक्षता।' },
+      securityOperations: { en: 'Skilled in managing and monitoring security systems, responding to incidents, and ensuring the continuous protection of an organization\'s digital assets.', es: 'Habilidad en la gestión y supervisión de sistemas de seguridad, respuesta a incidentes y garantía de la protección continua de los activos digitales de una organización.', hi: 'सुरक्षा प्रणालियों के प्रबंधन और निगरानी, घटनाओं का जवाब देने और किसी संगठन की डिजिटल संपत्तियों की निरंतर सुरक्षा सुनिश्चित करने में कुशल।' },
+      vulnerabilityAssessment: { en: 'Adept at identifying, quantifying, and prioritizing vulnerabilities in systems and applications to mitigate security risks.', es: 'Hábil en la identificación, cuantificación y priorización de vulnerabilidades en sistemas y aplicaciones para mitigar los riesgos de seguridad.', hi: 'सिस्टम और अनुप्रयोगों में कमजोरियों की पहचान, मात्रा निर्धारण और प्राथमिकता देने में निपुण, ताकि सुरक्षा जोखिमों को कम किया जा सके।' },
+      threatVulnerabilityManagement: { en: 'Comprehensive understanding of identifying, assessing, and mitigating threats and vulnerabilities across an enterprise.', es: 'Comprensión integral de la identificación, evaluación y mitigación de amenazas y vulnerabilidades en toda una empresa.', hi: 'एक उद्यम भर में खतरों और कमजोरियों की पहचान, मूल्यांकन और शमन की व्यापक समझ।' },
+      incidentResponse: { en: 'Proven ability to respond to and manage cybersecurity incidents, minimizing damage and restoring normal operations quickly.', es: 'Capacidad probada para responder y gestionar incidentes de ciberseguridad, minimizando los daños y restaurando las operaciones normales rápidamente.', hi: 'साइबर सुरक्षा घटनाओं का जवाब देने और उन्हें प्रबंधित करने, क्षति को कम करने और सामान्य संचालन को जल्दी से बहाल करने की सिद्ध क्षमता।' },
+      securityArchitectureDesign: { en: 'Expertise in designing and implementing robust and scalable security architectures for complex IT environments.', es: 'Experiencia en el diseño e implementación de arquitecturas de seguridad robustas y escalables para entornos de TI complejos.', hi: 'जटिल आईटी वातावरण के लिए मजबूत और स्केलेबल सुरक्षा आर्किटेक्चर को डिजाइन और लागू करने में विशेषज्ञता।' },
+      siemSkill: { en: 'Proficient in Security Information and Event Management (SIEM) systems for real-time analysis of security alerts generated by network hardware and applications.', es: 'Dominio en sistemas de Gestión de Información y Eventos de Seguridad (SIEM) para el análisis en tiempo real de alertas de seguridad generadas por hardware y aplicaciones de red.', hi: 'नेटवर्क हार्डवेयर और अनुप्रयोगों द्वारा उत्पन्न सुरक्षा अलर्ट के वास्तविक समय विश्लेषण के लिए सुरक्षा सूचना और घटना प्रबंधन (SIEM) प्रणालियों में कुशल।' },
+      itSecurityOperations: { en: 'Managing daily IT security tasks, including monitoring, incident handling, and maintaining security tools and infrastructure.', es: 'Gestión de tareas diarias de seguridad de TI, incluyendo monitoreo, manejo de incidentes y mantenimiento de herramientas e infraestructura de seguridad.', hi: 'दैनिक आईटी सुरक्षा कार्यों का प्रबंधन, जिसमें निगरानी, घटना प्रबंधन और सुरक्षा उपकरणों और बुनियादी ढांचे का रखरखाव शामिल है।' },
+      itSecurityPoliciesProcedures: { en: 'Developing, implementing, and enforcing IT security policies and procedures to ensure compliance and mitigate risks.', es: 'Desarrollo, implementación y aplicación de políticas y procedimientos de seguridad de TI para garantizar el cumplimiento y mitigar los riesgos.', hi: 'अनुपालन सुनिश्चित करने और जोखिमों को कम करने के लिए आईटी सुरक्षा नीतियों और प्रक्रियाओं का विकास, कार्यान्वयन और प्रवर्तन।' },
+      networkSecurity: { en: 'Strong background in securing computer networks from intrusion, unauthorized access, and other vulnerabilities.', es: 'Sólida experiencia en la protección de redes informáticas contra intrusiones, acceso no autorizado y otras vulnerabilidades.', hi: 'कंप्यूटर नेटवर्क को घुसपैठ, अनधिकृत पहुंच और अन्य कमजोरियों से सुरक्षित रखने में मजबूत पृष्ठभूमि।' },
+      managedSecurityServices: { en: 'Experience with providing and managing outsourced security services, including monitoring, threat detection, and incident response.', es: 'Experiencia en la provisión y gestión de servicios de seguridad externalizados, incluyendo monitoreo, detección de amenazas y respuesta a incidentes.', hi: 'आउटसोर्स सुरक्षा सेवाओं को प्रदान करने और प्रबंधित करने का अनुभव, जिसमें निगरानी, खतरे का पता लगाना और घटना प्रतिक्रिया शामिल है।' },
+      riskManagement: { en: 'Skilled in identifying, assessing, and mitigating risks to an organization\'s information assets.', es: 'Hábil en la identificación, evaluación y mitigación de riesgos para los activos de información de una organización.', hi: 'किसी संगठन की सूचना संपत्तियों के जोखिमों की पहचान, मूल्यांकन और शमन में कुशल।' },
+      internalAudits: { en: 'Conducting internal audits to assess compliance with security policies, standards, and regulatory requirements.', es: 'Realización de auditorías internas para evaluar el cumplimiento de las políticas, estándares y requisitos reglamentarios de seguridad.', hi: 'सुरक्षा नीतियों, मानकों और नियामक आवश्यकताओं के अनुपालन का आकलन करने के लिए आंतरिक ऑडिट करना।' },
+      informationSecurityManagement: { en: 'Implementing and managing comprehensive information security programs to protect sensitive data and systems.', es: 'Implementación y gestión de programas integrales de seguridad de la información para proteger datos y sistemas sensibles.', hi: 'संवेदनशील डेटा और सिस्टम की सुरक्षा के लिए व्यापक सूचना सुरक्षा कार्यक्रमों को लागू करना और प्रबंधित करना।' },
+      securityStandards: { en: 'Adherence to and implementation of various security standards and frameworks (e.g., ISO 27001, NIST).', es: 'Adhesión e implementación de diversos estándares y marcos de seguridad (por ejemplo, ISO 27001, NIST).', hi: 'विभिन्न सुरक्षा मानकों और ढांचों (जैसे, ISO 27001, NIST) का पालन और कार्यान्वयन।' },
+      productSecurity: { en: 'Ensuring the security of products throughout their lifecycle, from design to deployment and maintenance.', es: 'Garantizar la seguridad de los productos a lo largo de su ciclo de vida, desde el diseño hasta la implementación y el mantenimiento.', hi: 'उत्पादों की सुरक्षा सुनिश्चित करना उनके पूरे जीवनचक्र में, डिजाइन से लेकर तैनाती और रखरखाव तक।' },
+      casb: { en: 'Experience with Cloud Access Security Brokers (CASB) for enforcing security policies for cloud-based applications and data.', es: 'Experiencia con Cloud Access Security Brokers (CASB) para hacer cumplir las políticas de seguridad para aplicaciones y datos basados en la nube.', hi: 'क्लाउड-आधारित अनुप्रयोगों और डेटा के लिए सुरक्षा नीतियों को लागू करने के लिए क्लाउड एक्सेस सिक्योरिटी ब्रोकर्स (CASB) के साथ अनुभव।' },
+      amazonWebServicesAws: { en: 'Proficiency in Amazon Web Services (AWS) cloud platform, including its security features and services.', es: 'Dominio de la plataforma en la nube Amazon Web Services (AWS), incluyendo sus características y servicios de seguridad.', hi: 'अमेज़ॅन वेब सर्विसेज (AWS) क्लाउड प्लेटफॉर्म में दक्षता, जिसमें इसकी सुरक्षा विशेषताएं और सेवाएं शामिल हैं।' },
+      awsSecurity: { en: 'Specialized knowledge in securing AWS environments, including identity and access management, network security, and data protection.', es: 'Conocimiento especializado en la protección de entornos AWS, incluyendo la gestión de identidades y accesos, seguridad de red y protección de datos.', hi: 'AWS वातावरण को सुरक्षित करने में विशेष ज्ञान, जिसमें पहचान और पहुंच प्रबंधन, नेटवर्क सुरक्षा और डेटा सुरक्षा शामिल है।' },
+      splunk: { en: 'Skilled in using Splunk for security monitoring, incident investigation, and compliance reporting.', es: 'Hábil en el uso de Splunk para monitoreo de seguridad, investigación de incidentes e informes de cumplimiento.', hi: 'सुरक्षा निगरानी, घटना जांच और अनुपालन रिपोर्टिंग के लिए स्प्लंक का उपयोग करने में कुशल।' },
+      redHatLinux: { en: 'Experience with Red Hat Linux operating system, including system administration and security hardening.', es: 'Experiencia con el sistema operativo Red Hat Linux, incluyendo la administración del sistema y el endurecimiento de la seguridad.', hi: 'रेड हैट लिनक्स ऑपरेटिंग सिस्टम के साथ अनुभव, जिसमें सिस्टम प्रशासन और सुरक्षा सुदृढीकरण शामिल है।' },
+      windows: { en: 'Proficiency in Windows operating systems, including security configurations and troubleshooting.', es: 'Dominio de los sistemas operativos Windows, incluyendo configuraciones de seguridad y resolución de problemas.', hi: 'विंडोज ऑपरेटिंग सिस्टम में दक्षता, जिसमें सुरक्षा कॉन्फ़िगरेशन और समस्या निवारण शामिल है।' },
+      restApis: { en: 'Understanding and experience in working with RESTful APIs for integration and automation.', es: 'Comprensión y experiencia en el trabajo con API RESTful para integración y automatización.', hi: 'एकीकरण और स्वचालन के लिए RESTful APIs के साथ काम करने में समझ और अनुभव।' },
+      php: { en: 'Knowledge of PHP programming language for web development and scripting.', es: 'Conocimiento del lenguaje de programación PHP para desarrollo web y scripting.', hi: 'वेब विकास और स्क्रिप्टिंग के लिए PHP प्रोग्रामिंग भाषा का ज्ञान।' },
+      artificialIntelligenceAi: { en: 'Familiarity with Artificial Intelligence (AI) concepts and their application in cybersecurity.', es: 'Familiaridad con los conceptos de Inteligencia Artificial (IA) y su aplicación en ciberseguridad.', hi: 'आर्टिफिशियल इंटेलिजेंस (AI) अवधारणाओं और साइबर सुरक्षा में उनके अनुप्रयोग से परिचित।' },
+      generativeAi: { en: 'Understanding of Generative AI principles and its potential uses in security operations and threat intelligence.', es: 'Comprensión de los principios de la IA generativa y sus posibles usos en operaciones de seguridad e inteligencia de amenazas.', hi: 'जेनरेटिव एआई सिद्धांतों और सुरक्षा संचालन और खतरे की खुफिया जानकारी में इसके संभावित उपयोगों की समझ।' },
+      programManagement: { en: 'Ability to manage multiple related projects and initiatives to achieve strategic business goals.', es: 'Capacidad para gestionar múltiples proyectos e iniciativas relacionadas para lograr objetivos comerciales estratégicos.', hi: 'रणनीतिक व्यावसायिक लक्ष्यों को प्राप्त करने के लिए कई संबंधित परियोजनाओं और पहलों का प्रबंधन करने की क्षमता।' },
+      projectManagement: { en: 'Skilled in planning, executing, and closing projects, ensuring they are completed on time and within budget.', es: 'Hábil en la planificación, ejecución y cierre de proyectos, asegurando que se completen a tiempo y dentro del presupuesto.', hi: 'परियोजनाओं की योजना बनाने, निष्पादित करने और बंद करने में कुशल, यह सुनिश्चित करते हुए कि वे समय पर और बजट के भीतर पूरे हों।' },
+      vendorManagement: { en: 'Experience in managing relationships with third-party vendors and ensuring their compliance with security requirements.', es: 'Experiencia en la gestión de relaciones con proveedores externos y la garantía de su cumplimiento con los requisitos de seguridad.', hi: 'तीसरे पक्ष के विक्रेताओं के साथ संबंधों का प्रबंधन करने और सुरक्षा आवश्यकताओं के साथ उनके अनुपालन को सुनिश्चित करने में अनुभव।' },
+      serviceDelivery: { en: 'Proficiency in ensuring the effective and efficient delivery of security services to meet organizational needs.', es: 'Dominio en la garantía de la entrega efectiva y eficiente de servicios de seguridad para satisfacer las necesidades organizacionales.', hi: 'संगठनात्मक आवश्यकताओं को पूरा करने के लिए सुरक्षा सेवाओं की प्रभावी और कुशल डिलीवरी सुनिश्चित करने में दक्षता।' },
+      enterpriseArchitecture: { en: 'Understanding of enterprise architectural principles and their application in designing secure and scalable IT systems.', es: 'Comprensión de los principios de la arquitectura empresarial y su aplicación en el diseño de sistemas de TI seguros y escalables.', hi: 'एंटरप्राइज आर्किटेक्चरल सिद्धांतों और सुरक्षित और स्केलेबल आईटी सिस्टम को डिजाइन करने में उनके अनुप्रयोग की समझ।' },
+      corporateSecurity: { en: 'Knowledge of security practices and strategies to protect an entire organization from various threats.', es: 'Conocimiento de las prácticas y estrategias de seguridad para proteger a toda una organización de diversas amenazas.', hi: 'विभिन्न खतरों से पूरे संगठन की सुरक्षा के लिए सुरक्षा प्रथाओं और रणनीतियों का ज्ञान।' },
+      thirdPartyVendorManagement: { en: 'Specific expertise in managing security risks associated with third-party vendors and supply chains.', es: 'Experiencia específica en la gestión de riesgos de seguridad asociados con proveedores externos y cadenas de suministro.', hi: 'तीसरे पक्ष के विक्रेताओं और आपूर्ति श्रृंखलाओं से जुड़े सुरक्षा जोखिमों के प्रबंधन में विशिष्ट विशेषज्ञता।' },
+      leadership: { en: 'Ability to guide, motivate, and inspire teams to achieve common goals and drive success.', es: 'Capacidad para guiar, motivar e inspirar a los equipos para lograr objetivos comunes e impulsar el éxito.', hi: 'सामान्य लक्ष्यों को प्राप्त करने और सफलता प्राप्त करने के लिए टीमों का मार्गदर्शन करने, प्रेरित करने और प्रेरित करने की क्षमता।' },
+      executiveLeadership: { en: 'Experience in leading and directing high-level strategic initiatives and teams within an organization.', es: 'Experiencia en el liderazgo y la dirección de iniciativas y equipos estratégicos de alto nivel dentro de una organización.', hi: 'किसी संगठन के भीतर उच्च-स्तरीय रणनीतिक पहलों और टीमों का नेतृत्व और निर्देशन करने का अनुभव।' },
+      peopleManagement: { en: 'Skilled in overseeing and developing employees, fostering a positive work environment, and optimizing team performance.', es: 'Hábil en la supervisión y el desarrollo de empleados, fomentando un ambiente de trabajo positivo y optimizando el rendimiento del equipo.', hi: 'कर्मचारियों की देखरेख और विकास करने, एक सकारात्मक कार्य वातावरण को बढ़ावा देने और टीम के प्रदर्शन को अनुकूलित करने में कुशल।' },
+      interpersonalCommunication: { en: 'Strong ability to communicate effectively and build positive relationships with diverse individuals and teams.', es: 'Gran capacidad para comunicarse de manera efectiva y construir relaciones positivas con diversas personas y equipos.', hi: 'विभिन्न व्यक्तियों और टीमों के साथ प्रभावी ढंग से संवाद करने और सकारात्मक संबंध बनाने की मजबूत क्षमता।' },
+      crossFunctionalTeamLeadership: { en: 'Leading and collaborating with teams across different departments to achieve shared objectives.', es: 'Liderar y colaborar con equipos de diferentes departamentos para lograr objetivos compartidos.', hi: 'साझा उद्देश्यों को प्राप्त करने के लिए विभिन्न विभागों में टीमों का नेतृत्व और सहयोग करना।' },
+      teamBuilding: { en: 'Expertise in creating cohesive and high-performing teams through effective collaboration and development strategies.', es: 'Experiencia en la creación de equipos cohesionados y de alto rendimiento a través de estrategias efectivas de colaboración y desarrollo.', es: 'Experiencia en la creación de equipos cohesionados y de alto rendimiento a través de estrategias efectivas de colaboración y desarrollo.', hi: 'प्रभावी सहयोग और विकास रणनीतियों के माध्यम से सुसंगत और उच्च प्रदर्शन वाली टीमों के निर्माण में विशेषज्ञता।' },
+      relationshipBuilding: { en: 'Adept at establishing and nurturing professional relationships with stakeholders, colleagues, and partners.', es: 'Hábil en el establecimiento y fomento de relaciones profesionales con las partes interesadas, colegas y socios.', hi: 'हितधारकों, सहकर्मियों और भागीदारों के साथ पेशेवर संबंध स्थापित करने और उन्हें पोषित करने में निपुण।' },
+      accountability: { en: 'Demonstrates a strong sense of responsibility and ownership for tasks and outcomes.', es: 'Demuestra un fuerte sentido de responsabilidad y propiedad por las tareas y los resultados.', hi: 'कार्यों और परिणामों के लिए जिम्मेदारी और स्वामित्व की एक मजबूत भावना प्रदर्शित करता है।' },
+      publicSpeaking: { en: 'Confident and effective delivery of presentations and speeches to various audiences.', es: 'Entrega segura y efectiva de presentaciones y discursos a diversas audiencias.', hi: 'विभिन्न दर्शकों के लिए प्रस्तुतियों और भाषणों का आत्मविश्वासपूर्ण और प्रभावी वितरण।' },
+      compassion: { en: 'Ability to understand and share the feelings of others, fostering empathy and supportive interactions.', es: 'Capacidad para comprender y compartir los sentimientos de los demás, fomentando la empatía y las interacciones de apoyo.', hi: 'दूसरों की भावनाओं को समझने और साझा करने की क्षमता, सहानुभूति और सहायक बातचीत को बढ़ावा देना।' },
+      // Licenses & Certifications Details (updated to match the new structure)
+      advancedCyberSecurity: { en: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.', es: 'Esta certificación cubre amenazas avanzadas de ciberseguridad y principios de gobernanza, equipando a los líderes con estrategias para proteger los activos organizacionales y asegurar el cumplimiento.', hi: 'यह प्रमाणन उन्नत साइबर सुरक्षा खतरों और शासन सिद्धांतों को शामिल करता है, जो नेताओं को संगठनात्मक संपत्तियों की सुरक्षा और अनुपालन सुनिश्चित करने के लिए रणनीतियों से लैस करता है।' },
+      executiveLeadershipTeam: { en: 'Focuses on building and leading effective executive leadership teams for modern workplaces, emphasizing collaboration and strategic alignment.', es: 'Se centra en la creación y el liderazgo de equipos de liderazgo ejecutivo eficaces para los lugares de trabajo modernos, haciendo hincapié en la colaboración y la alineación estratégica.', hi: 'आधुनिक कार्यस्थलों के लिए प्रभावी कार्यकारी नेतृत्व टीमों के निर्माण और नेतृत्व पर केंद्रित है, जिसमें सहयोग और रणनीतिक संरेखण पर जोर दिया गया है।' },
+      compassionateCandor: { en: 'Explores a radical approach to management that combines empathy with direct, honest feedback for improved team performance and relationships.', es: 'Explora un enfoque radical de la gestión que combina la empatía con la retroalimentación directa y honesta para mejorar el rendimiento y las relaciones del equipo.', hi: 'प्रबंधन के लिए एक कट्टरपंथी दृष्टिकोण की पड़ताल करता है जो बेहतर टीम प्रदर्शन और संबंधों के लिए सहानुभूति को प्रत्यक्ष, ईमानदार प्रतिक्रिया के साथ जोड़ता है।' },
+      cyberSecurityForLeadership: { en: 'Provides essential cybersecurity knowledge for leaders, enabling them to make informed decisions and integrate security into business strategy.', es: 'Proporciona conocimientos esenciales de ciberseguridad para líderes, permitiéndoles tomar decisiones informadas e integrar la seguridad en la estrategia empresarial.', hi: 'नेताओं के लिए आवश्यक साइबर सुरक्षा ज्ञान प्रदान करता है, जिससे उन्हें सूचित निर्णय लेने और सुरक्षा को व्यावसायिक रणनीति में एकीकृत करने में सक्षम बनाया जा सके।' },
+      howToLeadAndInspireChange: { en: 'Teaches strategies for effective change management, inspiring teams, and overcoming resistance to new initiatives.', es: 'Enseña estrategias para una gestión eficaz del cambio, inspirar a los equipos y superar la resistencia a las nuevas iniciativas.', hi: 'प्रभावी परिवर्तन प्रबंधन, टीमों को प्रेरित करने और नई पहलों के प्रतिरोध पर काबू पाने के लिए रणनीतियाँ सिखाता है।' },
+      ccpaEssentialTraining: { en: 'Covers the California Consumer Privacy Act (CCPA) regulations, ensuring understanding of consumer data rights and compliance requirements.', es: 'Cubre las regulaciones de la Ley de Privacidad del Consumidor de California (CCPA), asegurando la comprensión de los derechos de datos del consumidor y los requisitos de cumplimiento.', hi: 'कैलिफोर्निया उपभोक्ता गोपनीयता अधिनियम (CCPA) के नियमों को शामिल करता है, उपभोक्ता डेटा अधिकारों और अनुपालन आवश्यकताओं की समझ सुनिश्चित करता है।' },
+      leveragingChatGPT: { en: 'Focuses on utilizing ChatGPT and similar AI models for enhancing cybersecurity operations, including threat analysis and automation.', es: 'Se centra en la utilización de ChatGPT y modelos de IA similares para mejorar las operaciones de ciberseguridad, incluyendo el análisis de amenazas y la automatización.', hi: 'खतरे के विश्लेषण और स्वचालन सहित साइबर सुरक्षा संचालन को बढ़ाने के लिए चैटजीपीटी और समान एआई मॉडल का उपयोग करने पर केंद्रित है।' },
+      understandingZeroTrust: { en: 'Provides a deep dive into the Zero Trust security model, its principles, and practical implementation strategies.', es: 'Ofrece una inmersión profunda en el modelo de seguridad Zero Trust, sus principios y estrategias de implementación prácticas.', hi: 'जीरो ट्रस्ट सुरक्षा मॉडल, उसके सिद्धांतों और व्यावहारिक कार्यान्वयन रणनीतियों में गहन जानकारी प्रदान करता है।' },
+      aiTrends: { en: 'Explores current and emerging trends in Artificial Intelligence, with a focus on their implications for various industries, including cybersecurity.', es: 'Explora las tendencias actuales y emergentes en Inteligencia Artificial, con un enfoque en sus implicaciones para diversas industrias, incluida la ciberseguridad.', hi: 'आर्टिफिशियल इंटेलिजेंस में वर्तमान और उभरती प्रवृत्तियों की पड़ताल करता है, जिसमें साइबर सुरक्षा सहित विभिन्न उद्योगों के लिए उनके निहितार्थों पर ध्यान केंद्रित किया गया है।' },
+      learningToSayNo: { en: 'Develops skills in assertive communication, setting boundaries, and effectively declining requests to manage time and priorities.', es: 'Desarrolla habilidades en comunicación asertiva, establecimiento de límites y declinación efectiva de solicitudes para gestionar el tiempo y las prioridades.', hi: 'मुखर संचार, सीमाएँ निर्धारित करने और समय और प्राथमिकताओं का प्रबंधन करने के लिए अनुरोधों को प्रभावी ढंग से अस्वीकार करने में कौशल विकसित करता है।' },
+      communicatingWithConfidence: { en: 'Enhances communication skills, focusing on clarity, assertiveness, and building rapport in professional settings.', es: 'Mejora las habilidades de comunicación, centrándose en la claridad, la asertividad y la construcción de relaciones en entornos profesionales.', hi: 'पेशेवर सेटिंग्स में स्पष्टता, मुखरता और तालमेल बनाने पर ध्यान केंद्रित करते हुए संचार कौशल को बढ़ाता है।' },
+      holdingYourselfAccountable: { en: 'Emphasizes personal responsibility and self-discipline in achieving goals and commitments.', es: 'Enfatiza la responsabilidad personal y la autodisciplina en el logro de metas y compromisos.', hi: 'लक्ष्यों और प्रतिबद्धताओं को प्राप्त करने में व्यक्तिगत जिम्मेदारी और आत्म-अनुशासन पर जोर देता है।' },
+      comptiaCasP: { en: 'CompTIA Advanced Security Practitioner (CASP+) certification, validating advanced-level cybersecurity skills in enterprise security architecture and operations.', es: 'Certificación CompTIA Advanced Security Practitioner (CASP+), que valida las habilidades avanzadas de ciberseguridad en la arquitectura y operaciones de seguridad empresarial.', hi: 'कॉम्पटिया एडवांस्ड सिक्योरिटी प्रैक्टिशनर (CASP+) प्रमाणीकरण, जो एंटरप्राइज सुरक्षा वास्तुकला और संचालन में उन्नत-स्तरीय साइबर सुरक्षा कौशल को मान्य करता है।' },
+      comptiaSecurity: { en: 'CompTIA Security+ (SY0-501) certification, covering core cybersecurity skills needed for an entry-level security professional.', es: 'Certificación CompTIA Security+ (SY0-501), que cubre las habilidades básicas de ciberseguridad necesarias para un profesional de seguridad de nivel de entrada.', hi: 'कॉम्पटिया सिक्योरिटी+ (SY0-501) प्रमाणीकरण, जो एक प्रवेश-स्तर के सुरक्षा पेशेवर के लिए आवश्यक मुख्य साइबर सुरक्षा कौशल को कवर करता है।' },
+      informationSecurityAwareness: { en: 'Training on ISO 27001:2013 standards for information security management systems, promoting awareness and compliance.', es: 'Capacitación sobre los estándares ISO 27001:2013 para sistemas de gestión de seguridad de la información, promoviendo la conciencia y el cumplimiento.', hi: 'सूचना सुरक्षा प्रबंधन प्रणालियों के लिए ISO 27001:2013 मानकों पर प्रशिक्षण, जागरूकता और अनुपालन को बढ़ावा देना।' },
+      awsCertifiedSolutionsArchitect: { en: 'AWS Certified Solutions Architect – Professional certification, demonstrating expertise in designing distributed systems on AWS.', es: 'Certificación AWS Certified Solutions Architect – Professional, que demuestra experiencia en el diseño de sistemas distribuidos en AWS.', hi: 'AWS सर्टिफाइड सॉल्यूशंस आर्किटेक्ट – प्रोफेशनल प्रमाणीकरण, जो AWS पर वितरित प्रणालियों को डिजाइन करने में विशेषज्ञता को दर्शाता है।' },
+      cnssCertifiedNetworkSecuritySpecialist: { en: 'CNSS Certified Network Security Specialist certification, focusing on securing network infrastructures.', es: 'Certificación CNSS Certified Network Security Specialist, que se centra en la protección de infraestructuras de red.', hi: 'CNSS सर्टिफाइड नेटवर्क सिक्योरिटी स्पेशलिस्ट प्रमाणीकरण, जो नेटवर्क इन्फ्रास्ट्रक्चर को सुरक्षित करने पर केंद्रित है।' },
+      qualysCertifiedSpecialistPolicyCompliance: { en: 'Qualys Certified Specialist – Policy Compliance, validating skills in managing and reporting on security policy compliance.', es: 'Qualys Certified Specialist – Cumplimiento de Políticas, que valida las habilidades en la gestión y los informes sobre el cumplimiento de las políticas de seguridad.', hi: 'क्वालिस सर्टिफाइड स्पेशलिस्ट – पॉलिसी कंप्लायंस, जो सुरक्षा नीति अनुपालन के प्रबंधन और रिपोर्टिंग में कौशल को मान्य करता है।' },
+      qualysCertifiedSpecialistVulnerabilityManagement: { en: 'Qualys Certified Specialist – Vulnerability Management, demonstrating proficiency in identifying and addressing system vulnerabilities.', es: 'Qualys Certified Specialist – Gestión de Vulnerabilidades, que demuestra el dominio en la identificación y el abordaje de las vulnerabilidades del sistema.', hi: 'क्वालिस सर्टिफाइड स्पेशलिस्ट – भेद्यता प्रबंधन, जो सिस्टम कमजोरियों की पहचान करने और उन्हें संबोधित करने में दक्षता को दर्शाता है।' },
+      theDataScientistsToolbox: { en: 'Covers fundamental tools and concepts in data science, including programming in R and data analysis techniques.', es: 'Cubre herramientas y conceptos fundamentales en ciencia de datos, incluyendo la programación en R y técnicas de análisis de datos.', hi: 'डेटा विज्ञान में मौलिक उपकरण और अवधारणाओं को शामिल करता है, जिसमें आर में प्रोग्रामिंग और डेटा विश्लेषण तकनीकें शामिल हैं।' },
+      searchingAndReportingWithSplunk6: { en: 'Training on advanced searching and reporting functionalities in Splunk 6 for security analytics and operational intelligence.', es: 'Capacitación sobre funcionalidades avanzadas de búsqueda e informes en Splunk 6 para análisis de seguridad e inteligencia operativa.', hi: 'सुरक्षा विश्लेषण और परिचालन खुफिया के लिए स्प्लंक 6 में उन्नत खोज और रिपोर्टिंग कार्यात्मकताओं पर प्रशिक्षण।' },
+      cloudLockUniversity201: { en: 'Advanced training from CloudLock University, focusing on cloud security best practices and platform usage.', es: 'Capacitación avanzada de CloudLock University, centrada en las mejores prácticas de seguridad en la nube y el uso de la plataforma.', hi: 'क्लाउड लॉक यूनिवर्सिटी से उन्नत प्रशिक्षण, क्लाउड सुरक्षा सर्वोत्तम प्रथाओं और प्लेटफॉर्म के उपयोग पर केंद्रित।' },
+      symantecEndpointProtection: { en: 'Administration course for Symantec Endpoint Protection 12.X, covering deployment, configuration, and management of endpoint security.', es: 'Curso de administración para Symantec Endpoint Protection 12.X, que cubre la implementación, configuración y gestión de la seguridad de los puntos finales.', hi: 'सिमेंटेक एंडपॉइंट प्रोटेक्शन 12.X के लिए प्रशासन पाठ्यक्रम, जिसमें एंडपॉइंट सुरक्षा की तैनाती, कॉन्फ़िगरेशन और प्रबंधन शामिल है।' },
+      ecCouncilCertifiedSecurityAnalyst: { en: 'EC-Council Certified Security Analyst certification, focusing on penetration testing and vulnerability assessment methodologies.', es: 'Certificación EC-Council Certified Security Analyst, que se centra en metodologías de pruebas de penetración y evaluación de vulnerabilidades.', hi: 'ईसी-काउंसिल सर्टिफाइड सिक्योरिटी एनालिस्ट प्रमाणीकरण, जो पैठ परीक्षण और भेद्यता मूल्यांकन पद्धतियों पर केंद्रित है।' },
+      certifiedEthicalHacker: { en: 'Certified Ethical Hacker (CEH) certification, validating ethical hacking and penetration testing skills.', es: 'Certificación Certified Ethical Hacker (CEH), que valida las habilidades de hacking ético y pruebas de penetración.', hi: 'सर्टिफाइड एथिकल हैकर (CEH) प्रमाणीकरण, जो नैतिक हैकिंग और पैठ परीक्षण कौशल को मान्य करता है।' },
+      redHatCertifiedTechnician: { en: 'Red Hat Certified Technician (RHCT) certification, demonstrating proficiency in Red Hat Enterprise Linux system administration.', es: 'Certificación Red Hat Certified Technician (RHCT), que demuestra el dominio en la administración de sistemas Red Hat Enterprise Linux.', hi: 'रेड हैट सर्टिफाइड टेक्नीशियन (RHCT) प्रमाणीकरण, जो रेड हैट एंटरप्राइज लिनक्स सिस्टम प्रशासन में दक्षता को दर्शाता है।' },
+      fortinetNse1: { en: 'Fortinet NSE 1 – Network Security Associate, an introductory certification to the threat landscape and Fortinet solutions.', es: 'Fortinet NSE 1 – Network Security Associate, una certificación introductoria al panorama de amenazas y las soluciones de Fortinet.', hi: 'फोर्टिनेट एनएसई 1 – नेटवर्क सिक्योरिटी एसोसिएट, खतरे के परिदृश्य और फोर्टिनेट समाधानों का एक परिचयात्मक प्रमाणीकरण।' },
+      fortinetNse2: { en: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.', es: 'Fortinet NSE 2 – Network Security Associate, que se centra en la evolución de la ciberseguridad y los tipos de productos de seguridad.', hi: 'फोर्टिनेट एनएसई 2 – नेटवर्क सिक्योरिटी एसोसिएट, जो साइबर सुरक्षा के विकास और सुरक्षा उत्पादों के प्रकारों पर केंद्रित है।' },
+      theThreatLandscape: { en: 'Course completed on understanding the current threat landscape, including common attack vectors and defense strategies.', es: 'Curso completado sobre la comprensión del panorama actual de amenazas, incluyendo vectores de ataque comunes y estrategias de defensa.', hi: 'वर्तमान खतरे के परिदृश्य को समझने पर पूरा किया गया पाठ्यक्रम, जिसमें सामान्य हमले के वैक्टर और रक्षा रणनीतियाँ शामिल हैं।' }
+    }
+  }">
+    <!-- Header with Name and Navigation -->
     <div class="header">
       <div class="name">Jayakrishnan CP</div>
       <nav class="flex items-center">
@@ -244,7 +474,8 @@
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#education">Education</a>
-        <a href="#contact">Contact</a> <!-- Added Contact back -->
+        <a href="#licenses-certifications">Certifications</a>
+        <a href="#contact">Contact</a>
         
         <!-- Profile Image with Dropdown -->
         <div class="relative ml-8" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
@@ -275,16 +506,13 @@
 
     <!-- Hero Section -->
     <div class="hero">
-      <div class="max-w-xl mx-auto md:mx-0"> <!-- Container for left-aligned content -->
-        <!-- Big White Letters Title - Smaller and Left Aligned -->
+      <div class="max-w-xl mx-auto md:mx-0">
         <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
           Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect
         </h1>
-        <!-- Summary/Couple Lines below title -->
         <p class="text-lg mt-4 text-left text-gray-200">
           Accomplished cybersecurity leader with over 18 years of experience driving enterprise-grade security solutions. Spearheaded Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection systems, achieving 100% SLA compliance and reducing incident response times by 40%.
         </p>
-        <!-- Contact Info -->
         <p class="text-lg mt-4 text-left">
           Email: <a href="mailto:jaykrishnancp@gmail.com" class="text-red-500 hover:underline">jaykrishnancp@gmail.com</a>
         </p>
@@ -297,7 +525,7 @@
     <!-- Content Area -->
     <div class="content">
       <!-- Summary Section -->
-      <div id="summary" class="space-y-4 pt-10"> <!-- Added padding top for anchor scroll -->
+      <div id="summary" class="space-y-4 pt-10">
         <h2 class="section-header">Summary</h2>
         <div class="card p-5 h-auto min-h-[150px] flex items-center justify-center">
           <p class="text-center">Accomplished cybersecurity leader with over 18 years of experience driving enterprise-grade security solutions. Spearheaded Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection systems, achieving 100% SLA compliance and reducing incident response times by 40%. Passionate about aligning security strategies with business objectives, Jay has built and led high-performing MDR and SOC teams, implementing SIEM, XDR, and SOAR platforms to enhance operational resilience. His expertise in automation and cloud-native security has delivered scalable programs, saving organizations millions through optimized threat detection and response.</p>
@@ -348,61 +576,31 @@
       <!-- Skills Section -->
       <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
-        <div class="carousel-container">
-          <div class="carousel" id="skills-carousel">
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'siem'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=SIEM" alt="SIEM" />
-              <div class="skill-number">1</div>
-              <div class="skill-title">SIEM</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'edr'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=EDR" alt="EDR" />
-              <div class="skill-number">2</div>
-              <div class="skill-title">EDR</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'automation'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Automation" alt="Automation" />
-              <div class="skill-number">3</div>
-              <div class="skill-title">Automation</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'cloudSecurity'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Cloud+Security" alt="Cloud Security" />
-              <div class="skill-number">4</div>
-              <div class="skill-title">Cloud Security</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'networkSecurity'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Network+Security" alt="Network Security" />
-              <div class="skill-number">5</div>
-              <div class="skill-title">Network Security</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'identityManagement'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Identity+Management" alt="Identity Management" />
-              <div class="skill-number">6</div>
-              <div class="skill-title">Identity Management</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'incidentResponse'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Incident+Response" alt="Incident Response" />
-              <div class="skill-number">7</div>
-              <div class="skill-title">Incident Response</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'riskAssessment'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Risk+Assessment" alt="Risk Assessment" />
-              <div class="skill-number">8</div>
-              <div class="skill-title">Risk Assessment</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'teamLeadership'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Team+Leadership" alt="Team Leadership" />
-              <div class="skill-number">9</div>
-              <div class="skill-title">Team Leadership</div>
-            </div>
-            <div class="skill-card" @click="isOpen = true; selectedItem = 'cissp'">
-              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CISSP" alt="CISSP" />
-              <div class="skill-number">10</div>
-              <div class="skill-title">CISSP</div>
-            </div>
-          </div>
-          <button class="carousel-arrow left" onclick="scrollCarousel('skills-carousel', -220)">&#10094;</button>
-          <button class="carousel-arrow right" onclick="scrollCarousel('skills-carousel', 220)">&#10095;</button>
+        <div class="flex space-x-4 mb-6 justify-center">
+          <button 
+            @click="activeSkillCategory = 'industryKnowledge'" 
+            :class="{ 'active': activeSkillCategory === 'industryKnowledge' }"
+            class="skill-category-button"
+          >
+            Industry Knowledge
+          </button>
+          <button 
+            @click="activeSkillCategory = 'toolsTechnologies'" 
+            :class="{ 'active': activeSkillCategory === 'toolsTechnologies' }"
+            class="skill-category-button"
+          >
+            Tools & Technologies
+          </button>
+        </div>
+
+        <div class="skill-grid">
+          <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
+            <div 
+              class="skill-grid-item" 
+              @click="isOpen = true; selectedItem = skill.id"
+              x-text="skill.title"
+            ></div>
+          </template>
         </div>
       </div>
 
@@ -457,6 +655,162 @@
           <button class="carousel-arrow right" onclick="scrollCarousel('education-carousel', 220)">&#10095;</button>
         </div>
       </div>
+
+      <!-- Licenses & Certifications Section -->
+      <div id="licenses-certifications" class="space-y-4 pt-10">
+        <h2 class="section-header">Licenses & Certifications</h2>
+        <div class="carousel-container">
+          <div class="carousel" id="licenses-carousel">
+            <div class="card" @click="isOpen = true; selectedItem = 'advancedCyberSecurity'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Adv+Cyber+Sec" alt="Advanced Cyber Security" />
+              <div class="card-number">1</div>
+              <div class="card-title">Advanced Cyber Security – Threats and Governance</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'executiveLeadershipTeam'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Exec+Lead+Team" alt="Building an Executive Leadership Team" />
+              <div class="card-number">2</div>
+              <div class="card-title">Building an Executive Leadership Team for the Modern Workplace</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'compassionateCandor'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Compassionate+Candor" alt="Compassionate Candor" />
+              <div class="card-number">3</div>
+              <div class="card-title">Compassionate Candor: A Radical Approach to Management</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'cyberSecurityForLeadership'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Cyber+Sec+Lead" alt="Cyber Security for Leadership" />
+              <div class="card-number">4</div>
+              <div class="card-title">Cyber Security for Leadership</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'howToLeadAndInspireChange'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Lead+Change" alt="How to Lead and Inspire Change" />
+              <div class="card-number">5</div>
+              <div class="card-title">How to Lead and Inspire Change</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'ccpaEssentialTraining'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CCPA" alt="California Consumer Privacy Act (CCPA) Essential Training" />
+              <div class="card-number">6</div>
+              <div class="card-title">California Consumer Privacy Act (CCPA) Essential Training</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'leveragingChatGPT'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=ChatGPT+Sec" alt="Leveraging ChatGPT for Smarter Cybersecurity" />
+              <div class="card-number">7</div>
+              <div class="card-title">Leveraging ChatGPT for Smarter Cybersecurity</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'understandingZeroTrust'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Zero+Trust" alt="Understanding Zero Trust" />
+              <div class="card-number">8</div>
+              <div class="card-title">Understanding Zero Trust</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'aiTrends'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=AI+Trends" alt="AI Trends" />
+              <div class="card-number">9</div>
+              <div class="card-title">AI Trends</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'learningToSayNo'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Say+No" alt="Learning to Say No" />
+              <div class="card-number">10</div>
+              <div class="card-title">Learning to Say No</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'communicatingWithConfidence'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Comm+Conf" alt="Communicating with Confidence" />
+              <div class="card-number">11</div>
+              <div class="card-title">Communicating with Confidence</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'holdingYourselfAccountable'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Accountable" alt="Holding Yourself Accountable" />
+              <div class="card-number">12</div>
+              <div class="card-title">Holding Yourself Accountable</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'comptiaCasP'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CASP+" alt="CompTIA Advanced Security Practitioner (CASP+)" />
+              <div class="card-number">13</div>
+              <div class="card-title">CompTIA Advanced Security Practitioner (CASP+)</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'comptiaSecurity'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Security+" alt="CompTIA Security+ (SY0-501)" />
+              <div class="card-number">14</div>
+              <div class="card-title">CompTIA Security+ (SY0-501)</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'informationSecurityAwareness'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=ISO+27001" alt="Information Security Awareness – ISO 27001:2013" />
+              <div class="card-number">15</div>
+              <div class="card-title">Information Security Awareness – ISO 27001:2013</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'awsCertifiedSolutionsArchitect'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=AWS+SA" alt="AWS Certified Solutions Architect – Professional" />
+              <div class="card-number">16</div>
+              <div class="card-title">AWS Certified Solutions Architect – Professional</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'cnssCertifiedNetworkSecuritySpecialist'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CNSS" alt="CNSS Certified Network Security Specialist" />
+              <div class="card-number">17</div>
+              <div class="card-title">CNSS Certified Network Security Specialist</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'qualysCertifiedSpecialistPolicyCompliance'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Qualys+PC" alt="Qualys Certified Specialist – Policy Compliance" />
+              <div class="card-number">18</div>
+              <div class="card-title">Qualys Certified Specialist – Policy Compliance</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'qualysCertifiedSpecialistVulnerabilityManagement'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Qualys+VM" alt="Qualys Certified Specialist – Vulnerability Management" />
+              <div class="card-number">19</div>
+              <div class="card-title">Qualys Certified Specialist – Vulnerability Management</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'theDataScientistsToolbox'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Data+Sci" alt="The Data Scientist’s Toolbox" />
+              <div class="card-number">20</div>
+              <div class="card-title">The Data Scientist’s Toolbox</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'searchingAndReportingWithSplunk6'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Splunk+Report" alt="Searching and Reporting with Splunk 6" />
+              <div class="card-number">21</div>
+              <div class="card-title">Searching and Reporting with Splunk 6</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'cloudLockUniversity201'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CloudLock" alt="CloudLock University 201 – Training" />
+              <div class="card-number">22</div>
+              <div class="card-title">CloudLock University 201 – Training</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'symantecEndpointProtection'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Symantec+EP" alt="Symantec Endpoint Protection 12.X: Administration" />
+              <div class="card-number">23</div>
+              <div class="card-title">Symantec Endpoint Protection 12.X: Administration</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'ecCouncilCertifiedSecurityAnalyst'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=EC-CSA" alt="EC-Council Certified Security Analyst" />
+              <div class="card-number">24</div>
+              <div class="card-title">EC-Council Certified Security Analyst</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'certifiedEthicalHacker'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=CEH" alt="Certified Ethical Hacker (CEH)" />
+              <div class="card-number">25</div>
+              <div class="card-title">Certified Ethical Hacker (CEH)</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'redHatCertifiedTechnician'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=RHCT" alt="Red Hat Certified Technician (RHCT)" />
+              <div class="card-number">26</div>
+              <div class="card-title">Red Hat Certified Technician (RHCT)</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'fortinetNse1'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=NSE+1" alt="Fortinet NSE 1 – Network Security Associate" />
+              <div class="card-number">27</div>
+              <div class="card-title">Fortinet NSE 1 – Network Security Associate</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'fortinetNse2'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=NSE+2" alt="Fortinet NSE 2 – Network Security Associate" />
+              <div class="card-number">28</div>
+              <div class="card-title">Fortinet NSE 2 – Network Security Associate</div>
+            </div>
+            <div class="card" @click="isOpen = true; selectedItem = 'theThreatLandscape'">
+              <img src="https://placehold.co/200x300/1f1f1f/E50914?text=Threat+Landscape" alt="The Threat Landscape – Course Completed" />
+              <div class="card-number">29</div>
+              <div class="card-title">The Threat Landscape – Course Completed</div>
+            </div>
+          </div>
+          <button class="carousel-arrow left" onclick="scrollCarousel('licenses-carousel', -220)">&#10094;</button>
+          <button class="carousel-arrow right" onclick="scrollCarousel('licenses-carousel', 220)">&#10095;</button>
+        </div>
+      </div>
       
       <!-- Offcanvas Backdrop -->
       <div 
@@ -469,6 +823,7 @@
         x-transition:leave-start="opacity-100" 
         x-transition:leave-end="opacity-0"
         class="offcanvas-backdrop"
+        @click="isOpen = false"
       ></div>
 
       <!-- Offcanvas Panel (now a centered modal) -->
@@ -484,70 +839,18 @@
         class="offcanvas"
       >
         <span class="offcanvas-close" @click="isOpen = false">×</span>
-        <h3 x-text="{
-          'seniorDirector': 'Senior Director - Security Operations',
-          'manager': 'Manager, Security Operations',
-          'teamLead': 'Team Lead - Incident Management',
-          'seniorAnalyst': 'Senior Security Analyst',
-          'assistantManager': 'Assistant Manager - Information Security',
-          'systemAdmin': 'System Administrator',
-          'siem': 'SIEM Expertise',
-          'edr': 'EDR Mastery',
-          'automation': 'Automation Prowess',
-          'cloudSecurity': 'Cloud Security Skills',
-          'networkSecurity': 'Network Security Know-How',
-          'identityManagement': 'Identity Management Expertise',
-          'incidentResponse': 'Incident Response Skills',
-          'riskAssessment': 'Risk Assessment Proficiency',
-          'teamLeadership': 'Team Leadership Strength',
-          'cissp': 'CISSP Certification',
-          'threatIntel': 'AI-Powered Threat Intel Engine',
-          'securityAutomation': 'Security Automation with n8n',
-          'cloudDashboard': 'Cloud Security Dashboard',
-          'mba': 'Master of Business Administration (MBA)',
-          'gdba': 'Graduate Diploma in Business Administration (GDBA)',
-          'diploma': 'Diploma in Computer Hardware'
-        }[selectedItem]" class="text-xl text-white mb-2"></h3>
-        <p x-text="{
-          'seniorDirector': 'Jay has excelled as Senior Director at UltraViolet Cyber, leading transformative projects like Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection, reducing unauthorized access by 60%. His strategic vision has set new benchmarks in cybersecurity leadership.',
-          'manager': 'As Manager at METMOX, Jay evaluated security processes and crafted a comprehensive framework, boosting hybrid environment protection by 50%. His vendor collaborations became a model for efficiency.',
-          'teamLead': 'Jay’s tenure as Team Lead at Verizon Business saw him inject security into application stacks, crafting a roadmap that improved ISO 27001 compliance by 35%, a feat still celebrated.',
-          'seniorAnalyst': 'At Super Computers Trading Est., Jay designed SIEM solutions, enhancing threat detection by 30%, and his vulnerability assessments cut risks by 40%, earning him accolades.',
-          'assistantManager': 'Jay coordinated security measures at Geojit Financial Services, achieving 98% regulatory compliance and reducing network intrusions by 50% with expert firewall deployments.',
-          'systemAdmin': 'As System Administrator at Safe Software, Jay ensured 100% uptime for banking servers, his backup processes reducing data loss by 90%, a testament to his early expertise.',
-          'siem': 'Jay has worked on developing SIEM solutions for over a decade, crafting systems that detect threats with pinpoint accuracy. His early Splunk deployments evolved into complex Microsoft Sentinel integrations, saving organizations from countless breaches.',
-          'edr': 'With years of hands-on experience, Jay has mastered EDR tools like CrowdStrike and Microsoft Defender, turning raw data into actionable defenses. He once led a rapid response that halted a ransomware attack in under an hour.',
-          'automation': 'Jay’s automation skills shine through his n8n workflows, automating threat responses and saving teams hours daily. His innovative scripts have become legends in SOC circles for their efficiency.',
-          'cloudSecurity': 'Jay has architected cloud security frameworks across AWS and Azure, ensuring resilience against evolving threats. His work on CASB implementations protected sensitive data during a major cloud migration.',
-          'networkSecurity': 'A veteran in network security, Jay has fortified systems with firewalls and IPS, reducing intrusions by 50% in critical projects. His troubleshooting tales are the stuff of cybersecurity folklore.',
-          'identityManagement': 'Jay’s expertise in identity management with Okta and Azure AD has streamlined access controls, preventing unauthorized entries with elegant solutions that others strive to emulate.',
-          'incidentResponse': 'Jay’s incident response skills have saved the day in high-stakes situations, leading teams to contain breaches with precision. His calm under pressure is a story told across security conferences.',
-          'riskAssessment': 'With a keen eye for risk, Jay has conducted assessments that transformed organizational security postures, identifying vulnerabilities that others missed, earning him widespread respect.',
-          'teamLeadership': 'Jay has guided teams through complex security challenges, fostering a culture of excellence. His mentorship has turned novices into experts, a legacy that endures.',
-          'cissp': 'Earning his CISSP, Jay has leveraged this certification to uphold the highest security standards, applying its principles to real-world scenarios with remarkable success.',
-          'threatIntel': 'Jay engineered an AI-powered Threat Intel Engine using Python and n8n, parsing CVEs and IOCs with CVSS scoring, cutting analysis time by 50% and boosting accuracy by 30%.',
-          'securityAutomation': 'Jay built n8n workflows for security automation, syndicating blogs and analyzing phishing alerts, automating 70% of tasks and reducing incidents by 25%.',
-              'cloudDashboard': {
-              'en': 'Jay integrated Tenable, CrowdStrike, and Sentinel into a cloud dashboard, enhancing decision-making by 35%.',
-              'es': 'Jay integró Tenable, CrowdStrike y Sentinel en un panel en la nube, mejorando la toma de decisiones en un 35%.',
-              'hi': 'जय ने टेनेबल, क्राउडस्ट्राइक और सेंटिनल को क्लाउड डैशबोर्ड में एकीकृत किया, जिससे निर्णय लेने में 35% की वृद्धि हुई।'
-            }[selectedLang],
-            'mba': {
-              'en': 'Jay earned his MBA from NIM, specializing in IT and HR, laying a strong foundation for his leadership.',
-              'es': 'Jay obtuvo su MBA en NIM, especializándose en TI y RRHH, sentando una sólida base para su liderazgo.',
-              'hi': 'जय ने NIM से MBA प्राप्त किया, जो IT और HR में विशेषज्ञता के साथ उनके नेतृत्व के लिए एक मजबूत आधार रखता है।'
-            }[selectedLang],
-            'gdba': {
-              'en': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills.',
-              'es': 'Su GDBA de NIM dotó a Jay de perspicacia empresarial, complementando sus habilidades técnicas.',
-              'hi': 'उनका NIM से GDBA जय को व्यावसायिक समझ से लैस किया, जो उनकी तकनीकी कौशल के पूरक है।'
-            }[selectedLang],
-            'diploma': {
-              'en': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his tech career.',
-              'es': 'El Diploma en Hardware de Computadoras de Jay de la Universidad Técnica de Kerala dio inicio a su carrera en tecnología.',
-              'hi': 'जय का केरल तकनीकी विश्वविद्यालय से कम्प्यूटर हार्डवेयर में डिप्लोमा उनकी तकनीकी करियर की शुरुआत थी।'
-            }[selectedLang]
-          }[selectedItem]" class="mt-2"></p>
+        <h3 x-text="details[selectedItem] ? details[selectedItem][selectedLang] : 'Details not available'" class="text-xl text-white mb-2"></h3>
+        <p x-text="details[selectedItem] ? details[selectedItem][selectedLang] : 'No description available for this item.'" class="mt-2"></p>
+        <div class="offcanvas-content" x-data="{ selectedLang: 'en' }">
+          <h4 class="text-lg mb-2">Select Language</h4>
+          <form class="lang-form">
+            <select x-model="selectedLang" class="bg-gray-800 text-white">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="hi">Hindi</option>
+            </select>
+            <button type="button" @click="selectedLang = $event.target.previousElementSibling.value" class="bg-red-600 text-white">Switch</button>
+          </form>
         </div>
       </div>
     </div>
