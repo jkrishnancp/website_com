@@ -18,7 +18,7 @@
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-       -webkit-user-select: none; /* Safari */
+      -webkit-user-select: none; /* Safari */
       -moz-user-select: none;    /* Firefox */
       -ms-user-select: none;     /* IE 10+ */
       user-select: none;         /* Standard syntax */
@@ -53,10 +53,52 @@
       color: #f0f0f0;
       text-decoration: underline;
     }
+
+    /* Mobile Navigation Specific Styles */
+    @media (max-width: 767px) { /* Adjust breakpoint as needed for mobile */
+      .header {
+        flex-wrap: wrap;
+      }
+      .header .name {
+        font-size: 1.5rem; /* Smaller name on mobile */
+      }
+      .header nav {
+        display: none; /* Hide desktop nav by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: #1f1f1f;
+        padding: 10px 0;
+        margin-top: 10px;
+      }
+      .header nav.is-open {
+        display: flex; /* Show nav when open */
+      }
+      .header nav a {
+        margin: 10px 0;
+        font-size: 1rem;
+      }
+      .hamburger-icon {
+        display: block; /* Show hamburger on mobile */
+      }
+      .profile-dropdown-mobile {
+        margin-left: auto; /* Push profile icon to the right on mobile */
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hamburger-icon {
+        display: none; /* Hide hamburger on desktop */
+      }
+      .header nav {
+        display: flex !important; /* Ensure nav is always flex on desktop */
+      }
+    }
+
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
+      background-image: url('imagessan-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg'); /* Placeholder for San Francisco image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -76,6 +118,8 @@
     .content {
       padding: 20px;
       min-height: calc(100vh - 60px);
+      max-width: 1200px; /* Limit content width on very large screens */
+      margin: 0 auto; /* Center content */
     }
     /* Section headers */
     .section-header {
@@ -174,7 +218,8 @@
 
     /* Styling for category buttons */
     .category-button {
-      @apply px-6 py-3 rounded-full border-2 border-gray-500 text-lg font-bold transition-colors duration-300 cursor-pointer;
+      @apply px-4 py-2 text-sm md:px-6 md:py-3 md:text-lg rounded-full border-2 border-gray-500 text-lg font-bold transition-colors duration-300 cursor-pointer;
+      white-space: nowrap; /* Prevent text wrapping on buttons */
     }
     .category-button.active {
       @apply bg-red-600 border-red-600 text-white;
@@ -183,9 +228,14 @@
     /* Styling for individual items in the grid */
     .grid-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid columns */
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted min-width for smaller screens */
       gap: 15px; /* Space between items */
       padding: 10px 0;
+    }
+    @media (min-width: 768px) {
+      .grid-section {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Original min-width for larger screens */
+      }
     }
     .grid-item {
       background-color: #1f1f1f;
@@ -255,13 +305,14 @@
   </style>
 </head>
 <body>
-  <div x-data="{ 
-    isOpen: false, 
-    selectedItem: '', 
+  <div x-data="{
+    isOpen: false,
+    selectedItem: '',
     activeSkillCategory: 'industryKnowledge',
     activeProjectCategory: 'aiAutomation',
     activeEducationCategory: 'degrees',
     activeLicenseCategory: 'cybersecurity',
+    isNavOpen: false, // For mobile navigation
     skills: {
       industryKnowledge: [
         { id: 'cybersecurity', title: 'Cybersecurity' },
@@ -485,38 +536,51 @@
       certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', description: 'Certified Ethical Hacker (CEH) certification, validating ethical hacking and penetration testing skills.' },
       redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', description: 'Red Hat Certified Technician (RHCT) certification, demonstrating proficiency in Red Hat Enterprise Linux system administration.' },
       fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', description: 'Fortinet NSE 1 – Network Security Associate, an introductory certification to the threat landscape and Fortinet solutions.' },
-      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate', description: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
+      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
       theThreatLandscape: { title: 'The Threat Landscape – Course Completed', description: 'Course completed on understanding the current threat landscape, including common attack vectors and defense strategies.' }
     }
   }">
     <!-- Header with Name and Navigation -->
     <div class="header">
       <div class="name">Jayakrishnan C Prakash</div>
-      <nav class="flex items-center">
-        <a href="#summary">Summary</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#licenses-certifications">Certifications</a>
-        
+
+      <!-- Hamburger Icon for Mobile -->
+      <button
+        class="hamburger-icon text-white text-3xl md:hidden focus:outline-none"
+        @click="isNavOpen = !isNavOpen"
+        aria-label="Toggle navigation"
+      >
+        &#9776; <!-- Hamburger icon -->
+      </button>
+
+      <nav
+        :class="{ 'is-open': isNavOpen }"
+        class="md:flex items-center"
+      >
+        <a href="#summary" @click="isNavOpen = false">Summary</a>
+        <a href="#experience" @click="isNavOpen = false">Experience</a>
+        <a href="#skills" @click="isNavOpen = false">Skills</a>
+        <a href="#projects" @click="isNavOpen = false">Projects</a>
+        <a href="#education" @click="isNavOpen = false">Education</a>
+        <a href="#licenses-certifications" @click="isNavOpen = false">Certifications</a>
+
         <!-- Profile Image with Dropdown -->
-        <div class="relative ml-8" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
-          <img 
-            src="images/profile.jpg" 
-            alt="Profile" 
-            class="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
+        <div class="relative ml-0 md:ml-8 mt-4 md:mt-0 profile-dropdown-mobile" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
+          <img
+            src="images/profile.jpg"
+            alt="Profile"
+            class="w-10 h-10 rounded-full border-2 border-white cursor-pointer mx-auto md:mx-0"
             @click="dropdownOpen = !dropdownOpen"
           />
-          <div 
-            x-show="dropdownOpen" 
-            x-transition:enter="transition ease-out duration-200" 
-            x-transition:enter-start="opacity-0 scale-95" 
+          <div
+            x-show="dropdownOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95"
             x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-150" 
-            x-transition:leave-start="opacity-100 scale-100" 
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-20"
+            class="absolute right-0 md:right-auto md:left-1/2 md:transform md:-translate-x-1/2 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-20"
           >
             <a href="https://github.com/jkrishnancp" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">GitHub</a>
             <a href="https://jayakrishnancp.tech" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Blog</a>
@@ -529,17 +593,17 @@
 
     <!-- Hero Section -->
     <div class="hero">
-      <div class="max-w-xl mx-auto md:mx-0">
+      <div class="max-w-xl mx-auto md:mx-0 px-4"> <!-- Added px-4 for mobile padding -->
         <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
           Cybersecurity Leader | Expert in Zero Trust, MDR, XDR, AI-Driven Threat Detection & Incident Response | Building Resilient Security Strategies for the Future
         </h1>
-        <p class="text-lg mt-4 text-left text-gray-200">
+        <p class="text-base md:text-lg mt-4 text-left text-gray-200"> <!-- Adjusted font size for mobile -->
           Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat detection with deep expertise in incident response and security automation. Focused on innovation, team leadership, and shaping future-ready strategies through data-driven intelligence and proactive defense.
         </p>
-        <p class="text-lg mt-4 text-left">
+        <p class="text-base md:text-lg mt-4 text-left"> <!-- Adjusted font size for mobile -->
           Email: <a href="mailto:jay@jayakrishnancp.com" class="text-red-500 hover:underline">jay@jayakrishnancp.com</a>
         </p>
-        <p class="text-lg text-left">
+        <p class="text-base md:text-lg text-left"> <!-- Adjusted font size for mobile -->
           LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
         </p>
       </div>
@@ -607,16 +671,16 @@
       <!-- Skills Section -->
       <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
-        <div class="flex space-x-4 mb-6 justify-center">
-          <button 
-            @click="activeSkillCategory = 'industryKnowledge'" 
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+          <button
+            @click="activeSkillCategory = 'industryKnowledge'"
             :class="{ 'active': activeSkillCategory === 'industryKnowledge' }"
             class="category-button"
           >
             Industry Knowledge
           </button>
-          <button 
-            @click="activeSkillCategory = 'toolsTechnologies'" 
+          <button
+            @click="activeSkillCategory = 'toolsTechnologies'"
             :class="{ 'active': activeSkillCategory === 'toolsTechnologies' }"
             class="category-button"
           >
@@ -626,8 +690,8 @@
 
         <div class="grid-section">
           <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
-            <div 
-              class="grid-item" 
+            <div
+              class="grid-item"
               @click="isOpen = true; selectedItem = skill.id"
               x-text="skill.title"
             ></div>
@@ -638,16 +702,16 @@
       <!-- Projects Section -->
       <div id="projects" class="space-y-4 pt-10">
         <h2 class="section-header">Projects</h2>
-        <div class="flex space-x-4 mb-6 justify-center">
-          <button 
-            @click="activeProjectCategory = 'aiAutomation'" 
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+          <button
+            @click="activeProjectCategory = 'aiAutomation'"
             :class="{ 'active': activeProjectCategory === 'aiAutomation' }"
             class="category-button"
           >
             AI & Automation Projects
           </button>
-          <button 
-            @click="activeProjectCategory = 'cloudSecurity'" 
+          <button
+            @click="activeProjectCategory = 'cloudSecurity'"
             :class="{ 'active': activeProjectCategory === 'cloudSecurity' }"
             class="category-button"
           >
@@ -656,8 +720,8 @@
         </div>
         <div class="grid-section">
           <template x-for="(project, index) in projects[activeProjectCategory]" :key="project.id">
-            <div 
-              class="grid-item" 
+            <div
+              class="grid-item"
               @click="isOpen = true; selectedItem = project.id"
               x-text="project.title"
             ></div>
@@ -668,16 +732,16 @@
       <!-- Education Section -->
       <div id="education" class="space-y-4 pt-10">
         <h2 class="section-header">Education</h2>
-        <div class="flex space-x-4 mb-6 justify-center">
-          <button 
-            @click="activeEducationCategory = 'degrees'" 
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+          <button
+            @click="activeEducationCategory = 'degrees'"
             :class="{ 'active': activeEducationCategory === 'degrees' }"
             class="category-button"
           >
             Degrees
           </button>
-          <button 
-            @click="activeEducationCategory = 'diplomas'" 
+          <button
+            @click="activeEducationCategory = 'diplomas'"
             :class="{ 'active': activeEducationCategory === 'diplomas' }"
             class="category-button"
           >
@@ -686,8 +750,8 @@
         </div>
         <div class="grid-section">
           <template x-for="(edu, index) in education[activeEducationCategory]" :key="edu.id">
-            <div 
-              class="grid-item" 
+            <div
+              class="grid-item"
               @click="isOpen = true; selectedItem = edu.id"
               x-text="edu.title"
             ></div>
@@ -698,64 +762,64 @@
       <!-- Licenses & Certifications Section -->
       <div id="licenses-certifications" class="space-y-4 pt-10">
         <h2 class="section-header">Licenses & Certifications</h2>
-        <div class="flex space-x-4 mb-6 justify-center flex-wrap">
-          <button 
-            @click="activeLicenseCategory = 'cybersecurity'" 
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+          <button
+            @click="activeLicenseCategory = 'cybersecurity'"
             :class="{ 'active': activeLicenseCategory === 'cybersecurity' }"
-            class="category-button mb-2"
+            class="category-button"
           >
             Cybersecurity Certifications
           </button>
-          <button 
-            @click="activeLicenseCategory = 'leadershipSoftSkills'" 
+          <button
+            @click="activeLicenseCategory = 'leadershipSoftSkills'"
             :class="{ 'active': activeLicenseCategory === 'leadershipSoftSkills' }"
-            class="category-button mb-2"
+            class="category-button"
           >
             Leadership & Soft Skills
           </button>
-          <button 
-            @click="activeLicenseCategory = 'dataAi'" 
+          <button
+            @click="activeLicenseCategory = 'dataAi'"
             :class="{ 'active': activeLicenseCategory === 'dataAi' }"
-            class="category-button mb-2"
+            class="category-button"
           >
             Data & AI
           </button>
-          <button 
-            @click="activeLicenseCategory = 'operatingSystems'" 
+          <button
+            @click="activeLicenseCategory = 'operatingSystems'"
             :class="{ 'active': activeLicenseCategory === 'operatingSystems' }"
-            class="category-button mb-2"
+            class="category-button"
           >
             Operating Systems
           </button>
         </div>
         <div class="grid-section">
           <template x-for="(license, index) in licenses[activeLicenseCategory]" :key="license.id">
-            <div 
-              class="grid-item" 
+            <div
+              class="grid-item"
               @click="isOpen = true; selectedItem = license.id"
               x-text="license.title"
             ></div>
           </template>
         </div>
       </div>
-      
+
       <!-- Offcanvas Backdrop -->
-      <div 
-        x-show="isOpen" 
-        x-cloak 
-        x-transition:enter="transition ease-out duration-300" 
-        x-transition:enter-start="opacity-0" 
+      <div
+        x-show="isOpen"
+        x-cloak
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200" 
-        x-transition:leave-start="opacity-100" 
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         class="offcanvas-backdrop"
         @click="isOpen = false"
       ></div>
 
       <!-- Offcanvas Panel (now a centered modal) -->
-      <div 
-        x-show="isOpen" 
+      <div
+        x-show="isOpen"
         x-cloak
         x-transition:enter="transition ease-out duration-300 transform"
         x-transition:enter-start="opacity-0 scale-95"
