@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jayakrishnan CP | Cybersecurity Leader Resume</title>
+  <title>Jayakrishnan C P | Cybersecurity Leader Resume</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
@@ -51,7 +51,7 @@
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('https://placehold.co/1200x600/000000/FFFFFF/png?text=San+Francisco+Skyline'); /* Placeholder for San Francisco image */
+      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
       background-size: cover; /* Cover the entire area */
       background-position: center; /* Center the image */
       background-repeat: no-repeat; /* Do not repeat the image */
@@ -61,6 +61,11 @@
       position: relative;
       /* Add an overlay to make text more readable */
       box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Dark overlay */
+      display: flex; /* Use flexbox for content alignment */
+      flex-direction: column; /* Stack items vertically */
+      justify-content: center; /* Center content vertically */
+      min-height: 400px; /* Minimum height for the hero section */
+      width: 100%; /* Ensure full width */
     }
     /* Main content area */
     .content {
@@ -239,6 +244,7 @@
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#education">Education</a>
+        <a href="#contact">Contact</a> <!-- Added Contact back -->
         
         <!-- Profile Image with Dropdown -->
         <div class="relative ml-8" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
@@ -269,17 +275,23 @@
 
     <!-- Hero Section -->
     <div class="hero">
-      <!-- Big White Letters Title - Smaller and Left Aligned -->
-      <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
-        Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect
-      </h1>
-      <!-- Contact Info -->
-      <p class="text-lg mt-4 text-left">
-        Email: <a href="mailto:jaykrishnancp@gmail.com" class="text-red-500 hover:underline">jaykrishnancp@gmail.com</a>
-      </p>
-      <p class="text-lg text-left">
-        LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
-      </p>
+      <div class="max-w-xl mx-auto md:mx-0"> <!-- Container for left-aligned content -->
+        <!-- Big White Letters Title - Smaller and Left Aligned -->
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
+          Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect
+        </h1>
+        <!-- Summary/Couple Lines below title -->
+        <p class="text-lg mt-4 text-left text-gray-200">
+          Accomplished cybersecurity leader with over 18 years of experience driving enterprise-grade security solutions. Spearheaded Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection systems, achieving 100% SLA compliance and reducing incident response times by 40%.
+        </p>
+        <!-- Contact Info -->
+        <p class="text-lg mt-4 text-left">
+          Email: <a href="mailto:jaykrishnancp@gmail.com" class="text-red-500 hover:underline">jaykrishnancp@gmail.com</a>
+        </p>
+        <p class="text-lg text-left">
+          LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
+        </p>
+      </div>
     </div>
 
     <!-- Content Area -->
