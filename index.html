@@ -7,54 +7,92 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
+    /* Ensure Alpine.js elements are hidden before initialization */
     [x-cloak] { display: none !important; }
+    /* Custom font for a Netflix-like feel */
     body {
-      font-family: 'Netflix Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #141414;
-      color: #fff;
+      font-family: 'Inter', sans-serif; /* Changed to Inter for better consistency */
+      background-color: #141414; /* Dark background */
+      color: #fff; /* White text */
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
+    /* Header styling for the top navigation bar */
+    .header {
+      background-color: #141414; /* Changed to match body background */
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between; /* Space out name and navigation */
+      align-items: center;
+      position: sticky; /* Make header sticky */
+      top: 0;
+      z-index: 100; /* Ensure header is on top */
+      border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+    }
+    .header .name {
+      font-size: 1.8rem;
+      font-weight: bold; /* Already bold, but explicitly set */
+      color: #E50914; /* Changed to red */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .header nav a {
+      color: #fff; /* Changed to white */
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 1.1rem;
+      font-weight: bold; /* Changed to bold */
+      transition: color 0.3s ease;
+    }
+    .header nav a:hover {
+      color: #f0f0f0; /* Slightly lighter on hover */
+      text-decoration: underline;
+    }
+    /* Hero section styling */
     .hero {
-      background: linear-gradient(to bottom, #141414, #000);
-      padding: 40px 20px;
-      text-align: center;
+      /* Background image for San Francisco */
+      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpeg'); /* Updated San Francisco image path */
+      background-size: cover; /* Cover the entire area */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-color: #141414; /* Fallback background color */
+      padding: 60px 20px; /* Adjusted padding after removing profile picture */
+      text-align: left; /* Changed to left alignment */
       position: relative;
+      /* Add an overlay to make text more readable */
+      box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Dark overlay */
     }
-    .hero img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #E50914;
-    }
+    /* Main content area */
     .content {
       padding: 20px;
-      min-height: calc(100vh - 60px);
+      min-height: calc(100vh - 60px); /* Ensure content takes up most of the viewport */
     }
+    /* Section headers */
     .section-header {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #E50914;
+      color: #E50914; /* Red color for section headers */
       margin-bottom: 10px;
     }
+    /* Carousel for experience, skills, projects, and education */
     .carousel {
       display: flex;
-      overflow-x: auto;
-      gap: 20px;
+      overflow-x: auto; /* Enable horizontal scrolling */
+      gap: 20px; /* Space between cards */
       padding: 10px 0;
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* Smooth scrolling */
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
+    /* Individual card styling */
     .card, .skill-card {
       min-width: 200px;
       height: 300px;
-      background-color: #1f1f1f;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      background-color: #1f1f1f; /* Darker background for cards */
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s;
+      transition: transform 0.3s; /* Smooth transform on hover */
       cursor: pointer;
     }
     .card:hover, .skill-card:hover {
@@ -64,7 +102,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.7;
+      opacity: 0.7; /* Slightly transparent image */
     }
     .card-number, .skill-number {
       position: absolute;
@@ -84,10 +122,13 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       z-index: 1;
     }
+    /* Offcanvas panel for details */
     .offcanvas {
       position: fixed;
-      top-0 right-0;
-      width: 80; /* w-80 = 320px */
+      top: 0;
+      right: 0;
+      width: 80%; /* Responsive width */
+      max-width: 400px; /* Max width for larger screens */
       height: 100%;
       background-color: #1f1f1f;
       padding: 20px;
@@ -95,6 +136,7 @@
       z-index: 50;
       overflow-y: auto;
       color: #ccc;
+      border-radius: 8px 0 0 8px; /* Rounded left corners */
     }
     .offcanvas-close {
       position: absolute;
@@ -114,35 +156,69 @@
       background-color: #333;
       color: #fff;
       border: 1px solid #444;
+      border-radius: 4px;
     }
     .lang-form button {
       width: auto;
       background-color: #E50914;
+      padding: 8px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .lang-form button:hover {
+      background-color: #c00;
+    }
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .offcanvas {
+        width: 400px; /* Fixed width on larger screens */
+      }
     }
   </style>
 </head>
 <body>
   <div x-data="{ isOpen: false, selectedItem: '', selectedLang: 'en' }">
+    <!-- Red Header with Name and Navigation -->
+    <div class="header">
+      <div class="name">Jayakrishnan CP</div>
+      <nav>
+        <a href="#summary">Summary</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <!-- Removed Contact navigation link -->
+      </nav>
+    </div>
+
     <!-- Hero Section -->
     <div class="hero">
-      <!-- Placeholder for photo (replace with your URL or Base64) -->
-      <img src="images/profile.jpg" alt="Jayakrishnan CP" class="mx-auto" />
-      <h1 class="text-4xl font-bold mt-4">Jayakrishnan CP</h1>
-      <p class="text-lg mt-2">Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect</p>
+      <!-- Big White Letters Title - Smaller and Left Aligned -->
+      <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
+        Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect
+      </h1>
+      <!-- Contact Info -->
+      <p class="text-lg mt-4 text-left">
+        Email: <a href="mailto:jaykrishnancp@gmail.com" class="text-red-500 hover:underline">jaykrishnancp@gmail.com</a>
+      </p>
+      <p class="text-lg text-left">
+        LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
+      </p>
     </div>
 
     <!-- Content Area -->
     <div class="content">
       <!-- Summary Section -->
-      <div id="summary" class="space-y-4">
+      <div id="summary" class="space-y-4 pt-10"> <!-- Added padding top for anchor scroll -->
         <h2 class="section-header">Summary</h2>
-        <div class="card">
-          <p>Accomplished cybersecurity leader with over 18 years of experience driving enterprise-grade security solutions. Spearheaded Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection systems, achieving 100% SLA compliance and reducing incident response times by 40%. Passionate about aligning security strategies with business objectives, Jay has built and led high-performing MDR and SOC teams, implementing SIEM, XDR, and SOAR platforms to enhance operational resilience. His expertise in automation and cloud-native security has delivered scalable programs, saving organizations millions through optimized threat detection and response.</p>
+        <div class="card p-5 h-auto min-h-[150px] flex items-center justify-center">
+          <p class="text-center">Accomplished cybersecurity leader with over 18 years of experience driving enterprise-grade security solutions. Spearheaded Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection systems, achieving 100% SLA compliance and reducing incident response times by 40%. Passionate about aligning security strategies with business objectives, Jay has built and led high-performing MDR and SOC teams, implementing SIEM, XDR, and SOAR platforms to enhance operational resilience. His expertise in automation and cloud-native security has delivered scalable programs, saving organizations millions through optimized threat detection and response.</p>
         </div>
       </div>
 
       <!-- Experience Section -->
-      <div id="experience" class="space-y-4">
+      <div id="experience" class="space-y-4 pt-10">
         <h2 class="section-header">Experience</h2>
         <div class="carousel">
           <div class="card" @click="isOpen = true; selectedItem = 'seniorDirector'">
@@ -161,7 +237,7 @@
             <div class="card-title">Team Lead - Incident Management</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'seniorAnalyst'">
-            <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpeg" alt="Senior Analyst" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=4" alt="Senior Analyst" /> <!-- No specific image provided, keeping placeholder -->
             <div class="card-number">4</div>
             <div class="card-title">Senior Security Analyst</div>
           </div>
@@ -171,7 +247,7 @@
             <div class="card-title">Assistant Manager - Information Security</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'systemAdmin'">
-            <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpg" alt="System Admin" />
+            <img src="images/safe_software_and_integrated_solutions_pvt_ltd_logo.jpeg" alt="System Admin" />
             <div class="card-number">6</div>
             <div class="card-title">System Administrator</div>
           </div>
@@ -179,56 +255,56 @@
       </div>
 
       <!-- Skills Section -->
-      <div id="skills" class="space-y-4">
+      <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
         <div class="carousel">
           <div class="skill-card" @click="isOpen = true; selectedItem = 'siem'">
-            <img src="images/placeholder1.jpg" alt="SIEM" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=1" alt="SIEM" />
             <div class="skill-number">1</div>
             <div class="skill-title">SIEM</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'edr'">
-            <img src="images/placeholder2.jpg" alt="EDR" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=2" alt="EDR" />
             <div class="skill-number">2</div>
             <div class="skill-title">EDR</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'automation'">
-            <img src="images/placeholder3.jpg" alt="Automation" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=3" alt="Automation" />
             <div class="skill-number">3</div>
             <div class="skill-title">Automation</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'cloudSecurity'">
-            <img src="images/placeholder4.jpg" alt="Cloud Security" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=4" alt="Cloud Security" />
             <div class="skill-number">4</div>
             <div class="skill-title">Cloud Security</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'networkSecurity'">
-            <img src="images/placeholder5.jpg" alt="Network Security" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=5" alt="Network Security" />
             <div class="skill-number">5</div>
             <div class="skill-title">Network Security</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'identityManagement'">
-            <img src="images/placeholder6.jpg" alt="Identity Management" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=6" alt="Identity Management" />
             <div class="skill-number">6</div>
             <div class="skill-title">Identity Management</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'incidentResponse'">
-            <img src="images/placeholder7.jpg" alt="Incident Response" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=7" alt="Incident Response" />
             <div class="skill-number">7</div>
             <div class="skill-title">Incident Response</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'riskAssessment'">
-            <img src="images/placeholder8.jpg" alt="Risk Assessment" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=8" alt="Risk Assessment" />
             <div class="skill-number">8</div>
             <div class="skill-title">Risk Assessment</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'teamLeadership'">
-            <img src="images/placeholder9.jpg" alt="Team Leadership" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=9" alt="Team Leadership" />
             <div class="skill-number">9</div>
             <div class="skill-title">Team Leadership</div>
           </div>
           <div class="skill-card" @click="isOpen = true; selectedItem = 'cissp'">
-            <img src="images/placeholder10.jpg" alt="CISSP" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=10" alt="CISSP" />
             <div class="skill-number">10</div>
             <div class="skill-title">CISSP</div>
           </div>
@@ -236,21 +312,21 @@
       </div>
 
       <!-- Projects Section -->
-      <div id="projects" class="space-y-4">
+      <div id="projects" class="space-y-4 pt-10">
         <h2 class="section-header">Projects</h2>
         <div class="carousel">
           <div class="card" @click="isOpen = true; selectedItem = 'threatIntel'">
-            <img src="images/placeholder1.jpg" alt="Threat Intel Engine" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=1" alt="Threat Intel Engine" />
             <div class="card-number">1</div>
             <div class="card-title">AI-Powered Threat Intel Engine</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'securityAutomation'">
-            <img src="images/placeholder2.jpg" alt="Security Automation" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=2" alt="Security Automation" />
             <div class="card-number">2</div>
             <div class="card-title">Security Automation with n8n</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'cloudDashboard'">
-            <img src="images/placeholder3.jpg" alt="Cloud Dashboard" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=3" alt="Cloud Dashboard" />
             <div class="card-number">3</div>
             <div class="card-title">Cloud Security Dashboard</div>
           </div>
@@ -258,36 +334,27 @@
       </div>
 
       <!-- Education Section -->
-      <div id="education" class="space-y-4">
+      <div id="education" class="space-y-4 pt-10">
         <h2 class="section-header">Education</h2>
         <div class="carousel">
           <div class="card" @click="isOpen = true; selectedItem = 'mba'">
-            <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpeg" alt="MBA" />
+            <img src="images/download.jpeg" alt="MBA" />
             <div class="card-number">1</div>
             <div class="card-title">Master of Business Administration (MBA)</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'gdba'">
-            <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpeg" alt="GDBA" />
+            <img src="images/download.jpeg" alt="GDBA" />
             <div class="card-number">2</div>
             <div class="card-title">Graduate Diploma in Business Administration (GDBA)</div>
           </div>
           <div class="card" @click="isOpen = true; selectedItem = 'diploma'">
-            <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpeg" alt="Diploma" />
+            <img src="https://placehold.co/200x300/1f1f1f/E50914?text=3" alt="Diploma" /> <!-- No specific image provided, keeping placeholder -->
             <div class="card-number">3</div>
             <div class="card-title">Diploma in Computer Hardware</div>
           </div>
         </div>
       </div>
-
-      <!-- Contact Section -->
-      <div id="contact" class="space-y-4">
-        <h2 class="section-header">Contact</h2>
-        <div class="card">
-          <p>Email: <a href="mailto:jaykrishnancp@gmail.com" class="text-red-500">jaykrishnancp@gmail.com</a></p>
-          <p>LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500">linkedin.com/in/jaykrishnancp</a></p>
-        </div>
-      </div>
-
+      
       <!-- Offcanvas Panel -->
       <div 
         x-show="isOpen" 
@@ -298,7 +365,7 @@
         x-transition:leave="transition ease-in-out duration-300 transform"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="translate-x-full"
-        class="offcanvas fixed top-0 right-0 w-80 h-full bg-gray-900 z-50 overflow-y-auto p-4"
+        class="offcanvas fixed top-0 right-0 w-80 h-full bg-gray-900 z-50 overflow-y-auto p-4 rounded-l-lg"
       >
         <span class="offcanvas-close" @click="isOpen = false">×</span>
         <h3 x-text="{
@@ -344,113 +411,7 @@
           'cissp': 'Earning his CISSP, Jay has leveraged this certification to uphold the highest security standards, applying its principles to real-world scenarios with remarkable success.',
           'threatIntel': 'Jay engineered an AI-powered Threat Intel Engine using Python and n8n, parsing CVEs and IOCs with CVSS scoring, cutting analysis time by 50% and boosting accuracy by 30%.',
           'securityAutomation': 'Jay built n8n workflows for security automation, syndicating blogs and analyzing phishing alerts, automating 70% of tasks and reducing incidents by 25%.',
-          'cloudDashboard': 'Jay integrated Tenable, CrowdStrike, and Sentinel into a cloud dashboard with AWS and Tableau, enhancing decision-making by 35% and cutting vulnerabilities by 20%.',
-          'mba': 'Jay earned his MBA from NIM, specializing in IT and HR, laying a strong foundation for his strategic leadership in cybersecurity.',
-          'gdba': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills and shaping his holistic approach to security.',
-          'diploma': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his career, giving him hands-on expertise that evolved into advanced security solutions.'
-        }[selectedItem]" class="mb-4"></p>
-        <div class="offcanvas-content" x-data="{ selectedLang: 'en' }">
-          <h4 class="text-lg mb-2">Select Language</h4>
-          <form class="lang-form">
-            <select x-model="selectedLang" class="bg-gray-800 text-white">
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="hi">Hindi</option>
-            </select>
-            <button type="button" @click="selectedLang = $event.target.previousElementSibling.value" class="bg-red-600 text-white">Switch</button>
-          </form>
-          <p x-text="{
-            'seniorDirector': {
-              'en': 'Jay has excelled as Senior Director at UltraViolet Cyber, leading transformative projects like Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection, reducing unauthorized access by 60%.',
-              'es': 'Jay ha destacado como Director Senior en UltraViolet Cyber, liderando proyectos transformadores como arquitecturas Zero Trust (ZIA, ZPA) y detección de amenazas con IA, reduciendo accesos no autorizados en un 60%.',
-              'hi': 'जय ने अल्ट्रावायलेट साइबर में वरिष्ठ निदेशक के रूप में उत्कृष्ट प्रदर्शन किया, जिसमें जीरो ट्रस्ट आर्किटेक्चर (जेडआईए, जेडपीए) और एआई-संचालित खतरे का पता लगाने जैसे परिवर्तनकारी परियोजनाओं का नेतृत्व किया, जिससे अनधिकृत पहुंच 60% कम हुई।'
-            }[selectedLang],
-            'manager': {
-              'en': 'As Manager at METMOX, Jay evaluated security processes and crafted a comprehensive framework, boosting hybrid environment protection by 50%.',
-              'es': 'Como Gerente en METMOX, Jay evaluó procesos de seguridad y creó un marco integral, mejorando la protección de entornos híbridos en un 50%.',
-              'hi': 'मेटमॉक्स में प्रबंधक के रूप में, जय ने सुरक्षा प्रक्रियाओं का मूल्यांकन किया और एक व्यापक ढांचा बनाया, जिससे हाइब्रिड वातावरण की सुरक्षा 50% बढ़ी।'
-            }[selectedLang],
-            'teamLead': {
-              'en': 'Jay’s tenure as Team Lead at Verizon Business saw him inject security into application stacks, crafting a roadmap that improved ISO 27001 compliance by 35%.',
-              'es': 'Durante su mandato como Líder de Equipo en Verizon Business, Jay integró seguridad en las pilas de aplicaciones, elaborando un plan que mejoró el cumplimiento de ISO 27001 en un 35%.',
-              'hi': 'वेरिज़न बिजनेस में टीम लीड के रूप में जय के कार्यकाल ने उन्हें एप्लिकेशन स्टैक में सुरक्षा को शामिल करने का मौका दिया, जिससे आईएसओ 27001 अनुपालन 35% बेहतर हुआ।'
-            }[selectedLang],
-            'seniorAnalyst': {
-              'en': 'At Super Computers Trading Est., Jay designed SIEM solutions, enhancing threat detection by 30%, and his vulnerability assessments cut risks by 40%.',
-              'es': 'En Super Computers Trading Est., Jay diseñó soluciones SIEM, mejorando la detección de amenazas en un 30%, y sus evaluaciones de vulnerabilidades redujeron riesgos en un 40%.',
-              'hi': 'सुपर कंप्यूटर्स ट्रेडिंग एस्ट में, जय ने SIEM समाधान डिज़ाइन किए, जिससे खतरे का पता लगाने में 30% की वृद्धि हुई, और उनकी कमजोरियों की जांच से जोखिम 40% कम हुआ।'
-            }[selectedLang],
-            'assistantManager': {
-              'en': 'Jay coordinated security measures at Geojit Financial Services, achieving 98% regulatory compliance and reducing network intrusions by 50%.',
-              'es': 'Jay coordinó medidas de seguridad en Geojit Financial Services, logrando un 98% de cumplimiento regulatorio y reduciendo intrusiones en la red en un 50%.',
-              'hi': 'जय ने गेओजिट फाइनेंशियल सर्विसेज में सुरक्षा उपायों का समन्वय किया, जिससे 98% नियामक अनुपालन और नेटवर्क घुसपैठ में 50% की कमी हुई।'
-            }[selectedLang],
-            'systemAdmin': {
-              'en': 'As System Administrator at Safe Software, Jay ensured 100% uptime for banking servers, his backup processes reducing data loss by 90%.',
-              'es': 'Como Administrador de Sistemas en Safe Software, Jay aseguró un 100% de tiempo de actividad para servidores bancarios, reduciendo la pérdida de datos en un 90% con sus procesos de respaldo.',
-              'hi': 'सेफ सॉफ्टवेयर में सिस्टम प्रशासक के रूप में, जय ने बैंकिंग सर्वर के लिए 100% अपटाइम सुनिश्चित किया, जिससे उनके बैकअप प्रक्रियाओं ने डेटा हानि को 90% कम किया।'
-            }[selectedLang],
-            'siem': {
-              'en': 'Jay has worked on developing SIEM solutions for over a decade, crafting systems that detect threats with pinpoint accuracy.',
-              'es': 'Jay ha trabajado en el desarrollo de soluciones SIEM durante más de una década, creando sistemas que detectan amenazas con precisión milimétrica.',
-              'hi': 'जय ने दस साल से अधिक समय तक SIEM समाधानों के विकास पर काम किया, जो खतरे को सटीकता से पहचानने वाली प्रणालियाँ बनाईं।'
-            }[selectedLang],
-            'edr': {
-              'en': 'With years of hands-on experience, Jay has mastered EDR tools like CrowdStrike and Microsoft Defender.',
-              'es': 'Con años de experiencia práctica, Jay ha dominado herramientas EDR como CrowdStrike y Microsoft Defender.',
-              'hi': 'सालों के हाथों-हाथ अनुभव के साथ, जय ने क्राउडस्ट्राइक और माइक्रोसॉफ्ट डिफेंडर जैसे EDR टूल्स में महारत हासिल की है।'
-            }[selectedLang],
-            'automation': {
-              'en': 'Jay’s automation skills shine through his n8n workflows, automating threat responses and saving teams hours daily.',
-              'es': 'Las habilidades de automatización de Jay brillan a través de sus flujos de trabajo n8n, automatizando respuestas a amenazas y ahorrando horas a los equipos diariamente.',
-              'hi': 'जय की स्वचालन कौशल उनके n8n कार्यप्रवाह में चमकती हैं, जो खतरे की प्रतिक्रियाओं को स्वचालित करती हैं और टीमों को रोज़ाना घंटों बचाती हैं।'
-            }[selectedLang],
-            'cloudSecurity': {
-              'en': 'Jay has architected cloud security frameworks across AWS and Azure, ensuring resilience against evolving threats.',
-              'es': 'Jay ha diseñado marcos de seguridad en la nube en AWS y Azure, asegurando resiliencia contra amenazas en evolución.',
-              'hi': 'जय ने AWS और Azure में क्लाउड सुरक्षा ढांचे का निर्माण किया, जो विकसित होती खतरे के खिलाफ लचीलापन सुनिश्चित करता है।'
-            }[selectedLang],
-            'networkSecurity': {
-              'en': 'A veteran in network security, Jay has fortified systems with firewalls and IPS, reducing intrusions by 50%.',
-              'es': 'Veterano en seguridad de redes, Jay ha fortalecido sistemas con firewalls e IPS, reduciendo intrusiones en un 50%.',
-              'hi': 'नेटवर्क सुरक्षा में एक अनुभवी, जय ने फायरवॉल और IPS के साथ सिस्टम को मजबूत किया, जिससे घुसपैठ 50% कम हुई।'
-            }[selectedLang],
-            'identityManagement': {
-              'en': 'Jay’s expertise in identity management with Okta and Azure AD has streamlined access controls.',
-              'es': 'La experiencia de Jay en gestión de identidades con Okta y Azure AD ha optimizado los controles de acceso.',
-              'hi': 'जय की ओकता और एज़्योर एडी के साथ पहचान प्रबंधन में विशेषज्ञता ने पहुँच नियंत्रण को सुव्यवस्थित किया है।'
-            }[selectedLang],
-            'incidentResponse': {
-              'en': 'Jay’s incident response skills have saved the day in high-stakes situations, leading teams with precision.',
-              'es': 'Las habilidades de respuesta a incidentes de Jay han salvado el día en situaciones de alto riesgo, liderando equipos con precisión.',
-              'hi': 'जय की घटना प्रतिक्रिया कौशल ने उच्च जोखिम वाली स्थितियों में दिन बचाया, टीमों को सटीकता से नेतृत्व किया।'
-            }[selectedLang],
-            'riskAssessment': {
-              'en': 'With a keen eye for risk, Jay has conducted assessments that transformed organizational security postures.',
-              'es': 'Con un ojo agudo para el riesgo, Jay ha realizado evaluaciones que transformaron las posturas de seguridad organizacional.',
-              'hi': 'जोखिम के लिए एक तीव्र नजर के साथ, जय ने मूल्यांकन किए जो संगठनात्मक सुरक्षा रुख को बदल दिया।'
-            }[selectedLang],
-            'teamLeadership': {
-              'en': 'Jay has guided teams through complex security challenges, fostering a culture of excellence.',
-              'es': 'Jay ha guiado a equipos a través de desafíos de seguridad complejos, fomentando una cultura de excelencia.',
-              'hi': 'जय ने जटिल सुरक्षा चुनौतियों के माध्यम से टीमों का मार्गदर्शन किया, उत्कृष्टता की संस्कृति को बढ़ावा दिया।'
-            }[selectedLang],
-            'cissp': {
-              'en': 'Earning his CISSP, Jay has leveraged this certification to uphold the highest security standards.',
-              'es': 'Al obtener su certificación CISSP, Jay ha utilizado esta acreditación para mantener los más altos estándares de seguridad.',
-              'hi': 'अपने CISSP को अर्जित करने के बाद, जय ने इस प्रमाणन का उपयोग उच्चतम सुरक्षा मानकों को बनाए रखने के लिए किया।'
-            }[selectedLang],
-            'threatIntel': {
-              'en': 'Jay engineered an AI-powered Threat Intel Engine using Python and n8n, cutting analysis time by 50%.',
-              'es': 'Jay diseñó un motor de inteligencia de amenazas impulsado por IA usando Python y n8n, reduciendo el tiempo de análisis en un 50%.',
-              'hi': 'जय ने पायथन और n8n का उपयोग करके एक AI-संचालित खतरे की खुफिया इंजन का निर्माण किया, जिससे विश्लेषण समय 50% कम हुआ।'
-            }[selectedLang],
-            'securityAutomation': {
-              'en': 'Jay built n8n workflows for security automation, automating 70% of tasks and reducing incidents by 25%.',
-              'es': 'Jay construyó flujos de trabajo n8n para automatización de seguridad, automatizando el 70% de las tareas y reduciendo incidentes en un 25%.',
-              'hi': 'जय ने सुरक्षा स्वचालन के लिए n8n कार्यप्रवाह बनाए, जिससे 70% कार्य स्वचालित हुए और घटनाओं में 25% की कमी आई।'
-            }[selectedLang],
-            'cloudDashboard': {
+              'cloudDashboard': {
               'en': 'Jay integrated Tenable, CrowdStrike, and Sentinel into a cloud dashboard, enhancing decision-making by 35%.',
               'es': 'Jay integró Tenable, CrowdStrike y Sentinel en un panel en la nube, mejorando la toma de decisiones en un 35%.',
               'hi': 'जय ने टेनेबल, क्राउडस्ट्राइक और सेंटिनल को क्लाउड डैशबोर्ड में एकीकृत किया, जिससे निर्णय लेने में 35% की वृद्धि हुई।'
