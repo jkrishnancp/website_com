@@ -16,7 +16,8 @@
       background-color: #141414;
       color: #fff;
       margin: 0;
-      padding: 0;
+      /* Added padding to body for consistent left alignment and spacing */
+      padding: 0 20px; /* 0 top/bottom, 20px left/right */
       overflow-x: hidden;
       -webkit-user-select: none; /* Safari */
       -moz-user-select: none;    /* Firefox */
@@ -26,7 +27,8 @@
     /* Header styling for the top navigation bar */
     .header {
       background-color: #141414;
-      padding: 15px 20px;
+      /* Padding adjusted to align with body padding, but keep vertical padding */
+      padding: 15px 0; /* Horizontal padding handled by body */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -34,6 +36,9 @@
       top: 0;
       z-index: 100;
       border-radius: 0 0 8px 8px;
+      /* Ensure header content is within max-width and left-aligned */
+      max-width: 1200px; /* Match content max-width */
+      margin: 0 auto; /* Keep header centered within body padding for large screens */
     }
     .header .name {
       font-size: 1.8rem;
@@ -58,6 +63,8 @@
     @media (max-width: 767px) { /* Adjust breakpoint as needed for mobile */
       .header {
         flex-wrap: wrap;
+        max-width: none; /* Remove max-width on mobile header */
+        padding: 15px 20px; /* Re-add padding for mobile header */
       }
       .header .name {
         font-size: 1.5rem; /* Smaller name on mobile */
@@ -98,7 +105,7 @@
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
+      background-image: url('images/san-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg'); /* Placeholder for San Francisco image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -116,10 +123,14 @@
     }
     /* Main content area */
     .content {
-      padding: 20px;
+      /* Removed margin: 0 auto; to allow left alignment */
+      padding: 20px 0; /* Keep vertical padding, horizontal handled by body */
       min-height: calc(100vh - 60px);
       max-width: 1200px; /* Limit content width on very large screens */
-      margin: 0 auto; /* Center content */
+      margin: 0 auto; /* Re-added margin auto to center the content *within the body's padding* */
+      /* This ensures it's left-aligned relative to the screen edge (due to body padding)
+         but still has a max-width and is centered within that available space.
+         This is a common and usually desired behavior on large screens. */
     }
     /* Section headers */
     .section-header {
@@ -417,7 +428,7 @@
     details: {
       seniorDirector: {
         title: 'Senior Director - Security Operations',
-        description: 'Jay has excelled as Senior Director at UltraViolet Cyber, leading transformative projects like Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection, reducing unauthorized access by 60%. His strategic vision has set new benchmarks in cybersecurity leadership.'
+        description: '<b>UltraViolet Cyber</b><br>Senior Director - Security Operations<br>April 2023 - Present (2 years 4 months)<br>San Francisco Bay Area<br><br>As the Senior Director of Security Operations at UltraViolet Cyber, I focus on delivering practical, results-driven cybersecurity solutions tailored to meet enterprise needs. Over my career, I’ve led transformative projects, including implementing <b>Zero Trust architectures (ZIA and ZPA)</b>, deploying <b>AI-powered tools for proactive threat detection</b>, and rolling out <b>enterprise-grade EDR solutions</b>. My hands-on approach ensures that critical projects are completed efficiently—often within 90-120 days—while maintaining <b>100% SLA compliance</b>.<br><br>Building and leading teams is a passion of mine. From creating <b>MDR operations</b> to driving security processes for <b>SIEM, XDR, CASB, and CSPM</b>, I strive to develop teams that can take on the toughest security challenges with confidence. I’m also deeply involved in leveraging <b>AI and automation, such as SOAR platforms</b>, to simplify incident response and improve resolution times.<br><br>For me, cybersecurity isn’t just about technology—it’s about aligning security strategies with business goals, reducing risk, and ensuring resilience in the face of constant change. I take pride in building scalable, practical security programs that empower teams and deliver long-term value to the organizations I serve.'
       },
       manager: {
         title: 'Manager, Security Operations',
@@ -527,7 +538,7 @@
       awsCertifiedSolutionsArchitect: { title: 'AWS Certified Solutions Architect – Professional', description: 'AWS Certified Solutions Architect – Professional certification, demonstrating expertise in designing distributed systems on AWS.' },
       cnssCertifiedNetworkSecuritySpecialist: { title: 'CNSS Certified Network Security Specialist', description: 'CNSS Certified Network Security Specialist certification, focusing on securing network infrastructures.' },
       qualysCertifiedSpecialistPolicyCompliance: { title: 'Qualys Certified Specialist – Policy Compliance', description: 'Qualys Certified Specialist – Policy Compliance, validating skills in managing and reporting on security policy compliance.' },
-      qualysCertifiedSpecialistVulnerabilityManagement: { title: 'Qualys Certified Specialist – Vulnerability Management', description: 'Qualys Certified Specialist – Vulnerability Management, demonstrating proficiency in identifying and addressing system vulnerabilities.' },
+      qualysCertifiedSpecialistVulnerabilityManagement: { title: 'Qualys Certified Specialist – Vulnerability Management, demonstrating proficiency in identifying and addressing system vulnerabilities.' },
       theDataScientistsToolbox: { title: 'The Data Scientist’s Toolbox', description: 'Covers fundamental tools and concepts in data science, including programming in R and data analysis techniques.' },
       searchingAndReportingWithSplunk6: { title: 'Searching and Reporting with Splunk 6', description: 'Training on advanced searching and reporting functionalities in Splunk 6 for security analytics and operational intelligence.' },
       cloudLockUniversity201: { title: 'CloudLock University 201 – Training', description: 'Advanced training from CloudLock University, focusing on cloud security best practices and platform usage.' },
@@ -832,7 +843,7 @@
       >
         <span class="offcanvas-close" @click="isOpen = false">×</span>
         <h3 x-text="details[selectedItem] ? details[selectedItem].title : 'Details not available'" class="text-xl text-white mb-2 text-left"></h3>
-        <p x-text="details[selectedItem] ? details[selectedItem].description : 'No description available for this item.'" class="mt-2 text-left leading-relaxed"></p>
+        <p x-html="details[selectedItem] ? details[selectedItem].description : 'No description available for this item.'" class="mt-2 text-left leading-relaxed"></p>
         <div class="offcanvas-content">
           <!-- Language selection removed -->
         </div>
