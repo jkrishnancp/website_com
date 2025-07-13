@@ -1,48 +1,9 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jayakrishnan CP | Cybersecurity Leader Resume</title>
+  <title>Jay Krishnan CP | Cybersecurity Leader Resume</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
@@ -66,30 +27,7 @@
       object-fit: cover;
       border: 4px solid #E50914;
     }
-    .nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #141414;
-      padding: 10px 20px;
-      z-index: 1000;
-      border-bottom: 1px solid #333;
-    }
-    .nav button {
-      margin: 0 10px;
-      padding: 8px 16px;
-      background-color: #E50914;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .nav button:hover {
-      background-color: #ff0000;
-    }
     .content {
-      margin-top: 60px;
       padding: 20px;
       min-height: calc(100vh - 60px);
     }
@@ -155,7 +93,7 @@
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
       z-index: 1001;
-      max-width: 400px;
+      max-width: 500px;
       color: #ccc;
     }
     .popup.active {
@@ -169,24 +107,21 @@
       color: #E50914;
       cursor: pointer;
     }
+    .popup-iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div x-data="{ showPopup: false, selectedItem: '' }">
-    <!-- Navigation -->
-    <nav class="nav flex justify-center">
-      <button @click="scrollToSection('summary')">Summary</button>
-      <button @click="scrollToSection('experience')">Experience</button>
-      <button @click="scrollToSection('skills')">Skills</button>
-      <button @click="scrollToSection('projects')">Projects</button>
-      <button @click="scrollToSection('education')">Education</button>
-      <button @click="scrollToSection('contact')">Contact</button>
-    </nav>
-
     <!-- Hero Section -->
     <div class="hero">
-      <img src="images/profile.jpg" alt="Jayakrishnan CP" class="mx-auto" />
-      <h1 class="text-4xl font-bold mt-4">Jayakrishnan CP</h1>
+      <!-- Placeholder for photo (replace with your Base64 or URL) -->
+      <img src="https://via.placeholder.com/150" alt="Jay Krishnan CP" class="mx-auto" />
+      <h1 class="text-4xl font-bold mt-4">Jay Krishnan CP</h1>
       <p class="text-lg mt-2">Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect</p>
     </div>
 
@@ -204,33 +139,33 @@
       <div id="experience" class="space-y-4">
         <h2 class="section-header">Experience</h2>
         <div class="carousel">
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'seniorDirector'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'seniorDirector'">
-            <img src="placeholder1.jpg" alt="Senior Director" />
+          <div class="card" @click="showPopup = true; selectedItem = 'seniorDirector'">
+            <img src="images/placeholder1.jpg" alt="Senior Director" />
             <div class="card-number">1</div>
             <div class="card-title">Senior Director - Security Operations</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'manager'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'manager'">
-            <img src="placeholder2.jpg" alt="Manager" />
+          <div class="card" @click="showPopup = true; selectedItem = 'manager'">
+            <img src="images/placeholder2.jpg" alt="Manager" />
             <div class="card-number">2</div>
             <div class="card-title">Manager, Security Operations</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'teamLead'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'teamLead'">
-            <img src="placeholder3.jpg" alt="Team Lead" />
+          <div class="card" @click="showPopup = true; selectedItem = 'teamLead'">
+            <img src="images/placeholder3.jpg" alt="Team Lead" />
             <div class="card-number">3</div>
             <div class="card-title">Team Lead - Incident Management</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'seniorAnalyst'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'seniorAnalyst'">
-            <img src="placeholder4.jpg" alt="Senior Analyst" />
+          <div class="card" @click="showPopup = true; selectedItem = 'seniorAnalyst'">
+            <img src="images/placeholder4.jpg" alt="Senior Analyst" />
             <div class="card-number">4</div>
             <div class="card-title">Senior Security Analyst</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'assistantManager'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'assistantManager'">
-            <img src="placeholder5.jpg" alt="Assistant Manager" />
+          <div class="card" @click="showPopup = true; selectedItem = 'assistantManager'">
+            <img src="images/placeholder5.jpg" alt="Assistant Manager" />
             <div class="card-number">5</div>
             <div class="card-title">Assistant Manager - Information Security</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'systemAdmin'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'systemAdmin'">
-            <img src="placeholder6.jpg" alt="System Admin" />
+          <div class="card" @click="showPopup = true; selectedItem = 'systemAdmin'">
+            <img src="images/placeholder6.jpg" alt="System Admin" />
             <div class="card-number">6</div>
             <div class="card-title">System Administrator</div>
           </div>
@@ -241,53 +176,53 @@
       <div id="skills" class="space-y-4">
         <h2 class="section-header">Skills</h2>
         <div class="carousel">
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'siem'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'siem'">
-            <img src="placeholder1.jpg" alt="SIEM" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'siem'">
+            <img src="images/placeholder1.jpg" alt="SIEM" />
             <div class="skill-number">1</div>
             <div class="skill-title">SIEM</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'edr'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'edr'">
-            <img src="placeholder2.jpg" alt="EDR" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'edr'">
+            <img src="images/placeholder2.jpg" alt="EDR" />
             <div class="skill-number">2</div>
             <div class="skill-title">EDR</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'automation'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'automation'">
-            <img src="placeholder3.jpg" alt="Automation" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'automation'">
+            <img src="images/placeholder3.jpg" alt="Automation" />
             <div class="skill-number">3</div>
             <div class="skill-title">Automation</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'cloudSecurity'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'cloudSecurity'">
-            <img src="placeholder4.jpg" alt="Cloud Security" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'cloudSecurity'">
+            <img src="images/placeholder4.jpg" alt="Cloud Security" />
             <div class="skill-number">4</div>
             <div class="skill-title">Cloud Security</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'networkSecurity'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'networkSecurity'">
-            <img src="placeholder5.jpg" alt="Network Security" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'networkSecurity'">
+            <img src="images/placeholder5.jpg" alt="Network Security" />
             <div class="skill-number">5</div>
             <div class="skill-title">Network Security</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'identityManagement'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'identityManagement'">
-            <img src="placeholder6.jpg" alt="Identity Management" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'identityManagement'">
+            <img src="images/placeholder6.jpg" alt="Identity Management" />
             <div class="skill-number">6</div>
             <div class="skill-title">Identity Management</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'incidentResponse'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'incidentResponse'">
-            <img src="placeholder7.jpg" alt="Incident Response" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'incidentResponse'">
+            <img src="images/placeholder7.jpg" alt="Incident Response" />
             <div class="skill-number">7</div>
             <div class="skill-title">Incident Response</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'riskAssessment'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'riskAssessment'">
-            <img src="placeholder8.jpg" alt="Risk Assessment" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'riskAssessment'">
+            <img src="images/placeholder8.jpg" alt="Risk Assessment" />
             <div class="skill-number">8</div>
             <div class="skill-title">Risk Assessment</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'teamLeadership'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'teamLeadership'">
-            <img src="placeholder9.jpg" alt="Team Leadership" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'teamLeadership'">
+            <img src="images/placeholder9.jpg" alt="Team Leadership" />
             <div class="skill-number">9</div>
             <div class="skill-title">Team Leadership</div>
           </div>
-          <div class="skill-card" @mouseover="showPopup = true; selectedItem = 'cissp'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'cissp'">
-            <img src="placeholder10.jpg" alt="CISSP" />
+          <div class="skill-card" @click="showPopup = true; selectedItem = 'cissp'">
+            <img src="images/placeholder10.jpg" alt="CISSP" />
             <div class="skill-number">10</div>
             <div class="skill-title">CISSP</div>
           </div>
@@ -298,18 +233,18 @@
       <div id="projects" class="space-y-4">
         <h2 class="section-header">Projects</h2>
         <div class="carousel">
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'threatIntel'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'threatIntel'">
-            <img src="placeholder1.jpg" alt="Threat Intel Engine" />
+          <div class="card" @click="showPopup = true; selectedItem = 'threatIntel'">
+            <img src="images/placeholder1.jpg" alt="Threat Intel Engine" />
             <div class="card-number">1</div>
             <div class="card-title">AI-Powered Threat Intel Engine</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'securityAutomation'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'securityAutomation'">
-            <img src="placeholder2.jpg" alt="Security Automation" />
+          <div class="card" @click="showPopup = true; selectedItem = 'securityAutomation'">
+            <img src="images/placeholder2.jpg" alt="Security Automation" />
             <div class="card-number">2</div>
             <div class="card-title">Security Automation with n8n</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'cloudDashboard'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'cloudDashboard'">
-            <img src="placeholder3.jpg" alt="Cloud Dashboard" />
+          <div class="card" @click="showPopup = true; selectedItem = 'cloudDashboard'">
+            <img src="images/placeholder3.jpg" alt="Cloud Dashboard" />
             <div class="card-number">3</div>
             <div class="card-title">Cloud Security Dashboard</div>
           </div>
@@ -320,18 +255,18 @@
       <div id="education" class="space-y-4">
         <h2 class="section-header">Education</h2>
         <div class="carousel">
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'mba'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'mba'">
-            <img src="placeholder1.jpg" alt="MBA" />
+          <div class="card" @click="showPopup = true; selectedItem = 'mba'">
+            <img src="images/placeholder1.jpg" alt="MBA" />
             <div class="card-number">1</div>
             <div class="card-title">Master of Business Administration (MBA)</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'gdba'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'gdba'">
-            <img src="placeholder2.jpg" alt="GDBA" />
+          <div class="card" @click="showPopup = true; selectedItem = 'gdba'">
+            <img src="images/placeholder2.jpg" alt="GDBA" />
             <div class="card-number">2</div>
             <div class="card-title">Graduate Diploma in Business Administration (GDBA)</div>
           </div>
-          <div class="card" @mouseover="showPopup = true; selectedItem = 'diploma'" @mouseleave="showPopup = false" @click="showPopup = true; selectedItem = 'diploma'">
-            <img src="placeholder3.jpg" alt="Diploma" />
+          <div class="card" @click="showPopup = true; selectedItem = 'diploma'">
+            <img src="images/placeholder3.jpg" alt="Diploma" />
             <div class="card-number">3</div>
             <div class="card-title">Diploma in Computer Hardware</div>
           </div>
@@ -397,7 +332,31 @@
           'mba': 'Jay earned his MBA from NIM, specializing in IT and HR, laying a strong foundation for his strategic leadership in cybersecurity.',
           'gdba': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills and shaping his holistic approach to security.',
           'diploma': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his career, giving him hands-on expertise that evolved into advanced security solutions.'
-        }[selectedItem]"></p>
+        }[selectedItem]" class="mb-4"></p>
+        <iframe x-bind:src="{
+          'seniorDirector': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay Krishnan CP, a cybersecurity leader with 18 years of experience, excels in Zero Trust architectures and AI-driven threat detection, reducing response times by 40%.</p><p>Skills: SIEM, EDR, Automation.</p></body></html>'),
+          'manager': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay, as Manager at METMOX, enhanced security by 50% with innovative frameworks.</p><p>Skills: Cloud Security, Network Security.</p></body></html>'),
+          'teamLead': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay led incident management at Verizon, improving compliance by 35%.</p><p>Skills: Incident Response, Risk Assessment.</p></body></html>'),
+          'seniorAnalyst': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay designed SIEM solutions at Super Computers, boosting detection by 30%.</p><p>Skills: SIEM, EDR.</p></body></html>'),
+          'assistantManager': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay achieved 98% compliance at Geojit with firewall deployments.</p><p>Skills: Network Security, Identity Management.</p></body></html>'),
+          'systemAdmin': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay ensured 100% uptime at Safe Software with robust backups.</p><p>Skills: Automation, Team Leadership.</p></body></html>'),
+          'siem': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s SIEM expertise saved organizations with Sentinel integrations.</p></body></html>'),
+          'edr': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay mastered EDR, halting ransomware attacks swiftly.</p></body></html>'),
+          'automation': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s automation workflows saved hours daily.</p></body></html>'),
+          'cloudSecurity': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay secured cloud frameworks with CASB solutions.</p></body></html>'),
+          'networkSecurity': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay reduced intrusions by 50% with firewalls.</p></body></html>'),
+          'identityManagement': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay streamlined access with Okta and Azure AD.</p></body></html>'),
+          'incidentResponse': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s response skills contained breaches with precision.</p></body></html>'),
+          'riskAssessment': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s assessments transformed security postures.</p></body></html>'),
+          'teamLeadership': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay mentored teams to excellence.</p></body></html>'),
+          'cissp': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay upholds standards with his CISSP certification.</p></body></html>'),
+          'threatIntel': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s Threat Intel Engine cut analysis time by 50%.</p></body></html>'),
+          'securityAutomation': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay automated 70% of security tasks with n8n.</p></body></html>'),
+          'cloudDashboard': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s dashboard improved decisions by 35%.</p></body></html>'),
+          'mba': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s MBA from NIM built his leadership foundation.</p></body></html>'),
+          'gdba': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s GDBA enhanced his business acumen.</p></body></html>'),
+          'diploma': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s Diploma sparked his tech career.</p></body></html>')
+        }[selectedItem]" class="popup-iframe" title="Language Selection"></iframe>
       </div>
     </div>
   </div>
