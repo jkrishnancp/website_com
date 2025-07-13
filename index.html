@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jayakrishnan C P | Cybersecurity Leader Resume</title>
+  <title>Jayakrishnan CP | Cybersecurity Leader Resume</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/alpinejs" defer></script>
   <style>
@@ -51,7 +51,7 @@
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
+      background-image: url('https://placehold.co/1200x600/000000/FFFFFF/png?text=San+Francisco+Skyline'); /* Placeholder for San Francisco image */
       background-size: cover; /* Cover the entire area */
       background-position: center; /* Center the image */
       background-repeat: no-repeat; /* Do not repeat the image */
@@ -161,32 +161,44 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       z-index: 1;
     }
-    /* Offcanvas panel for details */
-    .offcanvas {
+    /* Offcanvas (now modal) styling */
+    .offcanvas-backdrop {
       position: fixed;
       top: 0;
-      right: 0;
-      width: 80%; /* Responsive width */
-      max-width: 400px; /* Max width for larger screens */
+      left: 0;
+      width: 100%;
       height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+      z-index: 40; /* Below the modal, above content */
+    }
+    .offcanvas {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Center the modal */
+      width: 90%; /* Responsive width */
+      max-width: 600px; /* Max width for larger screens */
+      height: auto; /* Height adjusts to content */
+      max-height: 90vh; /* Max height to prevent overflow on small screens */
       background-color: #1f1f1f;
       padding: 20px;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Stronger shadow for modal */
       z-index: 50;
       overflow-y: auto;
       color: #ccc;
-      border-radius: 8px 0 0 8px; /* Rounded left corners */
+      border-radius: 8px; /* Rounded corners on all sides */
     }
     .offcanvas-close {
       position: absolute;
       top: 10px;
-      right: 10px;
-      font-size: 1.5rem;
+      right: 15px; /* Adjusted right position for padding */
+      font-size: 1.8rem; /* Slightly larger for easier clicking */
       color: #E50914;
       cursor: pointer;
+      font-weight: bold;
     }
     .offcanvas-content {
-      margin-top: 30px;
+      margin-top: 20px; /* Adjusted margin for close button */
     }
     .lang-form select, .lang-form button {
       margin: 5px;
@@ -211,7 +223,7 @@
     /* Responsive adjustments */
     @media (min-width: 768px) {
       .offcanvas {
-        width: 400px; /* Fixed width on larger screens */
+        width: 600px; /* Fixed width on larger screens */
       }
     }
   </style>
@@ -434,17 +446,30 @@
         </div>
       </div>
       
-      <!-- Offcanvas Panel -->
+      <!-- Offcanvas Backdrop -->
+      <div 
+        x-show="isOpen" 
+        x-cloak 
+        x-transition:enter="transition ease-out duration-300" 
+        x-transition:enter-start="opacity-0" 
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200" 
+        x-transition:leave-start="opacity-100" 
+        x-transition:leave-end="opacity-0"
+        class="offcanvas-backdrop"
+      ></div>
+
+      <!-- Offcanvas Panel (now a centered modal) -->
       <div 
         x-show="isOpen" 
         x-cloak
-        x-transition:enter="transition ease-in-out duration-300 transform"
-        x-transition:enter-start="translate-x-full"
-        x-transition:enter-end="translate-x-0"
-        x-transition:leave="transition ease-in-out duration-300 transform"
-        x-transition:leave-start="translate-x-0"
-        x-transition:leave-end="translate-x-full"
-        class="offcanvas fixed top-0 right-0 w-80 h-full bg-gray-900 z-50 overflow-y-auto p-4 rounded-l-lg"
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="offcanvas"
       >
         <span class="offcanvas-close" @click="isOpen = false">×</span>
         <h3 x-text="{
