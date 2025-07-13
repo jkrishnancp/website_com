@@ -13,6 +13,7 @@
       color: #fff;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
     .hero {
       background: linear-gradient(to bottom, #141414, #000);
@@ -56,7 +57,7 @@
       cursor: pointer;
     }
     .card:hover, .skill-card:hover {
-      transform: scale(1.05); /* Keep hover effect for visual feedback, but popup only on click */
+      transform: scale(1.05); /* Visual feedback on hover */
     }
     .card img, .skill-card img {
       width: 100%;
@@ -82,24 +83,24 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       z-index: 1;
     }
-    .popup {
-      display: none;
+    .offcanvas {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100%;
       background-color: #1f1f1f;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-      z-index: 1001;
-      max-width: 500px;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      transition: right 0.3s ease-in-out;
+      overflow-y: auto;
       color: #ccc;
     }
-    .popup.active {
-      display: block;
+    .offcanvas.active {
+      right: 0;
     }
-    .popup-close {
+    .offcanvas-close {
       position: absolute;
       top: 10px;
       right: 10px;
@@ -107,17 +108,25 @@
       color: #E50914;
       cursor: pointer;
     }
-    .popup-content {
-      margin-top: 10px;
+    .offcanvas-content {
+      margin-top: 30px;
     }
     .lang-form select, .lang-form button {
       margin: 5px;
       padding: 5px;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #444;
+    }
+    .lang-form button {
+      width: auto;
+      background-color: #E50914;
     }
   </style>
 </head>
 <body>
-  <div x-data="{ showPopup: false, selectedItem: '' }">
+  <div x-data="{ isOpen: false, selectedItem: '', selectedLang: 'en' }">
     <!-- Hero Section -->
     <div class="hero">
       <!-- Placeholder for photo (replace with your URL or Base64) -->
@@ -140,32 +149,32 @@
       <div id="experience" class="space-y-4">
         <h2 class="section-header">Experience</h2>
         <div class="carousel">
-          <div class="card" @click="showPopup = true; selectedItem = 'seniorDirector'">
+          <div class="card" @click="isOpen = true; selectedItem = 'seniorDirector'">
             <img src="images/placeholder1.jpg" alt="Senior Director" />
             <div class="card-number">1</div>
             <div class="card-title">Senior Director - Security Operations</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'manager'">
+          <div class="card" @click="isOpen = true; selectedItem = 'manager'">
             <img src="images/placeholder2.jpg" alt="Manager" />
             <div class="card-number">2</div>
             <div class="card-title">Manager, Security Operations</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'teamLead'">
+          <div class="card" @click="isOpen = true; selectedItem = 'teamLead'">
             <img src="images/placeholder3.jpg" alt="Team Lead" />
             <div class="card-number">3</div>
             <div class="card-title">Team Lead - Incident Management</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'seniorAnalyst'">
+          <div class="card" @click="isOpen = true; selectedItem = 'seniorAnalyst'">
             <img src="images/placeholder4.jpg" alt="Senior Analyst" />
             <div class="card-number">4</div>
             <div class="card-title">Senior Security Analyst</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'assistantManager'">
+          <div class="card" @click="isOpen = true; selectedItem = 'assistantManager'">
             <img src="images/placeholder5.jpg" alt="Assistant Manager" />
             <div class="card-number">5</div>
             <div class="card-title">Assistant Manager - Information Security</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'systemAdmin'">
+          <div class="card" @click="isOpen = true; selectedItem = 'systemAdmin'">
             <img src="images/placeholder6.jpg" alt="System Admin" />
             <div class="card-number">6</div>
             <div class="card-title">System Administrator</div>
@@ -177,52 +186,52 @@
       <div id="skills" class="space-y-4">
         <h2 class="section-header">Skills</h2>
         <div class="carousel">
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'siem'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'siem'">
             <img src="images/placeholder1.jpg" alt="SIEM" />
             <div class="skill-number">1</div>
             <div class="skill-title">SIEM</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'edr'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'edr'">
             <img src="images/placeholder2.jpg" alt="EDR" />
             <div class="skill-number">2</div>
             <div class="skill-title">EDR</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'automation'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'automation'">
             <img src="images/placeholder3.jpg" alt="Automation" />
             <div class="skill-number">3</div>
             <div class="skill-title">Automation</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'cloudSecurity'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'cloudSecurity'">
             <img src="images/placeholder4.jpg" alt="Cloud Security" />
             <div class="skill-number">4</div>
             <div class="skill-title">Cloud Security</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'networkSecurity'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'networkSecurity'">
             <img src="images/placeholder5.jpg" alt="Network Security" />
             <div class="skill-number">5</div>
             <div class="skill-title">Network Security</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'identityManagement'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'identityManagement'">
             <img src="images/placeholder6.jpg" alt="Identity Management" />
             <div class="skill-number">6</div>
             <div class="skill-title">Identity Management</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'incidentResponse'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'incidentResponse'">
             <img src="images/placeholder7.jpg" alt="Incident Response" />
             <div class="skill-number">7</div>
             <div class="skill-title">Incident Response</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'riskAssessment'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'riskAssessment'">
             <img src="images/placeholder8.jpg" alt="Risk Assessment" />
             <div class="skill-number">8</div>
             <div class="skill-title">Risk Assessment</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'teamLeadership'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'teamLeadership'">
             <img src="images/placeholder9.jpg" alt="Team Leadership" />
             <div class="skill-number">9</div>
             <div class="skill-title">Team Leadership</div>
           </div>
-          <div class="skill-card" @click="showPopup = true; selectedItem = 'cissp'">
+          <div class="skill-card" @click="isOpen = true; selectedItem = 'cissp'">
             <img src="images/placeholder10.jpg" alt="CISSP" />
             <div class="skill-number">10</div>
             <div class="skill-title">CISSP</div>
@@ -234,17 +243,17 @@
       <div id="projects" class="space-y-4">
         <h2 class="section-header">Projects</h2>
         <div class="carousel">
-          <div class="card" @click="showPopup = true; selectedItem = 'threatIntel'">
+          <div class="card" @click="isOpen = true; selectedItem = 'threatIntel'">
             <img src="images/placeholder1.jpg" alt="Threat Intel Engine" />
             <div class="card-number">1</div>
             <div class="card-title">AI-Powered Threat Intel Engine</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'securityAutomation'">
+          <div class="card" @click="isOpen = true; selectedItem = 'securityAutomation'">
             <img src="images/placeholder2.jpg" alt="Security Automation" />
             <div class="card-number">2</div>
             <div class="card-title">Security Automation with n8n</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'cloudDashboard'">
+          <div class="card" @click="isOpen = true; selectedItem = 'cloudDashboard'">
             <img src="images/placeholder3.jpg" alt="Cloud Dashboard" />
             <div class="card-number">3</div>
             <div class="card-title">Cloud Security Dashboard</div>
@@ -256,17 +265,17 @@
       <div id="education" class="space-y-4">
         <h2 class="section-header">Education</h2>
         <div class="carousel">
-          <div class="card" @click="showPopup = true; selectedItem = 'mba'">
+          <div class="card" @click="isOpen = true; selectedItem = 'mba'">
             <img src="images/placeholder1.jpg" alt="MBA" />
             <div class="card-number">1</div>
             <div class="card-title">Master of Business Administration (MBA)</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'gdba'">
+          <div class="card" @click="isOpen = true; selectedItem = 'gdba'">
             <img src="images/placeholder2.jpg" alt="GDBA" />
             <div class="card-number">2</div>
             <div class="card-title">Graduate Diploma in Business Administration (GDBA)</div>
           </div>
-          <div class="card" @click="showPopup = true; selectedItem = 'diploma'">
+          <div class="card" @click="isOpen = true; selectedItem = 'diploma'">
             <img src="images/placeholder3.jpg" alt="Diploma" />
             <div class="card-number">3</div>
             <div class="card-title">Diploma in Computer Hardware</div>
@@ -283,9 +292,9 @@
         </div>
       </div>
 
-      <!-- Popup -->
-      <div x-show="showPopup" class="popup" x-transition>
-        <span class="popup-close" @click="showPopup = false">×</span>
+      <!-- Offcanvas Panel -->
+      <div x-show="isOpen" class="offcanvas" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="translate-x-full" x-transition:leave="transition ease-in-out duration-300" x-transition:leave-end="translate-x-full">
+        <span class="offcanvas-close" @click="isOpen = false">×</span>
         <h3 x-text="{
           'seniorDirector': 'Senior Director - Security Operations',
           'manager': 'Manager, Security Operations',
@@ -334,7 +343,7 @@
           'gdba': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills and shaping his holistic approach to security.',
           'diploma': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his career, giving him hands-on expertise that evolved into advanced security solutions.'
         }[selectedItem]" class="mb-4"></p>
-        <div x-show="showPopup" class="popup-content" x-data="{ selectedLang: 'en' }">
+        <div class="offcanvas-content" x-data="{ selectedLang: 'en' }">
           <h4 class="text-lg mb-2">Select Language</h4>
           <form class="lang-form">
             <select x-model="selectedLang" class="bg-gray-800 text-white">
