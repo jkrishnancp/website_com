@@ -56,7 +56,7 @@
       cursor: pointer;
     }
     .card:hover, .skill-card:hover {
-      transform: scale(1.05);
+      transform: scale(1.05); /* Keep hover effect for visual feedback, but popup only on click */
     }
     .card img, .skill-card img {
       width: 100%;
@@ -107,11 +107,12 @@
       color: #E50914;
       cursor: pointer;
     }
-    .popup-iframe {
-      width: 100%;
-      height: 250px;
-      border: none;
+    .popup-content {
       margin-top: 10px;
+    }
+    .lang-form select, .lang-form button {
+      margin: 5px;
+      padding: 5px;
     }
   </style>
 </head>
@@ -119,7 +120,7 @@
   <div x-data="{ showPopup: false, selectedItem: '' }">
     <!-- Hero Section -->
     <div class="hero">
-      <!-- Placeholder for photo (replace with your Base64 or URL) -->
+      <!-- Placeholder for photo (replace with your URL or Base64) -->
       <img src="https://via.placeholder.com/150" alt="Jay Krishnan CP" class="mx-auto" />
       <h1 class="text-4xl font-bold mt-4">Jay Krishnan CP</h1>
       <p class="text-lg mt-2">Senior Cybersecurity Leader | AI-Driven Threat Detection | Zero Trust Architect</p>
@@ -333,30 +334,129 @@
           'gdba': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills and shaping his holistic approach to security.',
           'diploma': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his career, giving him hands-on expertise that evolved into advanced security solutions.'
         }[selectedItem]" class="mb-4"></p>
-        <iframe x-bind:src="{
-          'seniorDirector': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay Krishnan CP, a cybersecurity leader with 18 years of experience, excels in Zero Trust architectures and AI-driven threat detection, reducing response times by 40%.</p><p>Skills: SIEM, EDR, Automation.</p></body></html>'),
-          'manager': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay, as Manager at METMOX, enhanced security by 50% with innovative frameworks.</p><p>Skills: Cloud Security, Network Security.</p></body></html>'),
-          'teamLead': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay led incident management at Verizon, improving compliance by 35%.</p><p>Skills: Incident Response, Risk Assessment.</p></body></html>'),
-          'seniorAnalyst': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay designed SIEM solutions at Super Computers, boosting detection by 30%.</p><p>Skills: SIEM, EDR.</p></body></html>'),
-          'assistantManager': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay achieved 98% compliance at Geojit with firewall deployments.</p><p>Skills: Network Security, Identity Management.</p></body></html>'),
-          'systemAdmin': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay ensured 100% uptime at Safe Software with robust backups.</p><p>Skills: Automation, Team Leadership.</p></body></html>'),
-          'siem': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s SIEM expertise saved organizations with Sentinel integrations.</p></body></html>'),
-          'edr': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay mastered EDR, halting ransomware attacks swiftly.</p></body></html>'),
-          'automation': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s automation workflows saved hours daily.</p></body></html>'),
-          'cloudSecurity': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay secured cloud frameworks with CASB solutions.</p></body></html>'),
-          'networkSecurity': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay reduced intrusions by 50% with firewalls.</p></body></html>'),
-          'identityManagement': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay streamlined access with Okta and Azure AD.</p></body></html>'),
-          'incidentResponse': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s response skills contained breaches with precision.</p></body></html>'),
-          'riskAssessment': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s assessments transformed security postures.</p></body></html>'),
-          'teamLeadership': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay mentored teams to excellence.</p></body></html>'),
-          'cissp': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay upholds standards with his CISSP certification.</p></body></html>'),
-          'threatIntel': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s Threat Intel Engine cut analysis time by 50%.</p></body></html>'),
-          'securityAutomation': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay automated 70% of security tasks with n8n.</p></body></html>'),
-          'cloudDashboard': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s dashboard improved decisions by 35%.</p></body></html>'),
-          'mba': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s MBA from NIM built his leadership foundation.</p></body></html>'),
-          'gdba': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s GDBA enhanced his business acumen.</p></body></html>'),
-          'diploma': 'data:text/html;charset=utf-8,' + encodeURIComponent('<!DOCTYPE html><html><head><style>body { font-family: Arial, sans-serif; background: #1f1f1f; color: #ccc; margin: 0; padding: 10px; } select, button { margin: 5px; padding: 5px; } </style></head><body><h3>Select Language</h3><form><select><option value="en">English</option><option value="es">Spanish</option><option value="hi">Hindi</option></select><button type="submit">Switch</button></form><p>Jay’s Diploma sparked his tech career.</p></body></html>')
-        }[selectedItem]" class="popup-iframe" title="Language Selection"></iframe>
+        <div x-show="showPopup" class="popup-content" x-data="{ selectedLang: 'en' }">
+          <h4 class="text-lg mb-2">Select Language</h4>
+          <form class="lang-form">
+            <select x-model="selectedLang" class="bg-gray-800 text-white">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="hi">Hindi</option>
+            </select>
+            <button type="button" @click="selectedLang = $event.target.previousElementSibling.value" class="bg-red-600 text-white">Switch</button>
+          </form>
+          <p x-text="{
+            'seniorDirector': {
+              'en': 'Jay has excelled as Senior Director at UltraViolet Cyber, leading transformative projects like Zero Trust architectures (ZIA, ZPA) and AI-powered threat detection, reducing unauthorized access by 60%.',
+              'es': 'Jay ha destacado como Director Senior en UltraViolet Cyber, liderando proyectos transformadores como arquitecturas Zero Trust (ZIA, ZPA) y detección de amenazas con IA, reduciendo accesos no autorizados en un 60%.',
+              'hi': 'जय ने अल्ट्रावायलेट साइबर में वरिष्ठ निदेशक के रूप में उत्कृष्ट प्रदर्शन किया, जिसमें जीरो ट्रस्ट आर्किटेक्चर (जेडआईए, जेडपीए) और एआई-संचालित खतरे का पता लगाने जैसे परिवर्तनकारी परियोजनाओं का नेतृत्व किया, जिससे अनधिकृत पहुंच 60% कम हुई।'
+            }[selectedLang],
+            'manager': {
+              'en': 'As Manager at METMOX, Jay evaluated security processes and crafted a comprehensive framework, boosting hybrid environment protection by 50%.',
+              'es': 'Como Gerente en METMOX, Jay evaluó procesos de seguridad y creó un marco integral, mejorando la protección de entornos híbridos en un 50%.',
+              'hi': 'मेटमॉक्स में प्रबंधक के रूप में, जय ने सुरक्षा प्रक्रियाओं का मूल्यांकन किया और एक व्यापक ढांचा बनाया, जिससे हाइब्रिड वातावरण की सुरक्षा 50% बढ़ी।'
+            }[selectedLang],
+            'teamLead': {
+              'en': 'Jay’s tenure as Team Lead at Verizon Business saw him inject security into application stacks, crafting a roadmap that improved ISO 27001 compliance by 35%.',
+              'es': 'Durante su mandato como Líder de Equipo en Verizon Business, Jay integró seguridad en las pilas de aplicaciones, elaborando un plan que mejoró el cumplimiento de ISO 27001 en un 35%.',
+              'hi': 'वेरिज़न बिजनेस में टीम लीड के रूप में जय के कार्यकाल ने उन्हें एप्लिकेशन स्टैक में सुरक्षा को शामिल करने का मौका दिया, जिससे आईएसओ 27001 अनुपालन 35% बेहतर हुआ।'
+            }[selectedLang],
+            'seniorAnalyst': {
+              'en': 'At Super Computers Trading Est., Jay designed SIEM solutions, enhancing threat detection by 30%, and his vulnerability assessments cut risks by 40%.',
+              'es': 'En Super Computers Trading Est., Jay diseñó soluciones SIEM, mejorando la detección de amenazas en un 30%, y sus evaluaciones de vulnerabilidades redujeron riesgos en un 40%.',
+              'hi': 'सुपर कंप्यूटर्स ट्रेडिंग एस्ट में, जय ने SIEM समाधान डिज़ाइन किए, जिससे खतरे का पता लगाने में 30% की वृद्धि हुई, और उनकी कमजोरियों की जांच से जोखिम 40% कम हुआ।'
+            }[selectedLang],
+            'assistantManager': {
+              'en': 'Jay coordinated security measures at Geojit Financial Services, achieving 98% regulatory compliance and reducing network intrusions by 50%.',
+              'es': 'Jay coordinó medidas de seguridad en Geojit Financial Services, logrando un 98% de cumplimiento regulatorio y reduciendo intrusiones en la red en un 50%.',
+              'hi': 'जय ने गेओजिट फाइनेंशियल सर्विसेज में सुरक्षा उपायों का समन्वय किया, जिससे 98% नियामक अनुपालन और नेटवर्क घुसपैठ में 50% की कमी हुई।'
+            }[selectedLang],
+            'systemAdmin': {
+              'en': 'As System Administrator at Safe Software, Jay ensured 100% uptime for banking servers, his backup processes reducing data loss by 90%.',
+              'es': 'Como Administrador de Sistemas en Safe Software, Jay aseguró un 100% de tiempo de actividad para servidores bancarios, reduciendo la pérdida de datos en un 90% con sus procesos de respaldo.',
+              'hi': 'सेफ सॉफ्टवेयर में सिस्टम प्रशासक के रूप में, जय ने बैंकिंग सर्वर के लिए 100% अपटाइम सुनिश्चित किया, जिससे उनके बैकअप प्रक्रियाओं ने डेटा हानि को 90% कम किया।'
+            }[selectedLang],
+            'siem': {
+              'en': 'Jay has worked on developing SIEM solutions for over a decade, crafting systems that detect threats with pinpoint accuracy.',
+              'es': 'Jay ha trabajado en el desarrollo de soluciones SIEM durante más de una década, creando sistemas que detectan amenazas con precisión milimétrica.',
+              'hi': 'जय ने दस साल से अधिक समय तक SIEM समाधानों के विकास पर काम किया, जो खतरे को सटीकता से पहचानने वाली प्रणालियाँ बनाईं।'
+            }[selectedLang],
+            'edr': {
+              'en': 'With years of hands-on experience, Jay has mastered EDR tools like CrowdStrike and Microsoft Defender.',
+              'es': 'Con años de experiencia práctica, Jay ha dominado herramientas EDR como CrowdStrike y Microsoft Defender.',
+              'hi': 'सालों के हाथों-हाथ अनुभव के साथ, जय ने क्राउडस्ट्राइक और माइक्रोसॉफ्ट डिफेंडर जैसे EDR टूल्स में महारत हासिल की है।'
+            }[selectedLang],
+            'automation': {
+              'en': 'Jay’s automation skills shine through his n8n workflows, automating threat responses and saving teams hours daily.',
+              'es': 'Las habilidades de automatización de Jay brillan a través de sus flujos de trabajo n8n, automatizando respuestas a amenazas y ahorrando horas a los equipos diariamente.',
+              'hi': 'जय की स्वचालन कौशल उनके n8n कार्यप्रवाह में चमकती हैं, जो खतरे की प्रतिक्रियाओं को स्वचालित करती हैं और टीमों को रोज़ाना घंटों बचाती हैं।'
+            }[selectedLang],
+            'cloudSecurity': {
+              'en': 'Jay has architected cloud security frameworks across AWS and Azure, ensuring resilience against evolving threats.',
+              'es': 'Jay ha diseñado marcos de seguridad en la nube en AWS y Azure, asegurando resiliencia contra amenazas en evolución.',
+              'hi': 'जय ने AWS और Azure में क्लाउड सुरक्षा ढांचे का निर्माण किया, जो विकसित होती खतरे के खिलाफ लचीलापन सुनिश्चित करता है।'
+            }[selectedLang],
+            'networkSecurity': {
+              'en': 'A veteran in network security, Jay has fortified systems with firewalls and IPS, reducing intrusions by 50%.',
+              'es': 'Veterano en seguridad de redes, Jay ha fortalecido sistemas con firewalls e IPS, reduciendo intrusiones en un 50%.',
+              'hi': 'नेटवर्क सुरक्षा में एक अनुभवी, जय ने फायरवॉल और IPS के साथ सिस्टम को मजबूत किया, जिससे घुसपैठ 50% कम हुई।'
+            }[selectedLang],
+            'identityManagement': {
+              'en': 'Jay’s expertise in identity management with Okta and Azure AD has streamlined access controls.',
+              'es': 'La experiencia de Jay en gestión de identidades con Okta y Azure AD ha optimizado los controles de acceso.',
+              'hi': 'जय की ओकता और एज़्योर एडी के साथ पहचान प्रबंधन में विशेषज्ञता ने पहुँच नियंत्रण को सुव्यवस्थित किया है।'
+            }[selectedLang],
+            'incidentResponse': {
+              'en': 'Jay’s incident response skills have saved the day in high-stakes situations, leading teams with precision.',
+              'es': 'Las habilidades de respuesta a incidentes de Jay han salvado el día en situaciones de alto riesgo, liderando equipos con precisión.',
+              'hi': 'जय की घटना प्रतिक्रिया कौशल ने उच्च जोखिम वाली स्थितियों में दिन बचाया, टीमों को सटीकता से नेतृत्व किया।'
+            }[selectedLang],
+            'riskAssessment': {
+              'en': 'With a keen eye for risk, Jay has conducted assessments that transformed organizational security postures.',
+              'es': 'Con un ojo agudo para el riesgo, Jay ha realizado evaluaciones que transformaron las posturas de seguridad organizacional.',
+              'hi': 'जोखिम के लिए एक तीव्र नजर के साथ, जय ने मूल्यांकन किए जो संगठनात्मक सुरक्षा रुख को बदल दिया।'
+            }[selectedLang],
+            'teamLeadership': {
+              'en': 'Jay has guided teams through complex security challenges, fostering a culture of excellence.',
+              'es': 'Jay ha guiado a equipos a través de desafíos de seguridad complejos, fomentando una cultura de excelencia.',
+              'hi': 'जय ने जटिल सुरक्षा चुनौतियों के माध्यम से टीमों का मार्गदर्शन किया, उत्कृष्टता की संस्कृति को बढ़ावा दिया।'
+            }[selectedLang],
+            'cissp': {
+              'en': 'Earning his CISSP, Jay has leveraged this certification to uphold the highest security standards.',
+              'es': 'Al obtener su certificación CISSP, Jay ha utilizado esta acreditación para mantener los más altos estándares de seguridad.',
+              'hi': 'अपने CISSP को अर्जित करने के बाद, जय ने इस प्रमाणन का उपयोग उच्चतम सुरक्षा मानकों को बनाए रखने के लिए किया।'
+            }[selectedLang],
+            'threatIntel': {
+              'en': 'Jay engineered an AI-powered Threat Intel Engine using Python and n8n, cutting analysis time by 50%.',
+              'es': 'Jay diseñó un motor de inteligencia de amenazas impulsado por IA usando Python y n8n, reduciendo el tiempo de análisis en un 50%.',
+              'hi': 'जय ने पायथन और n8n का उपयोग करके एक AI-संचालित खतरे की खुफिया इंजन का निर्माण किया, जिससे विश्लेषण समय 50% कम हुआ।'
+            }[selectedLang],
+            'securityAutomation': {
+              'en': 'Jay built n8n workflows for security automation, automating 70% of tasks and reducing incidents by 25%.',
+              'es': 'Jay construyó flujos de trabajo n8n para automatización de seguridad, automatizando el 70% de las tareas y reduciendo incidentes en un 25%.',
+              'hi': 'जय ने सुरक्षा स्वचालन के लिए n8n कार्यप्रवाह बनाए, जिससे 70% कार्य स्वचालित हुए और घटनाओं में 25% की कमी आई।'
+            }[selectedLang],
+            'cloudDashboard': {
+              'en': 'Jay integrated Tenable, CrowdStrike, and Sentinel into a cloud dashboard, enhancing decision-making by 35%.',
+              'es': 'Jay integró Tenable, CrowdStrike y Sentinel en un panel en la nube, mejorando la toma de decisiones en un 35%.',
+              'hi': 'जय ने टेनेबल, क्राउडस्ट्राइक और सेंटिनल को क्लाउड डैशबोर्ड में एकीकृत किया, जिससे निर्णय लेने में 35% की वृद्धि हुई।'
+            }[selectedLang],
+            'mba': {
+              'en': 'Jay earned his MBA from NIM, specializing in IT and HR, laying a strong foundation for his leadership.',
+              'es': 'Jay obtuvo su MBA en NIM, especializándose en TI y RRHH, sentando una sólida base para su liderazgo.',
+              'hi': 'जय ने NIM से MBA प्राप्त किया, जो IT और HR में विशेषज्ञता के साथ उनके नेतृत्व के लिए एक मजबूत आधार रखता है।'
+            }[selectedLang],
+            'gdba': {
+              'en': 'His GDBA from NIM equipped Jay with business acumen, complementing his technical skills.',
+              'es': 'Su GDBA de NIM dotó a Jay de perspicacia empresarial, complementando sus habilidades técnicas.',
+              'hi': 'उनका NIM से GDBA जय को व्यावसायिक समझ से लैस किया, जो उनकी तकनीकी कौशल के पूरक है।'
+            }[selectedLang],
+            'diploma': {
+              'en': 'Jay’s Diploma in Computer Hardware from Technical University Kerala sparked his tech career.',
+              'es': 'El Diploma en Hardware de Computadoras de Jay de la Universidad Técnica de Kerala dio inicio a su carrera en tecnología.',
+              'hi': 'जय का केरल तकनीकी विश्वविद्यालय से कम्प्यूटर हार्डवेयर में डिप्लोमा उनकी तकनीकी करियर की शुरुआत थी।'
+            }[selectedLang]
+          }[selectedItem]" class="mt-2"></p>
+        </div>
       </div>
     </div>
   </div>
