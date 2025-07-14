@@ -354,44 +354,43 @@
     isNavOpen: false, // For mobile navigation
     skills: {
       industryKnowledge: [
-        { id: 'cybersecurity', title: 'Cybersecurity', proficiency: 3 },
-        { id: 'informationSecurity', title: 'Information Security', proficiency: 4 },
-        { id: 'securityOperations', title: 'Security Operations', proficiency: 3 },
-        { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment', proficiency: 4 },
-        { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management', proficiency: 3 },
-        { id: 'incidentResponse', title: 'Incident Response', proficiency: 4 },
-        { id: 'securityArchitectureDesign', title: 'Security Architecture Design', proficiency: 3 },
-        { id: 'itSecurityOperations', title: 'IT Security Operations', proficiency: 4 },
-        { id: 'itSecurityPoliciesProcedures', title: 'IT Security Policies & Procedures', proficiency: 3 },
+        { id: 'cybersecurity', title: 'Cybersecurity', proficiency: 5 },
+        { id: 'informationSecurity', title: 'Information Security', proficiency: 5 },
+        { id: 'securityOperations', title: 'Security Operations', proficiency: 5 },
+        { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment', proficiency: 5 },
+        { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management', proficiency: 5 },
+        { id: 'incidentResponse', title: 'Incident Response', proficiency: 5 },
+        { id: 'securityArchitectureDesign', title: 'Security Architecture Design', proficiency: 4 },
+        { id: 'itSecurityOperations', title: 'IT Security Operations', proficiency: 5 },
+        { id: 'itSecurityPoliciesProcedures', title: 'IT Security Policies & Procedures', proficiency: 4 },
         { id: 'networkSecurity', title: 'Network Security', proficiency: 4 },
-        { id: 'managedSecurityServices', title: 'Managed Security Services', proficiency: 3 },
+        { id: 'managedSecurityServices', title: 'Managed Security Services', proficiency: 4 },
         { id: 'riskManagement', title: 'Risk Management', proficiency: 4 },
         { id: 'internalAudits', title: 'Internal Audits', proficiency: 3 },
         { id: 'informationSecurityManagement', title: 'Information Security Management', proficiency: 4 },
         { id: 'securityStandards', title: 'Security Standards', proficiency: 3 },
-        { id: 'productSecurity', title: 'Product Security', proficiency: 4 },
-        { id: 'corporateSecurity', title: 'Corporate Security', proficiency: 3 },
-        { id: 'thirdPartyVendorManagement', title: 'Third Party Vendor Management', proficiency: 4 },
-        { id: 'leadership', title: 'Leadership', proficiency: 5 },
-        { id: 'executiveLeadership', title: 'Executive Leadership', proficiency: 5 },
-        { id: 'peopleManagement', title: 'People Management', proficiency: 5 },
+        { id: 'productSecurity', title: 'Product Security', proficiency: 3 },
+        { id: 'corporateSecurity', title: 'Corporate Security', proficiency: 5 },
+        { id: 'thirdPartyVendorManagement', title: 'Third Party Vendor Management', proficiency: 3 },
+        { id: 'leadership', title: 'Leadership', proficiency: 4 },
+        { id: 'executiveLeadership', title: 'Executive Leadership', proficiency: 4 },
+        { id: 'peopleManagement', title: 'People Management', proficiency: 3 },
         { id: 'interpersonalCommunication', title: 'Interpersonal Communication', proficiency: 4 },
         { id: 'crossFunctionalTeamLeadership', title: 'Cross-functional Team Leadership', proficiency: 4 },
         { id: 'teamBuilding', title: 'Team Building', proficiency: 4 },
         { id: 'relationshipBuilding', title: 'Relationship Building', proficiency: 4 },
         { id: 'accountability', title: 'Accountability', proficiency: 4 },
-        { id: 'publicSpeaking', title: 'Public Speaking', proficiency: 3 },
+        { id: 'publicSpeaking', title: 'Public Speaking', proficiency: 4 },
         { id: 'compassion', title: 'Compassion', proficiency: 5 }
       ],
       toolsTechnologies: [
         { id: 'siemSkill', title: 'SIEM', proficiency: 4 },
-        { id: 'casb', title: 'CASB', proficiency: 3 },
-        { id: 'amazonWebServicesAws', title: 'Amazon Web Services (AWS)', proficiency: 4 },
+        { id: 'casb', title: 'CASB', proficiency: 4 },
         { id: 'awsSecurity', title: 'AWS Security', proficiency: 4 },
         { id: 'splunk', title: 'Splunk', proficiency: 4 },
         { id: 'redHatLinux', title: 'Red Hat Linux', proficiency: 3 },
-        { id: 'windows', title: 'Windows', proficiency: 4 },
-        { id: 'restApis', title: 'REST APIs', proficiency: 3 },
+        { id: 'windows', title: 'Windows', proficiency: 3 },
+        { id: 'restApis', title: 'REST APIs', proficiency: 2 },
         { id: 'php', title: 'PHP', proficiency: 2 },
         { id: 'artificialIntelligenceAi', title: 'Artificial Intelligence (AI)', proficiency: 4 },
         { id: 'generativeAi', title: 'Generative AI', proficiency: 4 }
@@ -572,19 +571,15 @@
       theThreatLandscape: { title: 'The Threat Landscape – Course Completed', proficiency: 3 }
     }
   }">
-    <!-- Header with Name and Navigation -->
     <div class="header">
-      <!-- Made the name clickable to go to the summary section -->
-      <a href="#summary" class="name">Jayakrishnan C Prakash</a>
+      <a href="#" class="name">Jayakrishnan C Prakash</a>
 
-      <!-- Hamburger Icon for Mobile -->
       <button
         class="hamburger-icon text-white text-3xl md:hidden focus:outline-none"
         @click="isNavOpen = !isNavOpen"
         aria-label="Toggle navigation"
       >
-        &#9776; <!-- Hamburger icon -->
-      </button>
+        &#9776; </button>
 
       <nav
         :class="{ 'is-open': isNavOpen }"
@@ -597,7 +592,6 @@
         <a href="#education" @click="isNavOpen = false">Education</a>
         <a href="#licenses-certifications" @click="isNavOpen = false">Certifications</a>
 
-        <!-- Profile Image with Dropdown -->
         <div class="relative ml-0 md:ml-8 mt-4 md:mt-0 profile-dropdown-mobile" x-data="{ dropdownOpen: false }" @click.away="dropdownOpen = false">
           <img
             src="images/profile.jpg"
@@ -615,36 +609,28 @@
             x-transition:leave-end="opacity-0 scale-95"
             class="absolute right-0 md:right-auto md:left-1/2 md:transform md:-translate-x-1/2 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-20"
           >
-           <!--  <a href="https://github.com/jkrishnancp" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">GitHub</a> -->
+            <a href="https://github.com/jkrishnancp" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">GitHub</a>
             <a href="https://jayakrishnancp.tech" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Blog</a>
             <a href="https://n8n.jayakrishnancp.com/" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">n8n Projects</a>
-            <!-- Add more links as needed -->
-          </div>
+            </div>
         </div>
       </nav>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
-      <div class="max-w-xl mx-auto md:mx-0 px-4"> <!-- Added px-4 for mobile padding -->
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
+      <div class="max-w-xl mx-auto md:mx-0 px-4"> <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mt-4 uppercase text-white tracking-wide text-left">
           Cybersecurity Leader | Expert in Zero Trust, MDR, XDR, AI-Driven Threat Detection & Incident Response | Building Resilient Security Strategies for the Future
         </h1>
-        <p class="text-base md:text-lg mt-4 text-left text-gray-200"> <!-- Adjusted font size for mobile -->
-          Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat intelligence—all aimed at fortifying organizations against evolving cyber threats.
+        <p class="text-base md:text-lg mt-4 text-left text-gray-200"> Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat intelligence—all aimed at fortifying organizations against evolving cyber threats.
         </p>
-        <p class="text-base md:text-lg mt-4 text-left"> <!-- Adjusted font size for mobile -->
-          Email: <a href="mailto:jay@jayakrishnancp.com" class="text-red-500 hover:underline">jay@jayakrishnancp.com</a>
+        <p class="text-base md:text-lg mt-4 text-left"> Email: <a href="mailto:jay@jayakrishnancp.com" class="text-red-500 hover:underline">jay@jayakrishnancp.com</a>
         </p>
-        <p class="text-base md:text-lg text-left"> <!-- Adjusted font size for mobile -->
-          LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
+        <p class="text-base md:text-lg text-left"> LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
         </p>
       </div>
     </div>
 
-    <!-- Content Area -->
     <div class="content">
-      <!-- Summary Section -->
       <div id="summary" class="space-y-4 pt-10">
         <h2 class="section-header">Summary</h2>
         <div class="card p-5 h-auto min-h-[150px] flex flex-col items-start justify-center text-left">
@@ -660,7 +646,6 @@
         </div>
       </div>
 
-      <!-- Experience Section -->
       <div id="experience" class="space-y-4 pt-10">
         <h2 class="section-header">Experience</h2>
         <div class="carousel-container">
@@ -701,11 +686,9 @@
         </div>
       </div>
 
-      <!-- Skills Section -->
       <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
-          <button
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <button
             @click="activeSkillCategory = 'industryKnowledge'"
             :class="{ 'active': activeSkillCategory === 'industryKnowledge' }"
             class="category-button"
@@ -721,7 +704,6 @@
           </button>
         </div>
 
-        <!-- Skills carousel container -->
         <div class="carousel-container">
           <div class="carousel" id="skills-carousel">
             <div class="grid-section">
@@ -757,12 +739,9 @@
         </div>
       </div>
 
-      <!-- Projects Section -->
       <div id="projects" class="space-y-4 pt-10">
         <h2 class="section-header">Projects</h2>
-        <!-- Removed category buttons for Projects -->
-        <div class="projects-education-grid"> <!-- Changed class here -->
-          <template x-for="(project, index) in projects" :key="project.id">
+        <div class="projects-education-grid"> <template x-for="(project, index) in projects" :key="project.id">
             <div
               class="grid-item"
               @click="isOpen = true; selectedItem = project.id"
@@ -772,12 +751,9 @@
         </div>
       </div>
 
-      <!-- Education Section -->
       <div id="education" class="space-y-4 pt-10">
         <h2 class="section-header">Education</h2>
-        <!-- Removed category buttons for Education -->
-        <div class="projects-education-grid"> <!-- Changed class here -->
-          <template x-for="(edu, index) in education" :key="edu.id">
+        <div class="projects-education-grid"> <template x-for="(edu, index) in education" :key="edu.id">
             <div
               class="grid-item"
               @click="isOpen = true; selectedItem = edu.id"
@@ -787,11 +763,9 @@
         </div>
       </div>
 
-      <!-- Licenses & Certifications Section -->
       <div id="licenses-certifications" class="space-y-4 pt-10">
         <h2 class="section-header">Licenses & Certifications</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
-          <button
+        <div class="flex flex-wrap justify-center gap-4 mb-6"> <button
             @click="activeLicenseCategory = 'cybersecurity'"
             :class="{ 'active': activeLicenseCategory === 'cybersecurity' }"
             class="category-button"
@@ -820,7 +794,6 @@
             Operating Systems
           </button>
         </div>
-        <!-- Licenses & Certifications carousel container -->
         <div class="carousel-container">
           <div class="carousel" id="licenses-carousel">
             <div class="grid-section">
@@ -856,7 +829,6 @@
         </div>
       </div>
 
-      <!-- Offcanvas Backdrop -->
       <div
         x-show="isOpen"
         x-cloak
@@ -870,7 +842,6 @@
         @click="isOpen = false"
       ></div>
 
-      <!-- Offcanvas Panel (now a centered modal) -->
       <div
         x-show="isOpen"
         x-cloak
@@ -886,12 +857,10 @@
         <h3 x-text="details[selectedItem] ? details[selectedItem].title : 'Details not available'" class="text-xl text-white mb-2 text-left"></h3>
         <p x-html="details[selectedItem] ? details[selectedItem].description : 'No description available for this item.'" class="mt-2 text-left leading-relaxed"></p>
         <div class="offcanvas-content">
-          <!-- Language selection removed -->
-        </div>
+          </div>
       </div>
     </div>
 
-    <!-- Footer with Copyright -->
     <footer class="footer">
       &copy; <span x-text="new Date().getFullYear()"></span> Jayakrishnan C Prakash. All rights reserved.
     </footer>
