@@ -189,11 +189,13 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s;
+      transition: transform 0.3s, z-index 0s 0.3s; /* Added z-index transition delay */
       cursor: pointer;
     }
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(2);
+      z-index: 10; /* Bring to front on hover */
+      transition: transform 0.3s, z-index 0s; /* No delay when bringing to front */
     }
     .card img {
       width: 100%;
@@ -278,12 +280,15 @@
       font-weight: 600;
       font-size: 0.9rem; /* Slightly smaller font for more text in box */
       min-height: 100px; /* Increased height for consistent rows and stars */
-      transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+      transition: transform 0.2s ease-in-out, background-color 0.2s ease, z-index 0s 0.2s; /* Added z-index transition delay */
       cursor: pointer;
+      position: relative; /* Ensure z-index works */
     }
     .grid-item:hover {
-      transform: translateY(-3px);
+      transform: scale(2);
       background-color: #2a2a2a;
+      z-index: 10; /* Bring to front on hover */
+      transition: transform 0.2s ease-in-out, background-color 0.2s ease, z-index 0s; /* No delay when bringing to front */
     }
 
     /* Removed .skills-scroll-container as it's no longer needed */
@@ -517,9 +522,9 @@
       awsSecurity: { title: 'AWS Security', description: 'Specialized knowledge in securing AWS environments, including identity and access management, network security, and data protection.' },
       splunk: { title: 'Splunk', description: 'Skilled in using Splunk for security monitoring, incident investigation, and compliance reporting.' },
       redHatLinux: { title: 'Red Hat Linux', description: 'Experience with Red Hat Linux operating system, including system administration and security hardening.' },
-      windows: { title: 'Windows', description: 'Proficiency in Windows operating systems, including security configurations and troubleshooting.' },
-      restApis: { title: 'REST APIs', description: 'Understanding and experience in working with RESTful APIs for integration and automation.' },
-      php: { title: 'PHP', description: 'Knowledge of PHP programming language for web development and scripting.' },
+      windows: { title: 'Windows', proficiency: 3 },
+      restApis: { title: 'REST APIs', proficiency: 2 },
+      php: { title: 'PHP', proficiency: 2 },
       artificialIntelligenceAi: { title: 'Artificial Intelligence (AI)', description: 'Familiarity with Artificial Intelligence (AI) concepts and their application in cybersecurity.' },
       generativeAi: { title: 'Generative AI', description: 'Understanding of Generative AI principles and its potential uses in security operations and threat intelligence.' },
       programManagement: { title: 'Program Management', description: 'Ability to manage multiple related projects and initiatives to achieve strategic business goals.' },
@@ -538,7 +543,7 @@
       relationshipBuilding: { title: 'Relationship Building', description: 'Adept at establishing and nurturing professional relationships with stakeholders, colleagues, and partners.' },
       accountability: { title: 'Accountability', description: 'Demonstrates a strong sense of responsibility and ownership for tasks and outcomes.' },
       publicSpeaking: { title: 'Public Speaking', description: 'Confident and effective delivery of presentations and speeches to various audiences.' },
-      compassion: { title: 'Compassion', description: 'Ability to understand and share the feelings of others, fostering empathy and supportive interactions.' },
+      compassion: { title: 'Compassion', proficiency: 5 },
       // Licenses & Certifications Details
       advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance', description: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.' },
       executiveLeadershipTeam: { title: 'Building an Executive Leadership Team for the Modern Workplace', description: 'Focuses on building and leading effective executive leadership teams for modern workplaces, emphasizing collaboration and strategic alignment.' },
