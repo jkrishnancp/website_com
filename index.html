@@ -136,7 +136,7 @@
     .carousel-container {
         position: relative;
         width: 100%;
-        overflow: hidden;
+        /* Removed overflow: hidden to allow scaled elements to pop out */
     }
     .carousel {
       display: flex;
@@ -181,7 +181,7 @@
     }
 
     /* Individual card styling for experience */
-    .card {
+    .carousel .card { /* Added .carousel to make this rule more specific */
       min-width: 200px;
       height: 300px; /* Enforce consistent height for images */
       background-color: #1f1f1f;
@@ -192,7 +192,7 @@
       transition: transform 0.3s, z-index 0s 0.3s; /* Added z-index transition delay */
       cursor: pointer;
     }
-    .card:hover {
+    .carousel .card:hover { /* Added .carousel to make this rule more specific */
       transform: scale(2);
       z-index: 10; /* Bring to front on hover */
       transition: transform 0.3s, z-index 0s; /* No delay when bringing to front */
@@ -318,7 +318,7 @@
       z-index: 50;
       overflow-y: auto;
       color: #ccc;
-      border-radius: 8px;
+      border-radius: 8鸣;
     }
     .offcanvas-close {
       position: absolute;
@@ -521,7 +521,7 @@
       amazonWebServicesAws: { title: 'Amazon Web Services (AWS)', description: 'Proficiency in Amazon Web Services (AWS) cloud platform, including its security features and services.' },
       awsSecurity: { title: 'AWS Security', description: 'Specialized knowledge in securing AWS environments, including identity and access management, network security, and data protection.' },
       splunk: { title: 'Splunk', description: 'Skilled in using Splunk for security monitoring, incident investigation, and compliance reporting.' },
-      redHatLinux: { title: 'Red Hat Linux', description: 'Experience with Red Hat Linux operating system, including system administration and security hardening.' },
+      redHatLinux: { title: 'Red Hat Linux', proficiency: 3 },
       windows: { title: 'Windows', proficiency: 3 },
       restApis: { title: 'REST APIs', proficiency: 2 },
       php: { title: 'PHP', proficiency: 2 },
@@ -535,14 +535,14 @@
       corporateSecurity: { title: 'Corporate Security', description: 'Knowledge of security practices and strategies to protect an entire organization from various threats.' },
       thirdPartyVendorManagement: { title: 'Third Party Vendor Management', description: 'Specific expertise in managing security risks associated with third-party vendors and supply chains.' },
       leadership: { title: 'Leadership', description: 'Ability to guide, motivate, and inspire teams to achieve common goals and drive success.' },
-      executiveLeadership: { title: 'Executive Leadership', description: 'Experience in leading and directing high-level strategic initiatives and teams within an organization.' },
-      peopleManagement: { title: 'People Management', description: 'Skilled in overseeing and developing employees, fostering a positive work environment, and optimizing team performance.' },
-      interpersonalCommunication: { title: 'Interpersonal Communication', description: 'Strong ability to communicate effectively and build positive relationships with diverse individuals and teams.' },
-      crossFunctionalTeamLeadership: { title: 'Cross-functional Team Leadership', description: 'Leading and collaborating with teams across different departments to achieve shared objectives.' },
-      teamBuilding: { title: 'Team Building', description: 'Expertise in creating cohesive and high-performing teams through effective collaboration and development strategies.' },
-      relationshipBuilding: { title: 'Relationship Building', description: 'Adept at establishing and nurturing professional relationships with stakeholders, colleagues, and partners.' },
-      accountability: { title: 'Accountability', description: 'Demonstrates a strong sense of responsibility and ownership for tasks and outcomes.' },
-      publicSpeaking: { title: 'Public Speaking', description: 'Confident and effective delivery of presentations and speeches to various audiences.' },
+      executiveLeadership: { title: 'Executive Leadership', proficiency: 4 },
+      peopleManagement: { title: 'People Management', proficiency: 3 },
+      interpersonalCommunication: { title: 'Interpersonal Communication', proficiency: 4 },
+      crossFunctionalTeamLeadership: { title: 'Cross-functional Team Leadership', proficiency: 4 },
+      teamBuilding: { title: 'Team Building', proficiency: 4 },
+      relationshipBuilding: { title: 'Relationship Building', proficiency: 4 },
+      accountability: { title: 'Accountability', proficiency: 4 },
+      publicSpeaking: { title: 'Public Speaking', proficiency: 4 },
       compassion: { title: 'Compassion', proficiency: 5 },
       // Licenses & Certifications Details
       advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance', description: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.' },
@@ -572,7 +572,7 @@
       certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', proficiency: 4 },
       redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', proficiency: 4 },
       fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', proficiency: 2 },
-      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
+      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate', proficiency: 2 },
       theThreatLandscape: { title: 'The Threat Landscape – Course Completed', proficiency: 3 }
     }
   }">
