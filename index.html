@@ -136,7 +136,7 @@
     .carousel-container {
         position: relative;
         width: 100%;
-        /* Removed overflow: hidden to allow scaled elements to pop out */
+        overflow: hidden;
     }
     .carousel {
       display: flex;
@@ -181,7 +181,7 @@
     }
 
     /* Individual card styling for experience */
-    .carousel .card { /* Added .carousel to make this rule more specific */
+    .card {
       min-width: 200px;
       height: 300px; /* Enforce consistent height for images */
       background-color: #1f1f1f;
@@ -189,13 +189,11 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, z-index 0s 0.3s; /* Added z-index transition delay */
+      transition: transform 0.3s;
       cursor: pointer;
     }
-    .carousel .card:hover { /* Added .carousel to make this rule more specific */
-      transform: scale(1.25); /* Changed from 2 to 1.25 */
-      z-index: 10; /* Bring to front on hover */
-      transition: transform 0.3s, z-index 0s; /* No delay when bringing to front */
+    .card:hover {
+      transform: scale(1.05);
     }
     .card img {
       width: 100%;
@@ -280,15 +278,12 @@
       font-weight: 600;
       font-size: 0.9rem; /* Slightly smaller font for more text in box */
       min-height: 100px; /* Increased height for consistent rows and stars */
-      transition: transform 0.2s ease-in-out, background-color 0.2s ease, z-index 0s 0.2s; /* Added z-index transition delay */
+      transition: transform 0.2s ease-in-out, background-color 0.2s ease;
       cursor: pointer;
-      position: relative; /* Ensure z-index works */
     }
     .grid-item:hover {
-      transform: scale(1.25); /* Changed from 2 to 1.25 */
+      transform: translateY(-3px);
       background-color: #2a2a2a;
-      z-index: 10; /* Bring to front on hover */
-      transition: transform 0.2s ease-in-out, background-color 0.2s ease, z-index 0s; /* No delay when bringing to front */
     }
 
     /* Removed .skills-scroll-container as it's no longer needed */
@@ -512,19 +507,19 @@
       itSecurityPoliciesProcedures: { title: 'IT Security Policies & Procedures', description: 'Developing, implementing, and enforcing IT security policies and procedures to ensure compliance and mitigate risks.' },
       networkSecurity: { title: 'Network Security', description: 'Strong background in securing computer networks from intrusion, unauthorized access, and other vulnerabilities.' },
       managedSecurityServices: { title: 'Managed Security Services', description: 'Experience with providing and managing outsourced security services, including monitoring, threat detection, and incident response.' },
-      riskManagement: { title: 'Risk Management', proficiency: 4 },
-      internalAudits: { title: 'Internal Audits', proficiency: 3 },
+      riskManagement: { title: 'Risk Management', description: 'Skilled in identifying, assessing, and mitigating risks to an organization\'s information assets.' },
+      internalAudits: { title: 'Internal Audits', description: 'Conducting internal audits to assess compliance with security policies, standards, and regulatory requirements.' },
       informationSecurityManagement: { title: 'Information Security Management', proficiency: 4 },
       securityStandards: { title: 'Security Standards', description: 'Adherence to and implementation of various security standards and frameworks (e.g., ISO 27001, NIST).' },
-      productSecurity: { title: 'Product Security', proficiency: 3 },
+      productSecurity: { title: 'Product Security', description: 'Ensuring the security of products throughout their lifecycle, from design to deployment and maintenance.' },
       casb: { title: 'CASB', description: 'Experience with Cloud Access Security Brokers (CASB) for enforcing security policies for cloud-based applications and data.' },
       amazonWebServicesAws: { title: 'Amazon Web Services (AWS)', description: 'Proficiency in Amazon Web Services (AWS) cloud platform, including its security features and services.' },
       awsSecurity: { title: 'AWS Security', description: 'Specialized knowledge in securing AWS environments, including identity and access management, network security, and data protection.' },
-      splunk: { title: 'Splunk', proficiency: 4 },
-      redHatLinux: { title: 'Red Hat Linux', proficiency: 3 },
-      windows: { title: 'Windows', proficiency: 3 },
-      restApis: { title: 'REST APIs', proficiency: 2 },
-      php: { title: 'PHP', proficiency: 2 },
+      splunk: { title: 'Splunk', description: 'Skilled in using Splunk for security monitoring, incident investigation, and compliance reporting.' },
+      redHatLinux: { title: 'Red Hat Linux', description: 'Experience with Red Hat Linux operating system, including system administration and security hardening.' },
+      windows: { title: 'Windows', description: 'Proficiency in Windows operating systems, including security configurations and troubleshooting.' },
+      restApis: { title: 'REST APIs', description: 'Understanding and experience in working with RESTful APIs for integration and automation.' },
+      php: { title: 'PHP', description: 'Knowledge of PHP programming language for web development and scripting.' },
       artificialIntelligenceAi: { title: 'Artificial Intelligence (AI)', description: 'Familiarity with Artificial Intelligence (AI) concepts and their application in cybersecurity.' },
       generativeAi: { title: 'Generative AI', description: 'Understanding of Generative AI principles and its potential uses in security operations and threat intelligence.' },
       programManagement: { title: 'Program Management', description: 'Ability to manage multiple related projects and initiatives to achieve strategic business goals.' },
@@ -533,17 +528,17 @@
       serviceDelivery: { title: 'Service Delivery', description: 'Proficiency in ensuring the effective and efficient delivery of security services to meet organizational needs.' },
       enterpriseArchitecture: { title: 'Enterprise Architecture', description: 'Understanding of enterprise architectural principles and their application in designing secure and scalable IT systems.' },
       corporateSecurity: { title: 'Corporate Security', description: 'Knowledge of security practices and strategies to protect an entire organization from various threats.' },
-      thirdPartyVendorManagement: { title: 'Third Party Vendor Management', proficiency: 3 },
+      thirdPartyVendorManagement: { title: 'Third Party Vendor Management', description: 'Specific expertise in managing security risks associated with third-party vendors and supply chains.' },
       leadership: { title: 'Leadership', description: 'Ability to guide, motivate, and inspire teams to achieve common goals and drive success.' },
-      executiveLeadership: { title: 'Executive Leadership', proficiency: 4 },
-      peopleManagement: { title: 'People Management', proficiency: 3 },
-      interpersonalCommunication: { title: 'Interpersonal Communication', proficiency: 4 },
-      crossFunctionalTeamLeadership: { title: 'Cross-functional Team Leadership', proficiency: 4 },
-      teamBuilding: { title: 'Team Building', proficiency: 4 },
-      relationshipBuilding: { title: 'Relationship Building', proficiency: 4 },
-      accountability: { title: 'Accountability', proficiency: 4 },
-      publicSpeaking: { title: 'Public Speaking', proficiency: 4 },
-      compassion: { title: 'Compassion', proficiency: 5 },
+      executiveLeadership: { title: 'Executive Leadership', description: 'Experience in leading and directing high-level strategic initiatives and teams within an organization.' },
+      peopleManagement: { title: 'People Management', description: 'Skilled in overseeing and developing employees, fostering a positive work environment, and optimizing team performance.' },
+      interpersonalCommunication: { title: 'Interpersonal Communication', description: 'Strong ability to communicate effectively and build positive relationships with diverse individuals and teams.' },
+      crossFunctionalTeamLeadership: { title: 'Cross-functional Team Leadership', description: 'Leading and collaborating with teams across different departments to achieve shared objectives.' },
+      teamBuilding: { title: 'Team Building', description: 'Expertise in creating cohesive and high-performing teams through effective collaboration and development strategies.' },
+      relationshipBuilding: { title: 'Relationship Building', description: 'Adept at establishing and nurturing professional relationships with stakeholders, colleagues, and partners.' },
+      accountability: { title: 'Accountability', description: 'Demonstrates a strong sense of responsibility and ownership for tasks and outcomes.' },
+      publicSpeaking: { title: 'Public Speaking', description: 'Confident and effective delivery of presentations and speeches to various audiences.' },
+      compassion: { title: 'Compassion', description: 'Ability to understand and share the feelings of others, fostering empathy and supportive interactions.' },
       // Licenses & Certifications Details
       advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance', description: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.' },
       executiveLeadershipTeam: { title: 'Building an Executive Leadership Team for the Modern Workplace', description: 'Focuses on building and leading effective executive leadership teams for modern workplaces, emphasizing collaboration and strategic alignment.' },
@@ -572,7 +567,7 @@
       certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', proficiency: 4 },
       redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', proficiency: 4 },
       fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', proficiency: 2 },
-      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate', proficiency: 2 },
+      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
       theThreatLandscape: { title: 'The Threat Landscape – Course Completed', proficiency: 3 }
     }
   }">
