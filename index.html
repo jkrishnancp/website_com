@@ -132,7 +132,7 @@
       color: #E50914;
       margin-bottom: 10px;
     }
-    /* Carousel for experience */
+    /* Carousel for experience, skills, and certifications */
     .carousel-container {
         position: relative;
         width: 100%;
@@ -229,18 +229,41 @@
       @apply bg-red-600 border-red-600 text-white;
     }
 
-    /* Styling for individual items in the grid */
+    /* Styling for individual items in the grid (used for Skills and Certifications carousels) */
     .grid-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted min-width for smaller screens */
+      grid-auto-flow: column; /* Arrange items in columns, allowing horizontal scroll */
+      grid-auto-columns: minmax(140px, 1fr); /* Set column width, min 140px, max 1fr */
+      grid-template-rows: repeat(3, minmax(100px, 1fr)); /* Force 3 rows */
       gap: 15px; /* Space between items */
       padding: 10px 0;
     }
     @media (min-width: 768px) {
       .grid-section {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Original min-width for larger screens */
+        grid-auto-columns: minmax(180px, 1fr); /* Original min-width for larger screens */
       }
     }
+
+    /* New styling for Projects and Education sections to show 3 tiles per line */
+    .projects-education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Default for mobile/small screens */
+      gap: 15px;
+      padding: 10px 0;
+    }
+
+    @media (min-width: 768px) { /* Tablets and larger */
+      .projects-education-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) { /* Desktops and larger */
+      .projects-education-grid {
+        grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+      }
+    }
+
     .grid-item {
       background-color: #1f1f1f;
       color: #fff;
@@ -248,12 +271,13 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       display: flex;
+      flex-direction: column; /* Added for vertical alignment of text and stars */
       align-items: center;
       justify-content: center;
       text-align: center;
       font-weight: 600;
       font-size: 0.9rem; /* Slightly smaller font for more text in box */
-      min-height: 80px; /* Fixed height for consistent rows */
+      min-height: 100px; /* Increased height for consistent rows and stars */
       transition: transform 0.2s ease-in-out, background-color 0.2s ease;
       cursor: pointer;
     }
@@ -261,6 +285,8 @@
       transform: translateY(-3px);
       background-color: #2a2a2a;
     }
+
+    /* Removed .skills-scroll-container as it's no longer needed */
 
     /* Offcanvas (now modal) styling */
     .offcanvas-backdrop {
@@ -306,6 +332,17 @@
       -ms-user-select: none;
       user-select: none;
     }
+
+    /* Footer Styling */
+    .footer {
+      background-color: #1f1f1f;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      border-top: 1px solid #333;
+    }
   </style>
 </head>
 <body>
@@ -313,109 +350,100 @@
     isOpen: false,
     selectedItem: '',
     activeSkillCategory: 'industryKnowledge',
-    activeProjectCategory: 'aiAutomation',
-    activeEducationCategory: 'degrees',
     activeLicenseCategory: 'cybersecurity',
     isNavOpen: false, // For mobile navigation
     skills: {
       industryKnowledge: [
-        { id: 'cybersecurity', title: 'Cybersecurity' },
-        { id: 'informationSecurity', title: 'Information Security' },
-        { id: 'securityOperations', title: 'Security Operations' },
-        { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment' },
-        { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management' },
-        { id: 'incidentResponse', title: 'Incident Response' },
-        { id: 'securityArchitectureDesign', title: 'Security Architecture Design' },
-        { id: 'itSecurityOperations', title: 'IT Security Operations' },
-        { id: 'itSecurityPoliciesProcedures', title: 'IT Security Policies & Procedures' },
-        { id: 'networkSecurity', title: 'Network Security' },
-        { id: 'managedSecurityServices', title: 'Managed Security Services' },
-        { id: 'riskManagement', title: 'Risk Management' },
-        { id: 'internalAudits', title: 'Internal Audits' },
-        { id: 'informationSecurityManagement', title: 'Information Security Management' },
-        { id: 'securityStandards', title: 'Security Standards' },
-        { id: 'productSecurity', title: 'Product Security' },
-        { id: 'corporateSecurity', title: 'Corporate Security' },
-        { id: 'thirdPartyVendorManagement', title: 'Third Party Vendor Management' },
-        { id: 'leadership', title: 'Leadership' },
-        { id: 'executiveLeadership', title: 'Executive Leadership' },
-        { id: 'peopleManagement', title: 'People Management' },
-        { id: 'interpersonalCommunication', title: 'Interpersonal Communication' },
-        { id: 'crossFunctionalTeamLeadership', title: 'Cross-functional Team Leadership' },
-        { id: 'teamBuilding', title: 'Team Building' },
-        { id: 'relationshipBuilding', title: 'Relationship Building' },
-        { id: 'accountability', title: 'Accountability' },
-        { id: 'publicSpeaking', title: 'Public Speaking' },
-        { id: 'compassion', title: 'Compassion' }
+        { id: 'cybersecurity', title: 'Cybersecurity', proficiency: 3 },
+        { id: 'informationSecurity', title: 'Information Security', proficiency: 4 },
+        { id: 'securityOperations', title: 'Security Operations', proficiency: 3 },
+        { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment', proficiency: 4 },
+        { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management', proficiency: 3 },
+        { id: 'incidentResponse', title: 'Incident Response', proficiency: 4 },
+        { id: 'securityArchitectureDesign', title: 'Security Architecture Design', proficiency: 3 },
+        { id: 'itSecurityOperations', title: 'IT Security Operations', proficiency: 4 },
+        { id: 'itSecurityPoliciesProcedures', title: 'IT Security Policies & Procedures', proficiency: 3 },
+        { id: 'networkSecurity', title: 'Network Security', proficiency: 4 },
+        { id: 'managedSecurityServices', title: 'Managed Security Services', proficiency: 3 },
+        { id: 'riskManagement', title: 'Risk Management', proficiency: 4 },
+        { id: 'internalAudits', title: 'Internal Audits', proficiency: 3 },
+        { id: 'informationSecurityManagement', title: 'Information Security Management', proficiency: 4 },
+        { id: 'securityStandards', title: 'Security Standards', proficiency: 3 },
+        { id: 'productSecurity', title: 'Product Security', proficiency: 4 },
+        { id: 'corporateSecurity', title: 'Corporate Security', proficiency: 3 },
+        { id: 'thirdPartyVendorManagement', title: 'Third Party Vendor Management', proficiency: 4 },
+        { id: 'leadership', title: 'Leadership', proficiency: 5 },
+        { id: 'executiveLeadership', title: 'Executive Leadership', proficiency: 5 },
+        { id: 'peopleManagement', title: 'People Management', proficiency: 5 },
+        { id: 'interpersonalCommunication', title: 'Interpersonal Communication', proficiency: 4 },
+        { id: 'crossFunctionalTeamLeadership', title: 'Cross-functional Team Leadership', proficiency: 4 },
+        { id: 'teamBuilding', title: 'Team Building', proficiency: 4 },
+        { id: 'relationshipBuilding', title: 'Relationship Building', proficiency: 4 },
+        { id: 'accountability', title: 'Accountability', proficiency: 4 },
+        { id: 'publicSpeaking', title: 'Public Speaking', proficiency: 3 },
+        { id: 'compassion', title: 'Compassion', proficiency: 5 }
       ],
       toolsTechnologies: [
-        { id: 'siemSkill', title: 'SIEM' },
-        { id: 'casb', title: 'CASB' },
-        { id: 'amazonWebServicesAws', title: 'Amazon Web Services (AWS)' },
-        { id: 'awsSecurity', title: 'AWS Security' },
-        { id: 'splunk', title: 'Splunk' },
-        { id: 'redHatLinux', title: 'Red Hat Linux' },
-        { id: 'windows', title: 'Windows' },
-        { id: 'restApis', title: 'REST APIs' },
-        { id: 'php', title: 'PHP' },
-        { id: 'artificialIntelligenceAi', title: 'Artificial Intelligence (AI)' },
-        { id: 'generativeAi', title: 'Generative AI' }
+        { id: 'siemSkill', title: 'SIEM', proficiency: 4 },
+        { id: 'casb', title: 'CASB', proficiency: 3 },
+        { id: 'amazonWebServicesAws', title: 'Amazon Web Services (AWS)', proficiency: 4 },
+        { id: 'awsSecurity', title: 'AWS Security', proficiency: 4 },
+        { id: 'splunk', title: 'Splunk', proficiency: 4 },
+        { id: 'redHatLinux', title: 'Red Hat Linux', proficiency: 3 },
+        { id: 'windows', title: 'Windows', proficiency: 4 },
+        { id: 'restApis', title: 'REST APIs', proficiency: 3 },
+        { id: 'php', title: 'PHP', proficiency: 2 },
+        { id: 'artificialIntelligenceAi', title: 'Artificial Intelligence (AI)', proficiency: 4 },
+        { id: 'generativeAi', title: 'Generative AI', proficiency: 4 }
       ]
     },
-    projects: {
-      aiAutomation: [
-        { id: 'threatIntel', title: 'AI-Powered Threat Intel Engine' },
-        { id: 'securityAutomation', title: 'Security Automation with n8n' }
-      ],
-      cloudSecurity: [
-        { id: 'cloudDashboard', title: 'Cloud Security Dashboard' }
-      ]
-    },
-    education: {
-      degrees: [
-        { id: 'mba', title: 'Master of Business Administration (MBA)' },
-        { id: 'gdba', title: 'Graduate Diploma in Business Administration (GDBA)' }
-      ],
-      diplomas: [
-        { id: 'diploma', title: 'Diploma in Computer Hardware' }
-      ]
-    },
+    // Projects and Education data are now flattened as filters are removed
+    projects: [
+      { id: 'threatIntel', title: 'AI-Powered Threat Intel Engine' },
+      { id: 'securityAutomation', title: 'Security Automation with n8n' },
+      { id: 'cloudDashboard', title: 'Cloud Security Dashboard' }
+    ],
+    education: [
+      { id: 'mba', title: 'Master of Business Administration (MBA)' },
+      { id: 'gdba', title: 'Graduate Diploma in Business Administration (GDBA)' },
+      { id: 'diploma', title: 'Diploma in Computer Hardware' }
+    ],
     licenses: {
       cybersecurity: [
-        { id: 'advancedCyberSecurity', title: 'Advanced Cyber Security – Threats and Governance' },
-        { id: 'leveragingChatGPT', title: 'Leveraging ChatGPT for Smarter Cybersecurity' },
-        { id: 'understandingZeroTrust', title: 'Understanding Zero Trust' },
-        { id: 'comptiaCasP', title: 'CompTIA Advanced Security Practitioner (CASP+)' },
-        { id: 'comptiaSecurity', title: 'CompTIA Security+ (SY0-501)' },
-        { id: 'informationSecurityAwareness', title: 'Information Security Awareness – ISO 27001:2013' },
-        { id: 'awsCertifiedSolutionsArchitect', title: 'AWS Certified Solutions Architect – Professional' },
-        { id: 'cnssCertifiedNetworkSecuritySpecialist', title: 'CNSS Certified Network Security Specialist' },
-        { id: 'qualysCertifiedSpecialistPolicyCompliance', title: 'Qualys Certified Specialist – Policy Compliance' },
-        { id: 'qualysCertifiedSpecialistVulnerabilityManagement', title: 'Qualys Certified Specialist – Vulnerability Management' },
-        { id: 'searchingAndReportingWithSplunk6', title: 'Searching and Reporting with Splunk 6' },
-        { id: 'cloudLockUniversity201', title: 'CloudLock University 201 – Training' },
-        { id: 'symantecEndpointProtection', title: 'Symantec Endpoint Protection 12.X: Administration' },
-        { id: 'ecCouncilCertifiedSecurityAnalyst', title: 'EC-Council Certified Security Analyst' },
-        { id: 'certifiedEthicalHacker', title: 'Certified Ethical Hacker (CEH)' },
-        { id: 'fortinetNse1', title: 'Fortinet NSE 1 – Network Security Associate' },
-        { id: 'fortinetNse2', title: 'Fortinet NSE 2 – Network Security Associate' },
-        { id: 'theThreatLandscape', title: 'The Threat Landscape – Course Completed' }
+        { id: 'advancedCyberSecurity', title: 'Advanced Cyber Security – Threats and Governance', proficiency: 4 },
+        { id: 'leveragingChatGPT', title: 'Leveraging ChatGPT for Smarter Cybersecurity', proficiency: 4 },
+        { id: 'understandingZeroTrust', title: 'Understanding Zero Trust', proficiency: 4 },
+        { id: 'comptiaCasP', title: 'CompTIA Advanced Security Practitioner (CASP+)', proficiency: 5 },
+        { id: 'comptiaSecurity', title: 'CompTIA Security+ (SY0-501)', proficiency: 5 },
+        { id: 'informationSecurityAwareness', title: 'Information Security Awareness – ISO 27001:2013', proficiency: 3 },
+        { id: 'awsCertifiedSolutionsArchitect', title: 'AWS Certified Solutions Architect – Professional', proficiency: 4 },
+        { id: 'cnssCertifiedNetworkSecuritySpecialist', title: 'CNSS Certified Network Security Specialist', proficiency: 4 },
+        { id: 'qualysCertifiedSpecialistPolicyCompliance', title: 'Qualys Certified Specialist – Policy Compliance', proficiency: 3 },
+        { id: 'qualysCertifiedSpecialistVulnerabilityManagement', title: 'Qualys Certified Specialist – Vulnerability Management', proficiency: 3 },
+        { id: 'searchingAndReportingWithSplunk6', title: 'Searching and Reporting with Splunk 6', proficiency: 4 },
+        { id: 'cloudLockUniversity201', title: 'CloudLock University 201 – Training', proficiency: 3 },
+        { id: 'symantecEndpointProtection', title: 'Symantec Endpoint Protection 12.X: Administration', proficiency: 3 },
+        { id: 'ecCouncilCertifiedSecurityAnalyst', title: 'EC-Council Certified Security Analyst', proficiency: 4 },
+        { id: 'certifiedEthicalHacker', title: 'Certified Ethical Hacker (CEH)', proficiency: 4 },
+        { id: 'fortinetNse1', title: 'Fortinet NSE 1 – Network Security Associate', proficiency: 2 },
+        { id: 'fortinetNse2', title: 'Fortinet NSE 2 – Network Security Associate', proficiency: 2 },
+        { id: 'theThreatLandscape', title: 'The Threat Landscape – Course Completed', proficiency: 3 }
       ],
       leadershipSoftSkills: [
-        { id: 'executiveLeadershipTeam', title: 'Building an Executive Leadership Team for the Modern Workplace' },
-        { id: 'compassionateCandor', title: 'Compassionate Candor: A Radical Approach to Management' },
-        { id: 'cyberSecurityForLeadership', title: 'Cyber Security for Leadership' },
-        { id: 'howToLeadAndInspireChange', title: 'How to Lead and Inspire Change' },
-        { id: 'learningToSayNo', title: 'Learning to Say No' },
-        { id: 'communicatingWithConfidence', title: 'Communicating with Confidence' },
-        { id: 'holdingYourselfAccountable', title: 'Holding Yourself Accountable' }
+        { id: 'executiveLeadershipTeam', title: 'Building an Executive Leadership Team for the Modern Workplace', proficiency: 4 },
+        { id: 'compassionateCandor', title: 'Compassionate Candor: A Radical Approach to Management', proficiency: 4 },
+        { id: 'cyberSecurityForLeadership', title: 'Cyber Security for Leadership', proficiency: 3 },
+        { id: 'howToLeadAndInspireChange', title: 'How to Lead and Inspire Change', proficiency: 4 },
+        { id: 'learningToSayNo', title: 'Learning to Say No', proficiency: 3 },
+        { id: 'communicatingWithConfidence', title: 'Communicating with Confidence', proficiency: 4 },
+        { id: 'holdingYourselfAccountable', title: 'Holding Yourself Accountable', proficiency: 4 }
       ],
       dataAi: [
-        { id: 'aiTrends', title: 'AI Trends' },
-        { id: 'theDataScientistsToolbox', title: 'The Data Scientist’s Toolbox' }
+        { id: 'aiTrends', title: 'AI Trends', proficiency: 3 },
+        { id: 'theDataScientistsToolbox', title: 'The Data Scientist’s Toolbox', proficiency: 2 }
       ],
       operatingSystems: [
-        { id: 'redHatCertifiedTechnician', title: 'Red Hat Certified Technician (RHCT)' }
+        { id: 'redHatCertifiedTechnician', title: 'Red Hat Certified Technician (RHCT)', proficiency: 4 }
       ]
     },
     details: {
@@ -429,11 +457,11 @@
       },
       teamLead: {
         title: 'Team Lead - Incident Management',
-        description: '<b>Verizon Business</b><br>Team Lead - Incident Management<br>April 2012 - May 2013 (1 year 2 months)<br>Mumbai Area, India<br>As a member of the enterprise architecture team, charged with broad responsibilities to inject security practices into the overall application stack. Reviewed overall environment and developed an <b>incremental roadmap for addressing critical gaps</b> and charting a progressive course to more effective enterprise security over time. Included collaborating with the team driving a <b>DevOps initiative</b>, as well as initiating changes to implement and leverage <b>sec ops automation</b>.<br><br><b>Main Responsibilities:</b><br><ul><li>Analysis of an organization\'s overall security risks and requirements, rating the importance of a company\'s products and offerings, and the related design, configuration, implementation and support of the information infrastructure to protect the business from potential security breaches.</li><li>Create reports for assigned areas of responsibility; Manage Security Programs; Offer new ideas and suggestions for improvement.</li><li>Involved in rigorous reporting and metric presentation to management with regard to information security and compliance issues.</li><li>Lead and mentor a team of 6 people and took ownership of their deliverables</li><li>Maintaining Assets report of Critical Systems in the organization, Preparing Analysis and trending report for the organization on weekly, monthly basis Monitors security audit and intrusion detection system logs for system and network anomalies.</li><li>Investigates and/or escalates security violations, attempts to gain unauthorized access, virus infections that may affect the network or other event affecting security. Document and reports event(s); Assists in providing engineering analysis, design and support for firewalls, routers, networks and operating systems</li><li>Assists in performing product evaluations and recommends products/ services for network security. Validates and tests basic security architecture and design solutions to produce detailed engineering specifications with recommended vendor technologies.</li></ul>'
+        description: '<b>Verizon Business</b><br>Team Lead - Incident Management<br>April 2012 - May 2013 (1 year 2 months)<br>Mumbai Area, India<br>As a member of the enterprise architecture team, charged with broad responsibilities to inject security practices into the overall application stack. Reviewed overall environment and developed an <b>incremental roadmap for addressing critical gaps</b> and charting a progressive course to more effective enterprise security over time. Included collaborating with the team driving a <b>DevOps initiative</b>, as well as initiating changes to implement and leverage <b>sec ops automation</b>.<br><br><b>Main Responsibilities:</b><br><ul><li>Analysis of an organization\'s overall security risks and requirements, rating the importance of a company\'s products and offerings, and the related design, configuration, implementation and support of the information infrastructure to protect the business from potential security breaches.</li><li>Create reports for assigned areas of responsibility; Manage Security Programs; Offer new ideas and suggestions for improvement.</li><li>Involved in rigorous reporting and metric presentation to management with regard to information security and compliance issues.</li><li>Lead and mentor a team of 6 people and took ownership of their deliverables</li><li>Maintaining Assets report of Critical Systems in the organization, Preparing Analysis and trending report for the organization on weekly, monthly basis Monitors security audit and intrusion detection system logs for system and network anomalies.</li><li>Investigates and/or escalates security violations, attempts to gain unauthorized access, virus infections that may affect the network or other event affecting security. Document and reports event(s); Assists in providing engineering analysis, design and support for firewalls, routers and operating systems</li><li>Assists in performing product evaluations and recommends products/ services for network security. Validates and tests basic security architecture and design solutions to produce detailed engineering specifications with recommended vendor technologies.</li></ul>'
       },
       seniorAnalyst: {
         title: 'Senior Security Analyst',
-        description: '<b>Super Computers Trading Est, Abu Dhabi, UAE.</b><br>Senior Security Analyst<br>September 2011 - April 2012 (8 months)<br><ul><li>Hold multifaceted responsibilities like <b>Implementation, design architecture, upgrades, and health checks and advanced troubleshooting</b>.</li><li>Address and administer peer-level client relationships.</li><li>Facilitate participation in business development and technical pre-sales activities, whenever required.</li><li>Being primary contacts for operations and SOC Operations.</li><li>Designing, implementation, integration, and administration of <b>SIEM technologies</b></li><li>Conduct knowledge transfer and security awareness sessions for resources.</li><li><b>Vulnerability Assessment and Penetration Testing</b>.</li></ul>'
+        description: '<b>Super Computers Trading Est, Abu Dhabi, UAE.</b><br>Senior Security Analyst<br>September 2011 - April 2012 (8 months)<br><ul><li>Hold multifaceted responsibilities like <b>Implementation, design architecture, upgrades, and health checks and advanced troubleshooting</b>.</li><li>Address and administer peer-level client relationships.</li></li><li>Facilitate participation in business development and technical pre-sales activities, whenever required.</li><li>Being primary contacts for operations and SOC Operations.</li><li>Designing, implementation, integration, and administration of <b>SIEM technologies</b></li><li>Conduct knowledge transfer and security awareness sessions for resources.</li><li><b>Vulnerability Assessment and Penetration Testing</b>.</li></ul>'
       },
       assistantManager: {
         title: 'Assistant Manager - Information Security',
@@ -482,7 +510,7 @@
       managedSecurityServices: { title: 'Managed Security Services', description: 'Experience with providing and managing outsourced security services, including monitoring, threat detection, and incident response.' },
       riskManagement: { title: 'Risk Management', description: 'Skilled in identifying, assessing, and mitigating risks to an organization\'s information assets.' },
       internalAudits: { title: 'Internal Audits', description: 'Conducting internal audits to assess compliance with security policies, standards, and regulatory requirements.' },
-      informationSecurityManagement: { title: 'Information Security Management', description: 'Implementing and managing comprehensive information security programs to protect sensitive data and systems.' },
+      informationSecurityManagement: { title: 'Information Security Management', proficiency: 4 },
       securityStandards: { title: 'Security Standards', description: 'Adherence to and implementation of various security standards and frameworks (e.g., ISO 27001, NIST).' },
       productSecurity: { title: 'Product Security', description: 'Ensuring the security of products throughout their lifecycle, from design to deployment and maintenance.' },
       casb: { title: 'CASB', description: 'Experience with Cloud Access Security Brokers (CASB) for enforcing security policies for cloud-based applications and data.' },
@@ -516,32 +544,32 @@
       advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance', description: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.' },
       executiveLeadershipTeam: { title: 'Building an Executive Leadership Team for the Modern Workplace', description: 'Focuses on building and leading effective executive leadership teams for modern workplaces, emphasizing collaboration and strategic alignment.' },
       compassionateCandor: { title: 'Compassionate Candor: A Radical Approach to Management', description: 'Explores a radical approach to management that combines empathy with direct, honest feedback for improved team performance and relationships.' },
-      cyberSecurityForLeadership: { title: 'Cyber Security for Leadership', description: 'Provides essential cybersecurity knowledge for leaders, enabling them to make informed decisions and integrate security into business strategy.' },
-      howToLeadAndInspireChange: { title: 'How to Lead and Inspire Change', description: 'Teaches strategies for effective change management, inspiring teams, and overcoming resistance to new initiatives.' },
+      cyberSecurityForLeadership: { title: 'Cyber Security for Leadership', proficiency: 3 },
+      howToLeadAndInspireChange: { title: 'How to Lead and Inspire Change', proficiency: 4 },
       ccpaEssentialTraining: { title: 'California Consumer Privacy Act (CCPA) Essential Training', description: 'Covers the California Consumer Privacy Act (CCPA) regulations, ensuring understanding of consumer data rights and compliance requirements.' },
-      leveragingChatGPT: { title: 'Leveraging ChatGPT for Smarter Cybersecurity', description: 'Focuses on utilizing ChatGPT and similar AI models for enhancing cybersecurity operations, including threat analysis and automation.' },
-      understandingZeroTrust: { title: 'Understanding Zero Trust', description: 'Provides a deep dive into the Zero Trust security model, its principles, and practical implementation strategies.' },
-      aiTrends: { title: 'AI Trends', description: 'Explores current and emerging trends in Artificial Intelligence, with a focus on their implications for various industries, including cybersecurity.' },
-      learningToSayNo: { title: 'Learning to Say No', description: 'Develops skills in assertive communication, setting boundaries, and effectively declining requests to manage time and priorities.' },
-      communicatingWithConfidence: { title: 'Communicating with Confidence', description: 'Enhances communication skills, focusing on clarity, assertiveness, and building rapport in professional settings.' },
-      holdingYourselfAccountable: { title: 'Holding Yourself Accountable', description: 'Emphasizes personal responsibility and self-discipline in achieving goals and commitments.' },
-      comptiaCasP: { title: 'CompTIA Advanced Security Practitioner (CASP+)', description: 'CompTIA Advanced Security Practitioner (CASP+) certification, validating advanced-level cybersecurity skills in enterprise security architecture and operations.' },
-      comptiaSecurity: { title: 'CompTIA Security+ (SY0-501)', description: 'CompTIA Security+ (SY0-501) certification, covering core cybersecurity skills needed for an entry-level security professional.' },
-      informationSecurityAwareness: { title: 'Information Security Awareness – ISO 27001:2013', description: 'Training on ISO 27001:2013 standards for information security management systems, promoting awareness and compliance.' },
-      awsCertifiedSolutionsArchitect: { title: 'AWS Certified Solutions Architect – Professional', description: 'AWS Certified Solutions Architect – Professional certification, demonstrating expertise in designing distributed systems on AWS.' },
-      cnssCertifiedNetworkSecuritySpecialist: { title: 'CNSS Certified Network Security Specialist', description: 'CNSS Certified Network Security Specialist certification, focusing on securing network infrastructures.' },
-      qualysCertifiedSpecialistPolicyCompliance: { title: 'Qualys Certified Specialist – Policy Compliance', description: 'Qualys Certified Specialist – Policy Compliance, validating skills in managing and reporting on security policy compliance.' },
+      leveragingChatGPT: { title: 'Leveraging ChatGPT for Smarter Cybersecurity', proficiency: 4 },
+      understandingZeroTrust: { title: 'Understanding Zero Trust', proficiency: 4 },
+      aiTrends: { title: 'AI Trends', proficiency: 3 },
+      learningToSayNo: { title: 'Learning to Say No', proficiency: 3 },
+      communicatingWithConfidence: { title: 'Communicating with Confidence', proficiency: 4 },
+      holdingYourselfAccountable: { title: 'Holding Yourself Accountable', proficiency: 4 },
+      comptiaCasP: { title: 'CompTIA Advanced Security Practitioner (CASP+)', proficiency: 5 },
+      comptiaSecurity: { title: 'CompTIA Security+ (SY0-501)', proficiency: 5 },
+      informationSecurityAwareness: { title: 'Information Security Awareness – ISO 27001:2013', proficiency: 3 },
+      awsCertifiedSolutionsArchitect: { title: 'AWS Certified Solutions Architect – Professional', proficiency: 4 },
+      cnssCertifiedNetworkSecuritySpecialist: { title: 'CNSS Certified Network Security Specialist', proficiency: 4 },
+      qualysCertifiedSpecialistPolicyCompliance: { title: 'Qualys Certified Specialist – Policy Compliance', proficiency: 3 },
       qualysCertifiedSpecialistVulnerabilityManagement: { title: 'Qualys Certified Specialist – Vulnerability Management, demonstrating proficiency in identifying and addressing system vulnerabilities.' },
-      theDataScientistsToolbox: { title: 'The Data Scientist’s Toolbox', description: 'Covers fundamental tools and concepts in data science, including programming in R and data analysis techniques.' },
-      searchingAndReportingWithSplunk6: { title: 'Searching and Reporting with Splunk 6', description: 'Training on advanced searching and reporting functionalities in Splunk 6 for security analytics and operational intelligence.' },
-      cloudLockUniversity201: { title: 'CloudLock University 201 – Training', description: 'Advanced training from CloudLock University, focusing on cloud security best practices and platform usage.' },
-      symantecEndpointProtection: { title: 'Symantec Endpoint Protection 12.X: Administration', description: 'Administration course for Symantec Endpoint Protection 12.X, covering deployment, configuration, and management of endpoint security.' },
-      ecCouncilCertifiedSecurityAnalyst: { title: 'EC-Council Certified Security Analyst', description: 'EC-Council Certified Security Analyst certification, focusing on penetration testing and vulnerability assessment methodologies.' },
-      certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', description: 'Certified Ethical Hacker (CEH) certification, validating ethical hacking and penetration testing skills.' },
-      redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', description: 'Red Hat Certified Technician (RHCT) certification, demonstrating proficiency in Red Hat Enterprise Linux system administration.' },
-      fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', description: 'Fortinet NSE 1 – Network Security Associate, an introductory certification to the threat landscape and Fortinet solutions.' },
+      theDataScientistsToolbox: { title: 'The Data Scientist’s Toolbox', proficiency: 2 },
+      searchingAndReportingWithSplunk6: { title: 'Searching and Reporting with Splunk 6', proficiency: 4 },
+      cloudLockUniversity201: { title: 'CloudLock University 201 – Training', proficiency: 3 },
+      symantecEndpointProtection: { title: 'Symantec Endpoint Protection 12.X: Administration', proficiency: 3 },
+      ecCouncilCertifiedSecurityAnalyst: { title: 'EC-Council Certified Security Analyst', proficiency: 4 },
+      certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', proficiency: 4 },
+      redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', proficiency: 4 },
+      fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', proficiency: 2 },
       fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
-      theThreatLandscape: { title: 'The Threat Landscape – Course Completed', description: 'Course completed on understanding the current threat landscape, including common attack vectors and defense strategies.' }
+      theThreatLandscape: { title: 'The Threat Landscape – Course Completed', proficiency: 3 }
     }
   }">
     <!-- Header with Name and Navigation -->
@@ -603,7 +631,7 @@
           Cybersecurity Leader | Expert in Zero Trust, MDR, XDR, AI-Driven Threat Detection & Incident Response | Building Resilient Security Strategies for the Future
         </h1>
         <p class="text-base md:text-lg mt-4 text-left text-gray-200"> <!-- Adjusted font size for mobile -->
-          Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat detection with deep expertise in incident response and security automation. Focused on innovation, team leadership, and shaping future-ready strategies through data-driven intelligence and proactive defense.
+          Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat intelligence—all aimed at fortifying organizations against evolving cyber threats.
         </p>
         <p class="text-base md:text-lg mt-4 text-left"> <!-- Adjusted font size for mobile -->
           Email: <a href="mailto:jay@jayakrishnancp.com" class="text-red-500 hover:underline">jay@jayakrishnancp.com</a>
@@ -653,7 +681,7 @@
               <div class="card-title">Team Lead - Incident Management</div>
             </div>
             <div class="card" @click="isOpen = true; selectedItem = 'seniorAnalyst'">
-              <img src="images/No_Image_Available.jpg" alt="Senior Analyst" />
+              <img src="images/No_Image_Available.jpg" alt="Senior Analyst" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=No+Image';" />
               <div class="card-number">4</div>
               <div class="card-title">Senior Security Analyst</div>
             </div>
@@ -693,38 +721,48 @@
           </button>
         </div>
 
-        <div class="grid-section">
-          <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
-            <div
-              class="grid-item"
-              @click="isOpen = true; selectedItem = skill.id"
-              x-text="skill.title"
-            ></div>
-          </template>
+        <!-- Skills carousel container -->
+        <div class="carousel-container">
+          <div class="carousel" id="skills-carousel">
+            <div class="grid-section">
+              <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
+                <div
+                  class="grid-item group"
+                  @click="isOpen = true; selectedItem = skill.id"
+                >
+                  <div class="flex flex-col items-center justify-center h-full">
+                    <span x-text="skill.title" class="text-center mb-1"></span>
+                    <div class="flex mt-1">
+                      <template x-for="i in 5" :key="i">
+                        <svg
+                          class="w-4 h-4"
+                          :class="{
+                            'text-yellow-400': i <= skill.proficiency,
+                            'text-gray-600': i > skill.proficiency,
+                            'group-hover:scale-110 group-hover:text-yellow-300 transition-transform duration-200 ease-out': i <= skill.proficiency
+                          }"
+                          fill="currentColor" viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                        </svg>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <button class="carousel-arrow left" onclick="scrollCarousel('skills-carousel', -220)">&#10094;</button>
+          <button class="carousel-arrow right" onclick="scrollCarousel('skills-carousel', 220)">&#10095;</button>
         </div>
       </div>
 
       <!-- Projects Section -->
       <div id="projects" class="space-y-4 pt-10">
         <h2 class="section-header">Projects</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
-          <button
-            @click="activeProjectCategory = 'aiAutomation'"
-            :class="{ 'active': activeProjectCategory === 'aiAutomation' }"
-            class="category-button"
-          >
-            AI & Automation Projects
-          </button>
-          <button
-            @click="activeProjectCategory = 'cloudSecurity'"
-            :class="{ 'active': activeProjectCategory === 'cloudSecurity' }"
-            class="category-button"
-          >
-            Cloud & Security Projects
-          </button>
-        </div>
-        <div class="grid-section">
-          <template x-for="(project, index) in projects[activeProjectCategory]" :key="project.id">
+        <!-- Removed category buttons for Projects -->
+        <div class="projects-education-grid"> <!-- Changed class here -->
+          <template x-for="(project, index) in projects" :key="project.id">
             <div
               class="grid-item"
               @click="isOpen = true; selectedItem = project.id"
@@ -737,24 +775,9 @@
       <!-- Education Section -->
       <div id="education" class="space-y-4 pt-10">
         <h2 class="section-header">Education</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
-          <button
-            @click="activeEducationCategory = 'degrees'"
-            :class="{ 'active': activeEducationCategory === 'degrees' }"
-            class="category-button"
-          >
-            Degrees
-          </button>
-          <button
-            @click="activeEducationCategory = 'diplomas'"
-            :class="{ 'active': activeEducationCategory === 'diplomas' }"
-            class="category-button"
-          >
-            Diplomas
-          </button>
-        </div>
-        <div class="grid-section">
-          <template x-for="(edu, index) in education[activeEducationCategory]" :key="edu.id">
+        <!-- Removed category buttons for Education -->
+        <div class="projects-education-grid"> <!-- Changed class here -->
+          <template x-for="(edu, index) in education" :key="edu.id">
             <div
               class="grid-item"
               @click="isOpen = true; selectedItem = edu.id"
@@ -797,14 +820,39 @@
             Operating Systems
           </button>
         </div>
-        <div class="grid-section">
-          <template x-for="(license, index) in licenses[activeLicenseCategory]" :key="license.id">
-            <div
-              class="grid-item"
-              @click="isOpen = true; selectedItem = license.id"
-              x-text="license.title"
-            ></div>
-          </template>
+        <!-- Licenses & Certifications carousel container -->
+        <div class="carousel-container">
+          <div class="carousel" id="licenses-carousel">
+            <div class="grid-section">
+              <template x-for="(license, index) in licenses[activeLicenseCategory]" :key="license.id">
+                <div
+                  class="grid-item group"
+                  @click="isOpen = true; selectedItem = license.id"
+                >
+                  <div class="flex flex-col items-center justify-center h-full">
+                    <span x-text="license.title" class="text-center mb-1"></span>
+                    <div class="flex mt-1">
+                      <template x-for="i in 5" :key="i">
+                        <svg
+                          class="w-4 h-4"
+                          :class="{
+                            'text-yellow-400': i <= license.proficiency,
+                            'text-gray-600': i > license.proficiency,
+                            'group-hover:scale-110 group-hover:text-yellow-300 transition-transform duration-200 ease-out': i <= license.proficiency
+                          }"
+                          fill="currentColor" viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z"></path>
+                        </svg>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <button class="carousel-arrow left" onclick="scrollCarousel('licenses-carousel', -220)">&#10094;</button>
+          <button class="carousel-arrow right" onclick="scrollCarousel('licenses-carousel', 220)">&#10095;</button>
         </div>
       </div>
 
@@ -842,6 +890,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer with Copyright -->
+    <footer class="footer">
+      &copy; <span x-text="new Date().getFullYear()"></span> Jayakrishnan C Prakash. All rights reserved.
+    </footer>
+
   </div>
 
   <script>
