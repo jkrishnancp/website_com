@@ -16,7 +16,7 @@
       background-color: #141414;
       color: #fff;
       margin: 0;
-      padding: 0; /* Removed body padding to allow child elements to control their own alignment */
+      padding: 0 20px; /* Consistent padding for the entire body */
       overflow-x: hidden;
       -webkit-user-select: none; /* Safari */
       -moz-user-select: none;    /* Firefox */
@@ -26,7 +26,7 @@
     /* Header styling for the top navigation bar */
     .header {
       background-color: #141414;
-      padding: 15px 20px; /* Fixed padding for header */
+      padding: 15px 0; /* Vertical padding, horizontal handled by body's padding and max-width */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -35,7 +35,7 @@
       z-index: 100;
       border-radius: 0 0 8px 8px;
       max-width: 1200px; /* Limit header width */
-      margin: 0 auto; /* Center header on large screens */
+      margin: 0 auto; /* Center header within body padding */
     }
     .header .name {
       font-size: 1.8rem;
@@ -102,7 +102,7 @@
     /* Hero section styling */
     .hero {
       /* Background image for San Francisco */
-      background-image: url('images/san-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg'); /* Placeholder for San Francisco image */
+      background-image: url('images/bay-bridge-san-francisco-california-wallpaper-preview.jpg'); /* Placeholder for San Francisco image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -120,7 +120,7 @@
     }
     /* Main content area */
     .content {
-      padding: 20px; /* Consistent padding for content sections */
+      padding: 20px 0; /* Vertical padding, horizontal handled by body's padding */
       min-height: calc(100vh - 60px);
       max-width: 1200px; /* Limit content width on very large screens */
       margin: 0 auto; /* Center content within the available space */
@@ -132,15 +132,17 @@
       color: #E50914;
       margin-bottom: 10px;
     }
-    /* Carousel for experience */
+    /* Carousel container for both horizontal carousels (Experience, Skills, Licenses) */
     .carousel-container {
         position: relative;
         width: 100%;
         overflow: hidden;
     }
+    /* Base carousel styling for horizontal scrolling */
     .carousel {
-      display: flex;
+      display: flex; /* Default for horizontal flow */
       overflow-x: scroll;
+      overflow-y: hidden; /* Hide vertical scrollbar */
       gap: 20px;
       padding: 10px 0;
       scroll-behavior: smooth;
@@ -191,6 +193,7 @@
       overflow: hidden;
       transition: transform 0.3s;
       cursor: pointer;
+      flex-shrink: 0; /* Prevent items from shrinking in flex container */
     }
     .card:hover {
       transform: scale(1.05);
@@ -229,83 +232,98 @@
       @apply bg-red-600 border-red-600 text-white;
     }
 
-    /* Styling for individual items in the grid */
-    .grid-section {
+    /* Specific grid layout for Skills carousel (3 rows, horizontal scroll) */
+    .skills-grid-carousel {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted min-width for smaller screens */
-      gap: 15px; /* Space between items */
-      padding: 10px 0;
+      grid-auto-flow: column; /* Items flow into columns, then new rows */
+      grid-template-rows: repeat(3, minmax(0, 1fr)); /* 3 rows */
+      gap: 15px; /* Gap between grid items */
+      padding: 10px 0; /* Vertical padding inside the scrollable area */
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      overflow-y: hidden; /* Hide vertical scrollbar */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    @media (min-width: 768px) {
-      .grid-section {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Original min-width for larger screens */
-      }
+    .skills-grid-carousel::-webkit-scrollbar {
+        display: none;
     }
-    .grid-item {
+
+    /* Specific grid layout for Licenses carousel (2 rows, horizontal scroll) */
+    .licenses-grid-carousel {
+      display: grid;
+      grid-auto-flow: column; /* Items flow into columns, then new rows */
+      grid-template-rows: repeat(2, minmax(0, 1fr)); /* 2 rows */
+      gap: 15px; /* Gap between grid items */
+      padding: 10px 0; /* Vertical padding inside the scrollable area */
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      overflow-y: hidden; /* Hide vertical scrollbar */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .licenses-grid-carousel::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Styling for individual skill items and license items */
+    .skill-item, .license-item, .grid-item { /* Added .grid-item here for consistent styling */
       background-color: #1f1f1f;
       color: #fff;
       padding: 15px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       display: flex;
+      flex-direction: column; /* Stack title and stars vertically */
       align-items: center;
       justify-content: center;
       text-align: center;
       font-weight: 600;
-      font-size: 0.9rem; /* Slightly smaller font for more text in box */
+      font-size: 0.9rem;
       min-height: 80px; /* Fixed height for consistent rows */
+      min-width: 180px; /* Fixed width for horizontal scrolling */
+      box-sizing: border-box; /* Include padding in width/height */
       transition: transform 0.2s ease-in-out, background-color 0.2s ease;
       cursor: pointer;
+      flex-shrink: 0; /* Prevent items from shrinking */
     }
-    .grid-item:hover {
+    .skill-item:hover, .license-item:hover, .grid-item:hover { /* Added .grid-item here for consistent hover */
       transform: translateY(-3px);
       background-color: #2a2a2a;
     }
+    .skill-title {
+      margin-bottom: 5px; /* Space between title and stars */
+    }
+    .star-icon {
+      transition: transform 0.2s ease-in-out;
+    }
+    .star-icon:hover {
+      transform: scale(1.2);
+    }
 
-    /* Offcanvas (now modal) styling */
-    .offcanvas-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 40;
+    /* Adjust carousel container heights to fit rows */
+    .skills-carousel-container-height {
+        height: calc((80px + 15px) * 3 + 20px); /* (item height + gap) * 3 rows + carousel padding */
     }
-    .offcanvas {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 600px;
-      height: auto;
-      max-height: 90vh;
-      background-color: #1f1f1f;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-      z-index: 50;
-      overflow-y: auto;
-      color: #ccc;
-      border-radius: 8px;
+    .licenses-carousel-container-height {
+        height: calc((80px + 15px) * 2 + 20px); /* (item height + gap) * 2 rows + carousel padding */
     }
-    .offcanvas-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.8rem;
-      color: #E50914;
-      cursor: pointer;
-      font-weight: bold;
+
+    /* Ensure the original grid-section for Education is displayed correctly */
+    .education-grid-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted min-width for smaller screens */
+      gap: 15px; /* Space between items */
+      padding: 10px 0;
     }
-    .offcanvas-content {
-      margin-top: 20px;
-      /* Disable text selection */
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    @media (min-width: 768px) {
+      .education-grid-section {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Original min-width for larger screens */
+      }
     }
+
   </style>
 </head>
 <body>
@@ -314,14 +332,14 @@
     selectedItem: '',
     activeSkillCategory: 'industryKnowledge',
     activeProjectCategory: 'aiAutomation',
-    activeEducationCategory: 'degrees',
+    activeEducationCategory: 'degrees', /* This will no longer be used for filtering */
     activeLicenseCategory: 'cybersecurity',
     isNavOpen: false, // For mobile navigation
     skills: {
       industryKnowledge: [
-        { id: 'cybersecurity', title: 'Cybersecurity' },
+        { id: 'cybersecurity', title: 'Cybersecurity', stars: 5 },
         { id: 'informationSecurity', title: 'Information Security' },
-        { id: 'securityOperations', title: 'Security Operations' },
+        { id: 'securityOperations', title: 'Security Operations', stars: 5 },
         { id: 'vulnerabilityAssessment', title: 'Vulnerability Assessment' },
         { id: 'threatVulnerabilityManagement', title: 'Threat & Vulnerability Management' },
         { id: 'incidentResponse', title: 'Incident Response' },
@@ -371,15 +389,11 @@
         { id: 'cloudDashboard', title: 'Cloud Security Dashboard' }
       ]
     },
-    education: {
-      degrees: [
-        { id: 'mba', title: 'Master of Business Administration (MBA)' },
-        { id: 'gdba', title: 'Graduate Diploma in Business Administration (GDBA)' }
-      ],
-      diplomas: [
-        { id: 'diploma', title: 'Diploma in Computer Hardware' }
-      ]
-    },
+    education: [ /* Combined education into a single array */
+      { id: 'mba', title: 'Master of Business Administration (MBA)' },
+      { id: 'gdba', title: 'Graduate Diploma in Business Administration (GDBA)' },
+      { id: 'diploma', title: 'Diploma in Computer Hardware' }
+    ],
     licenses: {
       cybersecurity: [
         { id: 'advancedCyberSecurity', title: 'Advanced Cyber Security – Threats and Governance' },
@@ -513,35 +527,35 @@
       publicSpeaking: { title: 'Public Speaking', description: 'Confident and effective delivery of presentations and speeches to various audiences.' },
       compassion: { title: 'Compassion', description: 'Ability to understand and share the feelings of others, fostering empathy and supportive interactions.' },
       // Licenses & Certifications Details
-      advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance', description: 'This certification covers advanced cybersecurity threats and governance principles, equipping leaders with strategies to protect organizational assets and ensure compliance.' },
-      executiveLeadershipTeam: { title: 'Building an Executive Leadership Team for the Modern Workplace', description: 'Focuses on building and leading effective executive leadership teams for modern workplaces, emphasizing collaboration and strategic alignment.' },
-      compassionateCandor: { title: 'Compassionate Candor: A Radical Approach to Management', description: 'Explores a radical approach to management that combines empathy with direct, honest feedback for improved team performance and relationships.' },
-      cyberSecurityForLeadership: { title: 'Cyber Security for Leadership', description: 'Provides essential cybersecurity knowledge for leaders, enabling them to make informed decisions and integrate security into business strategy.' },
-      howToLeadAndInspireChange: { title: 'How to Lead and Inspire Change', description: 'Teaches strategies for effective change management, inspiring teams, and overcoming resistance to new initiatives.' },
-      ccpaEssentialTraining: { title: 'California Consumer Privacy Act (CCPA) Essential Training', description: 'Covers the California Consumer Privacy Act (CCPA) regulations, ensuring understanding of consumer data rights and compliance requirements.' },
-      leveragingChatGPT: { title: 'Leveraging ChatGPT for Smarter Cybersecurity', description: 'Focuses on utilizing ChatGPT and similar AI models for enhancing cybersecurity operations, including threat analysis and automation.' },
-      understandingZeroTrust: { title: 'Understanding Zero Trust', description: 'Provides a deep dive into the Zero Trust security model, its principles, and practical implementation strategies.' },
-      aiTrends: { title: 'AI Trends', description: 'Explores current and emerging trends in Artificial Intelligence, with a focus on their implications for various industries, including cybersecurity.' },
-      learningToSayNo: { title: 'Learning to Say No', description: 'Develops skills in assertive communication, setting boundaries, and effectively declining requests to manage time and priorities.' },
-      communicatingWithConfidence: { title: 'Communicating with Confidence', description: 'Enhances communication skills, focusing on clarity, assertiveness, and building rapport in professional settings.' },
-      holdingYourselfAccountable: { title: 'Holding Yourself Accountable', description: 'Emphasizes personal responsibility and self-discipline in achieving goals and commitments.' },
-      comptiaCasP: { title: 'CompTIA Advanced Security Practitioner (CASP+)', description: 'CompTIA Advanced Security Practitioner (CASP+) certification, validating advanced-level cybersecurity skills in enterprise security architecture and operations.' },
-      comptiaSecurity: { title: 'CompTIA Security+ (SY0-501)', description: 'CompTIA Security+ (SY0-501) certification, covering core cybersecurity skills needed for an entry-level security professional.' },
-      informationSecurityAwareness: { title: 'Information Security Awareness – ISO 27001:2013', description: 'Training on ISO 27001:2013 standards for information security management systems, promoting awareness and compliance.' },
-      awsCertifiedSolutionsArchitect: { title: 'AWS Certified Solutions Architect – Professional', description: 'AWS Certified Solutions Architect – Professional certification, demonstrating expertise in designing distributed systems on AWS.' },
-      cnssCertifiedNetworkSecuritySpecialist: { title: 'CNSS Certified Network Security Specialist', description: 'CNSS Certified Network Security Specialist certification, focusing on securing network infrastructures.' },
-      qualysCertifiedSpecialistPolicyCompliance: { title: 'Qualys Certified Specialist – Policy Compliance', description: 'Qualys Certified Specialist – Policy Compliance, validating skills in managing and reporting on security policy compliance.' },
-      qualysCertifiedSpecialistVulnerabilityManagement: { title: 'Qualys Certified Specialist – Vulnerability Management, demonstrating proficiency in identifying and addressing system vulnerabilities.' },
-      theDataScientistsToolbox: { title: 'The Data Scientist’s Toolbox', description: 'Covers fundamental tools and concepts in data science, including programming in R and data analysis techniques.' },
-      searchingAndReportingWithSplunk6: { title: 'Searching and Reporting with Splunk 6', description: 'Training on advanced searching and reporting functionalities in Splunk 6 for security analytics and operational intelligence.' },
-      cloudLockUniversity201: { title: 'CloudLock University 201 – Training', description: 'Advanced training from CloudLock University, focusing on cloud security best practices and platform usage.' },
-      symantecEndpointProtection: { title: 'Symantec Endpoint Protection 12.X: Administration', description: 'Administration course for Symantec Endpoint Protection 12.X, covering deployment, configuration, and management of endpoint security.' },
-      ecCouncilCertifiedSecurityAnalyst: { title: 'EC-Council Certified Security Analyst', description: 'EC-Council Certified Security Analyst certification, focusing on penetration testing and vulnerability assessment methodologies.' },
-      certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)', description: 'Certified Ethical Hacker (CEH) certification, validating ethical hacking and penetration testing skills.' },
-      redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)', description: 'Red Hat Certified Technician (RHCT) certification, demonstrating proficiency in Red Hat Enterprise Linux system administration.' },
-      fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate', description: 'Fortinet NSE 1 – Network Security Associate, an introductory certification to the threat landscape and Fortinet solutions.' },
-      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate, focusing on the evolution of cybersecurity and the types of security products.' },
-      theThreatLandscape: { title: 'The Threat Landscape – Course Completed', description: 'Course completed on understanding the current threat landscape, including common attack vectors and defense strategies.' }
+      advancedCyberSecurity: { title: 'Advanced Cyber Security – Threats and Governance' },
+      executiveLeadershipTeam: { title: 'Building an Executive Leadership Team for the Modern Workplace' },
+      compassionateCandor: { title: 'Compassionate Candor: A Radical Approach to Management' },
+      cyberSecurityForLeadership: { title: 'Cyber Security for Leadership' },
+      howToLeadAndInspireChange: { title: 'How to Lead and Inspire Change' },
+      ccpaEssentialTraining: { title: 'California Consumer Privacy Act (CCPA) Essential Training' },
+      leveragingChatGPT: { title: 'Leveraging ChatGPT for Smarter Cybersecurity' },
+      understandingZeroTrust: { title: 'Understanding Zero Trust' },
+      aiTrends: { title: 'AI Trends' },
+      learningToSayNo: { title: 'Learning to Say No' },
+      ('communicatingWithConfidence', title: 'Communicating with Confidence'),
+      holdingYourselfAccountable: { title: 'Holding Yourself Accountable' },
+      comptiaCasP: { title: 'CompTIA Advanced Security Practitioner (CASP+)' },
+      comptiaSecurity: { title: 'CompTIA Security+ (SY0-501)' },
+      informationSecurityAwareness: { title: 'Information Security Awareness – ISO 27001:2013' },
+      awsCertifiedSolutionsArchitect: { title: 'AWS Certified Solutions Architect – Professional' },
+      cnssCertifiedNetworkSecuritySpecialist: { title: 'CNSS Certified Network Security Specialist' },
+      qualysCertifiedSpecialistPolicyCompliance: { title: 'Qualys Certified Specialist – Policy Compliance' },
+      qualysCertifiedSpecialistVulnerabilityManagement: { title: 'Qualys Certified Specialist – Vulnerability Management' },
+      theDataScientistsToolbox: { title: 'The Data Scientist’s Toolbox' },
+      searchingAndReportingWithSplunk6: { title: 'Searching and Reporting with Splunk 6' },
+      cloudLockUniversity201: { title: 'CloudLock University 201 – Training' },
+      symantecEndpointProtection: { title: 'Symantec Endpoint Protection 12.X: Administration' },
+      ecCouncilCertifiedSecurityAnalyst: { title: 'EC-Council Certified Security Analyst' },
+      certifiedEthicalHacker: { title: 'Certified Ethical Hacker (CEH)' },
+      redHatCertifiedTechnician: { title: 'Red Hat Certified Technician (RHCT)' },
+      fortinetNse1: { title: 'Fortinet NSE 1 – Network Security Associate' },
+      fortinetNse2: { title: 'Fortinet NSE 2 – Network Security Associate' },
+      theThreatLandscape: { title: 'The Threat Landscape – Course Completed' }
     }
   }">
     <!-- Header with Name and Navigation -->
@@ -676,7 +690,7 @@
       <!-- Skills Section -->
       <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
           <button
             @click="activeSkillCategory = 'industryKnowledge'"
             :class="{ 'active': activeSkillCategory === 'industryKnowledge' }"
@@ -693,21 +707,33 @@
           </button>
         </div>
 
-        <div class="grid-section">
-          <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
-            <div
-              class="grid-item"
-              @click="isOpen = true; selectedItem = skill.id"
-              x-text="skill.title"
-            ></div>
-          </template>
+        <div class="carousel-container skills-carousel-container-height">
+          <div class="skills-grid-carousel" id="skills-horizontal-carousel">
+            <template x-for="(skill, index) in skills[activeSkillCategory]" :key="skill.id">
+              <div
+                class="skill-item"
+                @click="isOpen = true; selectedItem = skill.id"
+              >
+                <div class="skill-title" x-text="skill.title"></div>
+                <div class="stars" x-if="skill.stars">
+                  <template x-for="i in skill.stars">
+                    <svg class="w-5 h-5 text-yellow-400 inline-block star-icon" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.695h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.381-1.81.588-1.81h3.462a1 1 0 00.95-.695l1.07-3.292z"></path>
+                    </svg>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+          <button class="carousel-arrow left" onclick="scrollCarousel('skills-horizontal-carousel', -220)">&#10094;</button>
+          <button class="carousel-arrow right" onclick="scrollCarousel('skills-horizontal-carousel', 220)">&#10095;</button>
         </div>
       </div>
 
       <!-- Projects Section -->
       <div id="projects" class="space-y-4 pt-10">
         <h2 class="section-header">Projects</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
           <button
             @click="activeProjectCategory = 'aiAutomation'"
             :class="{ 'active': activeProjectCategory === 'aiAutomation' }"
@@ -737,24 +763,9 @@
       <!-- Education Section -->
       <div id="education" class="space-y-4 pt-10">
         <h2 class="section-header">Education</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
-          <button
-            @click="activeEducationCategory = 'degrees'"
-            :class="{ 'active': activeEducationCategory === 'degrees' }"
-            class="category-button"
-          >
-            Degrees
-          </button>
-          <button
-            @click="activeEducationCategory = 'diplomas'"
-            :class="{ 'active': activeEducationCategory === 'diplomas' }"
-            class="category-button"
-          >
-            Diplomas
-          </button>
-        </div>
-        <div class="grid-section">
-          <template x-for="(edu, index) in education[activeEducationCategory]" :key="edu.id">
+        <!-- Removed category buttons for Education -->
+        <div class="education-grid-section"> <!-- Changed class to avoid conflict with other grid-section display:none -->
+          <template x-for="(edu, index) in education" :key="edu.id">
             <div
               class="grid-item"
               @click="isOpen = true; selectedItem = edu.id"
@@ -767,7 +778,7 @@
       <!-- Licenses & Certifications Section -->
       <div id="licenses-certifications" class="space-y-4 pt-10">
         <h2 class="section-header">Licenses & Certifications</h2>
-        <div class="flex flex-wrap justify-center gap-4 mb-6"> <!-- Added flex-wrap and gap for mobile buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
           <button
             @click="activeLicenseCategory = 'cybersecurity'"
             :class="{ 'active': activeLicenseCategory === 'cybersecurity' }"
@@ -797,14 +808,18 @@
             Operating Systems
           </button>
         </div>
-        <div class="grid-section">
-          <template x-for="(license, index) in licenses[activeLicenseCategory]" :key="license.id">
-            <div
-              class="grid-item"
-              @click="isOpen = true; selectedItem = license.id"
-              x-text="license.title"
-            ></div>
-          </template>
+        <div class="carousel-container licenses-carousel-container-height">
+          <div class="licenses-grid-carousel" id="licenses-horizontal-carousel">
+            <template x-for="(license, index) in licenses[activeLicenseCategory]" :key="license.id">
+              <div
+                class="license-item"
+                @click="isOpen = true; selectedItem = license.id"
+                x-text="license.title"
+              ></div>
+            </template>
+          </div>
+          <button class="carousel-arrow left" onclick="scrollCarousel('licenses-horizontal-carousel', -220)">&#10094;</button>
+          <button class="carousel-arrow right" onclick="scrollCarousel('licenses-horizontal-carousel', 220)">&#10095;</button>
         </div>
       </div>
 
@@ -845,7 +860,7 @@
   </div>
 
   <script>
-    // Function to scroll carousels (only used for Experience section now)
+    // Function to scroll carousels (used for all horizontal carousels)
     function scrollCarousel(id, scrollAmount) {
       const carousel = document.getElementById(id);
       if (carousel) {
