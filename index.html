@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="images/profile.jpg" alt="Profile Picture" class="profile-img">
+        <h1>John Doe</h1>
+        <p class="title">Software Engineer</p>
+        <p class="about">Passionate about creating innovative solutions and building scalable applications.</p>
+        
+        <div class="buttons">
+            <a href="#" class="linkedin-btn" onclick="openModal('linkedinModal')">LinkedIn Profile</a>
+            <a href="#" class="resume-btn" onclick="openModal('resumeModal')">View Resume</a>
+            <a href="#" class="portfolio-btn" onclick="openModal('portfolioModal')">Portfolio</a>
+            <a href="#" class="contact-btn" onclick="openModal('contactModal')">Contact Me</a>
+        </div>
+        
+        <p class="contact">📧 john.doe@email.com | 📱 +1 (555) 123-4567</p>
+    </div>
+
+    <!-- LinkedIn Modal -->
+    <div id="linkedinModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('linkedinModal')">&times;</span>
+            <div class="modal-header">
+                <h2>LinkedIn Profile</h2>
+            </div>
+            <div class="modal-body">
+                <div class="linkedin-preview">
+                    <img src="images/profile.jpg" alt="LinkedIn Profile" class="modal-profile-img">
+                    <h3>John Doe</h3>
+                    <p class="modal-title">Software Engineer at Tech Corp</p>
+                    <p class="modal-description">
+                        Experienced software engineer with 5+ years in full-stack development. 
+                        Specialized in React, Node.js, and cloud technologies.
+                    </p>
+                    <div class="linkedin-stats">
+                        <div class="stat">
+                            <strong>500+</strong>
+                            <span>Connections</span>
+                        </div>
+                        <div class="stat">
+                            <strong>50+</strong>
+                            <span>Recommendations</span>
+                        </div>
+                    </div>
+                    <a href="https://linkedin.com/in/johndoe" target="_blank" class="external-link">
+                        Visit LinkedIn Profile →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('resumeModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Resume</h2>
+            </div>
+            <div class="modal-body">
+                <div class="resume-section">
+                    <h3>Experience</h3>
+                    <div class="experience-item">
+                        <h4>Senior Software Engineer</h4>
+                        <p class="company">Tech Corp • 2021 - Present</p>
+                        <ul>
+                            <li>Led development of microservices architecture</li>
+                            <li>Improved application performance by 40%</li>
+                            <li>Mentored junior developers</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <h4>Software Developer</h4>
+                        <p class="company">StartupXYZ • 2019 - 2021</p>
+                        <ul>
+                            <li>Built responsive web applications</li>
+                            <li>Implemented CI/CD pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resume-section">
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                </div>
+                <button class="download-btn" onclick="downloadResume()">Download PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('portfolioModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Portfolio</h2>
+            </div>
+            <div class="modal-body">
+                <div class="portfolio-grid">
+                    <div class="project-card">
+                        <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpg" alt="E-commerce Platform" class="project-img">
+                        <h4>E-commerce Platform</h4>
+                        <p>Full-stack web application built with React and Node.js</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/bay-bridge-san-francisco-california-wallpaper-preview.jpg" alt="Mobile App" class="project-img">
+                        <h4>Task Management App</h4>
+                        <p>Cross-platform mobile application for productivity</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/san-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg" alt="Analytics Dashboard" class="project-img">
+                        <h4>Analytics Dashboard</h4>
+                        <p>Real-time data visualization dashboard</p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">D3.js</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('contactModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="modal-body">
+                <form class="contact-form" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>📧 Email:</strong> john.doe@email.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>📱 Phone:</strong> +1 (555) 123-4567
+                    </div>
+                    <div class="contact-item">
+                        <strong>📍 Location:</strong> San Francisco, CA
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
