@@ -1,0 +1,13 @@
+{
+  "name": "professional-profile",
+  "version": "1.0.0",
+  "description": "A professional profile website with interactive modals",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build process needed for static site'",
+    "start": "echo 'Open index.html in a web browser'"
+  },
+  "keywords": ["profile", "portfolio", "website"],
+  "author": "John Doe",
+  "license": "MIT"
+}
