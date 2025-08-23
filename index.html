@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Professional Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="profile-info">
+                <img src="images/profile.jpg" alt="Profile Picture" class="profile-img">
+                <div class="profile-details">
+                    <h1>John Doe</h1>
+                    <p class="title">Senior Software Engineer</p>
+                    <p class="location">📍 San Francisco, CA</p>
+                    <p class="contact-info">📧 john.doe@email.com | 📱 +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="primary-btn" onclick="openModal('contactModal')">Message</button>
+                <button class="secondary-btn" onclick="openModal('portfolioModal')">View Portfolio</button>
+                <button class="outline-btn" onclick="downloadResume()">Download Resume</button>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section">
+            <h2>About</h2>
+            <p class="about-text">
+                Passionate software engineer with 5+ years of experience in full-stack development. 
+                Specialized in building scalable web applications using modern technologies like React, 
+                Node.js, and cloud platforms. Led multiple successful projects and mentored junior developers.
+            </p>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="experience-list">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>Senior Software Engineer</h3>
+                            <p class="company">Tech Corp</p>
+                        </div>
+                        <span class="duration">2021 - Present</span>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Led development of microservices architecture serving 1M+ users</li>
+                        <li>Improved application performance by 40% through optimization</li>
+                        <li>Mentored 5 junior developers and conducted code reviews</li>
+                        <li>Implemented CI/CD pipelines reducing deployment time by 60%</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>Software Developer</h3>
+                            <p class="company">StartupXYZ</p>
+                        </div>
+                        <span class="duration">2019 - 2021</span>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Built responsive web applications using React and Node.js</li>
+                        <li>Developed RESTful APIs handling 10K+ requests per minute</li>
+                        <li>Collaborated with design team to implement pixel-perfect UIs</li>
+                        <li>Integrated third-party services and payment gateways</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3>Junior Developer</h3>
+                            <p class="company">WebSolutions Inc</p>
+                        </div>
+                        <span class="duration">2018 - 2019</span>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Developed and maintained client websites using HTML, CSS, JavaScript</li>
+                        <li>Fixed bugs and implemented new features based on client feedback</li>
+                        <li>Participated in agile development processes and daily standups</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag expert">React</span>
+                        <span class="skill-tag expert">JavaScript</span>
+                        <span class="skill-tag expert">TypeScript</span>
+                        <span class="skill-tag advanced">Vue.js</span>
+                        <span class="skill-tag expert">HTML/CSS</span>
+                        <span class="skill-tag advanced">Tailwind CSS</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag expert">Node.js</span>
+                        <span class="skill-tag expert">Python</span>
+                        <span class="skill-tag advanced">Express.js</span>
+                        <span class="skill-tag advanced">Django</span>
+                        <span class="skill-tag expert">REST APIs</span>
+                        <span class="skill-tag intermediate">GraphQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Database & Cloud</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag expert">MongoDB</span>
+                        <span class="skill-tag expert">PostgreSQL</span>
+                        <span class="skill-tag expert">AWS</span>
+                        <span class="skill-tag advanced">Docker</span>
+                        <span class="skill-tag advanced">Redis</span>
+                        <span class="skill-tag intermediate">Kubernetes</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Others</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag expert">Git</span>
+                        <span class="skill-tag expert">VS Code</span>
+                        <span class="skill-tag advanced">Jest</span>
+                        <span class="skill-tag advanced">Webpack</span>
+                        <span class="skill-tag intermediate">Jenkins</span>
+                        <span class="skill-tag intermediate">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <p class="institution">University of California, Berkeley</p>
+                    </div>
+                    <span class="duration">2014 - 2018</span>
+                </div>
+                <p class="education-details">Graduated Magna Cum Laude • GPA: 3.8/4.0</p>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="section">
+            <h2>Certifications</h2>
+            <div class="certifications-grid">
+                <div class="cert-item">
+                    <h4>AWS Certified Solutions Architect</h4>
+                    <p>Amazon Web Services • 2023</p>
+                </div>
+                <div class="cert-item">
+                    <h4>React Developer Certification</h4>
+                    <p>Meta • 2022</p>
+                </div>
+                <div class="cert-item">
+                    <h4>Certified Kubernetes Administrator</h4>
+                    <p>CNCF • 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('contactModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Send Message</h2>
+            </div>
+            <div class="modal-body">
+                <form class="contact-form" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('portfolioModal')">&times;</span>
+            <div class="modal-header">
+                <h2>Portfolio</h2>
+            </div>
+            <div class="modal-body">
+                <div class="portfolio-grid">
+                    <div class="project-card">
+                        <img src="images/1_tnWlDu8HlAiKzq31zJbLiw.jpg" alt="E-commerce Platform" class="project-img">
+                        <h4>E-commerce Platform</h4>
+                        <p>Full-stack web application built with React and Node.js</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/bay-bridge-san-francisco-california-wallpaper-preview.jpg" alt="Mobile App" class="project-img">
+                        <h4>Task Management App</h4>
+                        <p>Cross-platform mobile application for productivity</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/san-francisco-city-skyline-united-states-night-time-3440x1440-5005.jpg" alt="Analytics Dashboard" class="project-img">
+                        <h4>Analytics Dashboard</h4>
+                        <p>Real-time data visualization dashboard</p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">D3.js</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
