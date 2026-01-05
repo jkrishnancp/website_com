@@ -646,46 +646,162 @@
         </div>
       </div>
 
-      <div id="experience" class="space-y-4 pt-10">
-        <h2 class="section-header">Experience</h2>
-        <div class="carousel-container">
-          <div class="carousel" id="experience-carousel">
-            <div class="card" @click="isOpen = true; selectedItem = 'seniorDirector'">
-              <img src="images/uvcyber_logo.jpeg" alt="Senior Director" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=UVCyber';" />
-              <div class="card-number">1</div>
-              <div class="card-title">Senior Director - Security Operations</div>
-            </div>
-            <div class="card" @click="isOpen = true; selectedItem = 'manager'">
-              <img src="images/metmox_logo.jpeg" alt="Manager" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=Metmox';" />
-              <div class="card-number">2</div>
-              <div class="card-title">Manager, Security Operations</div>
-            </div>
-            <div class="card" @click="isOpen = true; selectedItem = 'teamLead'">
-              <img src="images/verizonbusiness_logo.jpeg" alt="Team Lead" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=Verizon';" />
-              <div class="card-number">3</div>
-              <div class="card-title">Team Lead - Incident Management</div>
-            </div>
-            <div class="card" @click="isOpen = true; selectedItem = 'seniorAnalyst'">
-              <img src="images/No_Image_Available.jpg" alt="Senior Analyst" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=No+Image';" />
-              <div class="card-number">4</div>
-              <div class="card-title">Senior Security Analyst</div>
-            </div>
-            <div class="card" @click="isOpen = true; selectedItem = 'assistantManager'">
-              <img src="images/1631375676244.jpeg" alt="Assistant Manager" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=Geojit';" />
-              <div class="card-number">5</div>
-              <div class="card-title">Assistant Manager - Information Security</div>
-            </div>
-            <div class="card" @click="isOpen = true; selectedItem = 'systemAdmin'">
-              <img src="images/safe_software_and_integrated_solutions_pvt_ltd_logo.jpeg" alt="System Admin" onerror="this.onerror=null;this.src='https://placehold.co/200x300/1f1f1f/E50914?text=Safe+Software';" />
-              <div class="card-number">6</div>
-              <div class="card-title">System Administrator</div>
+<div id="experience" class="space-y-4 pt-10">
+  <h2 class="section-header">Experience Journey</h2>
+  
+  <!-- Stats Overview -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-lg p-4 text-center transform hover:scale-105 transition duration-300">
+      <div class="text-3xl font-bold text-white">20+</div>
+      <div class="text-sm text-gray-200">Years Experience</div>
+    </div>
+    <div class="bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg p-4 text-center transform hover:scale-105 transition duration-300">
+      <div class="text-3xl font-bold text-white">6</div>
+      <div class="text-sm text-gray-200">Leadership Roles</div>
+    </div>
+    <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-4 text-center transform hover:scale-105 transition duration-300">
+      <div class="text-3xl font-bold text-white">3</div>
+      <div class="text-sm text-gray-200">Countries</div>
+    </div>
+    <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-lg p-4 text-center transform hover:scale-105 transition duration-300">
+      <div class="text-3xl font-bold text-white">100%</div>
+      <div class="text-sm text-gray-200">SLA Compliance</div>
+    </div>
+  </div>
+
+  <!-- Timeline Connection Diagram -->
+  <div class="relative">
+    <!-- Timeline Line (desktop only) -->
+    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-red-600 via-purple-600 to-blue-600"></div>
+    
+    <!-- Timeline Items -->
+    <div class="space-y-8">
+      
+      <!-- Item 1: Senior Director (Right Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="w-full md:w-5/12 md:text-right">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'seniorDirector'">
+            <div class="text-red-500 font-bold text-sm mb-1">2023 - Present (2+ years)</div>
+            <h3 class="text-white font-bold text-lg">Senior Director - Security Operations</h3>
+            <p class="text-gray-400 text-sm mb-2">UltraViolet Cyber · San Francisco Bay Area</p>
+            <div class="flex gap-2 mt-2 md:justify-end justify-start flex-wrap">
+              <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded">Zero Trust</span>
+              <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded">AI/ML</span>
+              <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded">MDR</span>
+              <span class="bg-red-900 text-red-200 text-xs px-2 py-1 rounded">XDR</span>
             </div>
           </div>
-          <button class="carousel-arrow left" onclick="scrollCarousel('experience-carousel', -220)">&#10094;</button>
-          <button class="carousel-arrow right" onclick="scrollCarousel('experience-carousel', 220)">&#10095;</button>
+        </div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-red-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">1</div>
+        </div>
+        <div class="hidden md:block md:w-5/12"></div>
+      </div>
+
+      <!-- Item 2: Manager (Left Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="hidden md:block md:w-5/12"></div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-purple-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">2</div>
+        </div>
+        <div class="w-full md:w-5/12">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'manager'">
+            <div class="text-purple-500 font-bold text-sm mb-1">2013 - 2023 (10 years)</div>
+            <h3 class="text-white font-bold text-lg">Manager, Security Operations</h3>
+            <p class="text-gray-400 text-sm mb-2">METMOX · San Francisco Bay Area</p>
+            <div class="flex gap-2 mt-2 flex-wrap">
+              <span class="bg-purple-900 text-purple-200 text-xs px-2 py-1 rounded">SIEM</span>
+              <span class="bg-purple-900 text-purple-200 text-xs px-2 py-1 rounded">EDR</span>
+              <span class="bg-purple-900 text-purple-200 text-xs px-2 py-1 rounded">Cloud Security</span>
+              <span class="bg-purple-900 text-purple-200 text-xs px-2 py-1 rounded">DLP</span>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Item 3: Team Lead (Right Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="w-full md:w-5/12 md:text-right">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'teamLead'">
+            <div class="text-blue-500 font-bold text-sm mb-1">2012 - 2013 (1 year)</div>
+            <h3 class="text-white font-bold text-lg">Team Lead - Incident Management</h3>
+            <p class="text-gray-400 text-sm mb-2">Verizon Business · Mumbai, India</p>
+            <div class="flex gap-2 mt-2 md:justify-end justify-start flex-wrap">
+              <span class="bg-blue-900 text-blue-200 text-xs px-2 py-1 rounded">Incident Mgmt</span>
+              <span class="bg-blue-900 text-blue-200 text-xs px-2 py-1 rounded">DevOps</span>
+              <span class="bg-blue-900 text-blue-200 text-xs px-2 py-1 rounded">SecOps</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-blue-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">3</div>
+        </div>
+        <div class="hidden md:block md:w-5/12"></div>
+      </div>
+
+      <!-- Item 4: Senior Analyst (Left Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="hidden md:block md:w-5/12"></div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-orange-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">4</div>
+        </div>
+        <div class="w-full md:w-5/12">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'seniorAnalyst'">
+            <div class="text-orange-500 font-bold text-sm mb-1">2011 - 2012 (8 months)</div>
+            <h3 class="text-white font-bold text-lg">Senior Security Analyst</h3>
+            <p class="text-gray-400 text-sm mb-2">Super Computers Trading · Abu Dhabi, UAE</p>
+            <div class="flex gap-2 mt-2 flex-wrap">
+              <span class="bg-orange-900 text-orange-200 text-xs px-2 py-1 rounded">SIEM</span>
+              <span class="bg-orange-900 text-orange-200 text-xs px-2 py-1 rounded">VAPT</span>
+              <span class="bg-orange-900 text-orange-200 text-xs px-2 py-1 rounded">SOC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5: Assistant Manager (Right Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="w-full md:w-5/12 md:text-right">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'assistantManager'">
+            <div class="text-yellow-500 font-bold text-sm mb-1">2007 - 2011 (4 years 8 months)</div>
+            <h3 class="text-white font-bold text-lg">Assistant Manager - Information Security</h3>
+            <p class="text-gray-400 text-sm mb-2">Geojit Financial Services · Cochin, India</p>
+            <div class="flex gap-2 mt-2 md:justify-end justify-start flex-wrap">
+              <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded">Firewall</span>
+              <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded">IPS</span>
+              <span class="bg-yellow-900 text-yellow-200 text-xs px-2 py-1 rounded">Incident Mgmt</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-yellow-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">5</div>
+        </div>
+        <div class="hidden md:block md:w-5/12"></div>
+      </div>
+
+      <!-- Item 6: System Admin (Left Side) -->
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="hidden md:block md:w-5/12"></div>
+        <div class="hidden md:flex w-2/12 justify-center">
+          <div class="w-12 h-12 bg-green-600 rounded-full border-4 border-gray-900 flex items-center justify-center text-white font-bold shadow-lg z-10">6</div>
+        </div>
+        <div class="w-full md:w-5/12">
+          <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition duration-300 shadow-lg" @click="isOpen = true; selectedItem = 'systemAdmin'">
+            <div class="text-green-500 font-bold text-sm mb-1">2005 - 2007 (2 years)</div>
+            <h3 class="text-white font-bold text-lg">System Administrator</h3>
+            <p class="text-gray-400 text-sm mb-2">Safe Software · Palakkad, India</p>
+            <div class="flex gap-2 mt-2 flex-wrap">
+              <span class="bg-green-900 text-green-200 text-xs px-2 py-1 rounded">SQL</span>
+              <span class="bg-green-900 text-green-200 text-xs px-2 py-1 rounded">Backup</span>
+              <span class="bg-green-900 text-green-200 text-xs px-2 py-1 rounded">Banking</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
       <div id="skills" class="space-y-4 pt-10">
         <h2 class="section-header">Skills</h2>
         <div class="flex flex-wrap justify-center gap-4 mb-6"> <button
@@ -912,17 +1028,17 @@
 
   </div>
 
-  <script>
+ // <script>
     // Function to scroll carousels (only used for Experience section now)
-    function scrollCarousel(id, scrollAmount) {
-      const carousel = document.getElementById(id);
-      if (carousel) {
-        carousel.scrollBy({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
-      }
-    }
-  </script>
+//    function scrollCarousel(id, scrollAmount) {
+ //     const carousel = document.getElementById(id);
+  //    if (carousel) {
+  //      carousel.scrollBy({
+   //       left: scrollAmount,
+    //      behavior: 'smooth'
+   //     });
+   //   }
+   // }
+//  </script>
 </body>
 </html>
