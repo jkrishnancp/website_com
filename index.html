@@ -877,7 +877,6 @@
     @click.self="showAnnouncement = false"
   >
     <div class="bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-2xl max-w-md w-full border-2 border-red-600 overflow-hidden relative">
-      <!-- Close X -->
       <button
         @click="showAnnouncement = false"
         class="absolute top-4 right-4 text-white hover:text-red-500 transition duration-300 text-3xl leading-none z-10"
@@ -885,36 +884,22 @@
         ×
       </button>
       
-      <!-- Header -->
       <div class="bg-gradient-to-r from-red-700 to-red-600 p-6 text-center">
         <div class="text-4xl mb-2">🎉</div>
         <h2 class="text-2xl font-bold text-white">New Feature Alert!</h2>
       </div>
       
-      <!-- Content -->
       <div class="p-6 text-center">
         <h3 class="text-xl font-semibold text-white mb-3">
           Cybersecurity Periodic Table
         </h3>
         <p class="text-gray-300 mb-6 leading-relaxed">
-          Explore 70+ cybersecurity concepts organized in an interactive periodic table! 
-          Click any element to learn about threats, tools, frameworks, and security roles.
+          Explore 70+ cybersecurity concepts organized in an interactive periodic table! Click any element to learn about threats, tools, frameworks, and security roles.
         </p>
         
-        <!-- Buttons -->
         <div class="flex gap-3 justify-center flex-wrap">
-          
-            href="https://www.jayakrishnancp.com/cybersecurity-periodic-table"
-            class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-          >
-            Explore Now →
-          </a>
-          <button
-            @click="showAnnouncement = false"
-            class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
-          >
-            Maybe Later
-          </button>
+          <a href="https://www.jayakrishnancp.com/cybersecurity-periodic-table" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">Explore Now →</a>
+          <button @click="showAnnouncement = false" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Maybe Later</button>
         </div>
       </div>
     </div>
