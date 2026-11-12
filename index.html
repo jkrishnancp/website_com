@@ -623,8 +623,14 @@
         </h1>
         <p class="text-base md:text-lg mt-4 text-left text-gray-200"> Cybersecurity leader with 20+ years of experience driving global security operations and building resilient, business-aligned programs. Specializes in Zero Trust, MDR, XDR, and AI-driven threat intelligence—all aimed at fortifying organizations against evolving cyber threats.
         </p>
-        <p class="text-base md:text-lg mt-4 text-left"> Email: <a href="mailto:jay@jayakrishnancp.com" class="text-red-500 hover:underline">jay@jayakrishnancp.com</a>
+        <p class="text-base md:text-lg mt-4 text-left"> Email: <a href="#" id="contact-email" class="text-red-500 hover:underline">Email me</a>
         </p>
+        <script>
+          document.getElementById("contact-email").addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = "mailto:" + ["jay", "jayakrishnancp.com"].join("@");
+          });
+        </script>
         <p class="text-base md:text-lg text-left"> LinkedIn: <a href="https://linkedin.com/in/jaykrishnancp" class="text-red-500 hover:underline">linkedin.com/in/jaykrishnancp</a>
         </p>
       </div>
